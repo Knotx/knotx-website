@@ -9,7 +9,7 @@
           <div class="col-sm-12">
             <article>
               <header class="meta">                
-                <a class="meta-item" href="<%= @getMember(@document.author).github %>"><%= @getMember(@document.author).name %></a>
+                <a class="meta-item" href="<%= @getMemberGithub(@getMember(@document.author)) %>"><%= @getMember(@document.author).name %></a>
                 <time class="meta-item date" 
                       pubdate="<%= @formatDt(@document.date) %>" 
                       datetime="<%= @formatDt(@document.date) %>"><%= @formatDate(@document.date) %>

@@ -11,7 +11,7 @@
   <meta property="og:url" content="<%= @getPreparedUrl() %>"/>
   <meta property="og:site_name" content="<%= @site.name %>"/>
   <meta property="og:description" content="<%= @getPreparedDescription() %>"/>
-  <meta property="og:image" content="/img/logo-240x240.png"/>  
+  <meta property="og:image" content="<%= @getPreparedOgImage() %>"/>  
   
   <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,700|Montserrat:200,300,400,500,700|Ubuntu:300,400,500,700" rel="stylesheet">
   <%- @getBlock("styles").add(["/styles/bootstrap.css","/styles/knotx.css"]).toHTML() %>    
