@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- @partial('head', @) %>
+  <body <%= @getBackground() %>>
+    <%- @partial('header', @) %>
+    <%- @partial('content-header', @) %>
+
+    <!-- Support section -->
+    <div class="container flex info">
+      <div class="community">
+        <%- @content %>
+        <hr>
+        <!-- Core Team -->
+        <div class="row">
+          <div class="col-sm-3">
+            <h2><span id="core-team"></span>Core Team</h2>
+          </div>
+          <div class="col-sm-9">
+            <div class="row">    
+              <% for member in @getCollection("commiters").toJSON(): %>
+              <div class="col-sm-4">
+                <div class="contributor">
+                  <div class="contributor-left">
+                    <a href="<%= member.github %>"><img class="contributor-avatar" src="<%= member.avatar %>"></a>
+                  </div>
+                  <div class="contributor-body">
+                    <h4><a href="<%= member.github %>"><%= member.name %></a></h4>
+                    <% if member.website: %>
+                    <a href="<%= member.website %>">
+                      <img class="svg" src="/img/icons/globe.svg" />
+                    </a>                    
+                    <% end %>
+                    <a href="<%= member.github %>">
+                      <img class="svg" src="/img/icons/mark-github.svg" />
+                    </a>
+                    <% if member.twitter: %>
+                    <a href="<%= member.twitter %>">
+                      <img class="svg" src="/img/icons/twitter-logo.svg" />
+                    </a>      
+                    <% end %>                                                        
+                  </div>
+                </div>
+              </div>
+              <% end %>
+            </div>
+          </div>       
+        </div>
+        <hr>
+        <% if @getCollection("contributors").length > 0: %>
+        <div class="row">
+          <div class="col-sm-3">
+            <h2><span id="contributors"></span>Contributors</h2>
+          </div>
+          <div class="col-sm-9">
+            <div class="row">    
+              <% for member in @getCollection("contributors").toJSON(): %>
+              <div class="col-sm-4">
+                <div class="contributor">
+                  <div class="contributor-left">
+                    <a href="<%= member.github %>"><img class="contributor-avatar" src="<%= member.avatar %>"></a>
+                  </div>
+                  <div class="contributor-body">
+                    <h4><a href="<%= member.github %>"><%= member.name %></a></h4>
+                    <% if member.website: %>
+                    <a href="<%= member.website %>">
+                      <img class="svg" src="/img/icons/globe.svg" />
+                    </a>                    
+                    <% end %>
+                    <a href="<%= member.github %>">
+                      <img class="svg" src="/img/icons/mark-github.svg" />
+                    </a>
+                    <% if member.twitter: %>
+                    <a href="<%= member.twitter %>">
+                      <img class="svg" src="/img/icons/twitter-logo.svg" />
+                    </a>      
+                    <% end %>                                                        
+                  </div>
+                </div>
+              </div>
+              <% end %>
+            </div>
+          </div>       
+        </div>
+        <% end %>           
+      </div>
+    </div>
+    <%- @partial('footer', @) %>    
+  </body>
+</html>

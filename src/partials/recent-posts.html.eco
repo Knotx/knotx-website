@@ -1,0 +1,8 @@
+<h2>Recent Posts</h2>
+<ul>
+  <% for post in @getCollection("posts").toJSON()[0...5]: %>
+    <li><a href="<%= post.url %>"><%= post.title %></a></li>
+  <% end %>
+</ul>
+<a class="archive-link" href="/archive/">« Show all by date</a>            
+</div>

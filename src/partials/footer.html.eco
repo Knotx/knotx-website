@@ -1,0 +1,14 @@
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+         <p>Knot.x is <a href="https://github.com/Cognifide/knotx">open source</a> and is licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0 License</a>.</p>
+      </div>
+      <div class="col-sm-5 col-sm-offset-1 text-right">
+        <p>Knot.x is brought to you with the support of <img src="/img/Cognified_Logo_white.png" alt="Cognifide"/></p>
+      </div>
+    </div>
+  </div>
+</footer>
+<%- @getBlock("scripts").add(["/scripts/vendor/jquery.min.js","/scripts/vendor/bootstrap.min.js","/scripts/knotx.js"]).toHTML() %>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><%= @getPreparedTitle() %></title>
+		<meta http-equiv="REFRESH" content="0; url="<%= @document.target %>">
+		<link rel="canonical" href="<%= @document.target %>" />
+	</head>
+	<body>
+		This page has moved. You will be automatically redirected to its new location. If you aren't forwarded to the new page, <a href="<%= @document.target %>">click here</a>.
+		<script>document.location.href = "<%= @document.target %>"</script>
+	</body>
+</html>

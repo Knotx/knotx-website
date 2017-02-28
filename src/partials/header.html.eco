@@ -1,0 +1,22 @@
+<!-- Header -->
+<header class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">
+        <img src="/img/logo-knotx.png" class="navbar-brand-logo"/>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <% for item in @getCollection("menu").toJSON(): %>
+        <li><a href="<%= if item.layout == 'redirect' then item.target else item.url %>"><%= item.title %></a></li>
+        <% end %>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</header>
