@@ -19,9 +19,9 @@
     "docpad-plugin-stylus": "~2.11.0",
     "moment": "^2.17.1"
   },
-  "main": "node_modules/.bin/docpad-server",
+  "main": "node_modules/.bin/docpad",
   "scripts": {
-    "start": "node_modules/.bin/docpad-server",
+    "start": "node_modules/.bin/docpad run",
     "test": "node_modules/.bin/docpad generate --debug --silent",
     "info": "node_modules/.bin/docpad info --silent"
   }

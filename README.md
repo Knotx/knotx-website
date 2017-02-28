@@ -47,7 +47,7 @@ TBD
 
 ## The blog
 
-TBD
+Read [BLOG-HOWTO.md](BLOG-HOWTO.md) for instructions how to write blog post.
 
 ## Publishing to Github pages
 
