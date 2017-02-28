@@ -21,10 +21,10 @@
               <div class="col-sm-4">
                 <div class="contributor">
                   <div class="contributor-left">
-                    <a href="<%= member.github %>"><img class="contributor-avatar" src="<%= member.avatar %>"></a>
+                    <a href="<%= @getMemberGithub(member) %>"><img class="contributor-avatar" src="<%= member.avatar %>"></a>
                   </div>
                   <div class="contributor-body">
-                    <h4><a href="<%= member.github %>"><%= member.name %></a></h4>
+                    <h4><a href="<%= @getMemberGithub(member) %>"><%= member.name %></a></h4>
                     <% if member.website: %>
                     <a href="<%= member.website %>">
                       <img class="svg" src="/img/icons/globe.svg" />
@@ -57,10 +57,10 @@
               <div class="col-sm-4">
                 <div class="contributor">
                   <div class="contributor-left">
-                    <a href="<%= member.github %>"><img class="contributor-avatar" src="<%= member.avatar %>"></a>
+                    <a href="<%= @getMemberGithub(member) %>"><img class="contributor-avatar" src="<%= member.avatar %>"></a>
                   </div>
                   <div class="contributor-body">
-                    <h4><a href="<%= member.github %>"><%= member.name %></a></h4>
+                    <h4><a href="<%= @getMemberGithub(member) %>"><%= member.name %></a></h4>
                     <% if member.website: %>
                     <a href="<%= member.website %>">
                       <img class="svg" src="/img/icons/globe.svg" />

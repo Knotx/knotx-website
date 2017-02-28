@@ -45,14 +45,14 @@ http://YOUR_MACHINE_NAME:3010
 
 TBD
 
+## Contributors section
+
+Read [CONTRIBUTORS-HOWTO.md](CONTRIBUTORS-HOWTO.md) for instructions how to add information about Contributors to the site.
+
 ## The blog
 
-Read [BLOG-HOWTO.md](BLOG-HOWTO.md) for instructions how to write blog post.
+Read [BLOG-HOWTO.md](BLOG-HOWTO.md) for instructions how to write blog post. If you're not listed as Contributor on the site, then most probably you need to add youself, so follow the previous guide.
 
 ## Publishing to Github pages
-
-TBD
-
-## Contributors section
 
 TBD

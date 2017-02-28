@@ -28,7 +28,8 @@ docpadConfig = {
                 """
             keywords: """
                 knotx, vertx, reactive, asynchronous, templating, java, polyglot, cms
-                """     
+                """
+            image: "/img/logo-240x240.png"
         
         getPreparedTitle: -> 
           if @document.title 
@@ -36,6 +37,12 @@ docpadConfig = {
               "#{@document.title} - #{@document.addToTitle}" 
             else "#{@document.title}"
           else @site.title
+            
+        getPreparedOgImage: ->
+          if @document.image
+            "#{@site.url}#{@document.image}"
+          else
+            "#{@site.url}#{@site.image}" 
 
         getPreparedUrl: -> @site.url + @document.url
         getPreparedDescription: -> @document.description or @site.description
@@ -51,6 +58,9 @@ docpadConfig = {
             @getCollection('commiters').findOne({member:userId}).toJSON()
           else
             @getCollection('contributors').findOne({member:userId}).toJSON()
+            
+        getMemberGithub: (member) ->
+          member.github or "https://github.com/#{member.member}"
         
         dateToMonthAndYear: (date) -> moment(date).format("MMMM YYYY")
         
@@ -71,8 +81,7 @@ docpadConfig = {
     collections:
       posts: ->
         @getCollection('html')
-          .findAll({relativeOutDirPath: 'blog', layout: $ne: 'blog'},
-                   [{date:-1}])
+          .findAll({relativeOutDirPath: 'blog', layout: $ne: 'blog'},[{date:-1}])
           .on 'add', (model) ->
             model.set({addToTitle: 'Knot.x Blog Post'})
             model.setMetaDefaults({layout: "post"})          
@@ -81,8 +90,8 @@ docpadConfig = {
         @getCollection('html').findAll({relativeOutDirPath: 'commiters'})
         
       contributors: ->
-        @getCollection('html').findAll({relativeOutDirPath: 'contributors'})
-        
+        @getCollection('html').findAll({relativeOutDirPath: 'contributors', showOnPage: true})
+            
       menu: ->
         @getCollection('html').findAll({menu: true},[{order: 1}])
 }

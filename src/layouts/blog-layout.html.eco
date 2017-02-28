@@ -12,7 +12,7 @@
             <article>
               <h2><a href="<%= post.url %>"><%= post.title %></a></h2>
               <header class="meta">                
-                <a class="meta-item" href="<%= @getMember(post.author).github %>"><%= @getMember(post.author).name %></a>
+                <a class="meta-item" href="<%= @getMemberGithub(@getMember(post.author)) %>"><%= @getMember(post.author).name %></a>
                 <time class="meta-item date" 
                       pubdate="<%= @formatDt(post.date) %>" 
                       datetime="<%= @formatDt(post.date) %>"><%= @formatDate(post.date) %>
