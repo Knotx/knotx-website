@@ -20,9 +20,15 @@ docpadConfig = {
         ghpages:
           deployRemote: 'gh'
           deployBranch: 'master'
-          outPath: '.'          
+          outPath: '.'    
+          
+    environments:
+      gh:
+        templateData:
+          deployAnalytics: true
           
     templateData:
+        deployAnalytics: false
         site:
             url: "http://knotx.io"
             name: "Knot.x Website"
@@ -34,6 +40,7 @@ docpadConfig = {
                 knotx, vertx, reactive, asynchronous, templating, java, polyglot, cms
                 """
             image: "/img/logo-240x240.png"
+            analyticsId: "UA-92165781-1"
         
         getPreparedTitle: -> 
           if @document.title 

@@ -24,7 +24,7 @@
   "scripts": {
     "start": "node_modules/.bin/docpad run",
     "generate": "node_modules/.bin/docpad generate --debug --env static",
-    "deploy-gh": "node_modules/.bin/docpad deploy-ghpages --debug --env static",
+    "deploy-gh": "node_modules/.bin/docpad deploy-ghpages --debug --env static,gh",
     "info": "node_modules/.bin/docpad info --silent"
   }
 }
