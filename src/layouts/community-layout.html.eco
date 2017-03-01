@@ -41,8 +41,8 @@ layout: content-layout
         </div>
       </div>       
     </div>
-    <hr>
     <% if @getCollection("contributors").length > 0: %>
+    <hr>    
     <div class="row">
       <div class="col-sm-3">
         <h2><span id="contributors"></span>Contributors</h2>
