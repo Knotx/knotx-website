@@ -5,6 +5,8 @@
 moment = require('moment')
 moment.locale('en_gb')
 
+md5 = require('md5')
+
 # Define the DocPad Configuration
 docpadConfig = {
     port: 3010
@@ -59,6 +61,8 @@ docpadConfig = {
         getPreparedDescription: -> @document.description or @site.description
         getPreparedKeywords: -> @site.keywords.concat(@document.keywords or []).join(', ')
         getBackground: -> if @document.home then "class='colored-background'" else ""
+        
+        getPostIdentifier: -> md5("knotx.io+blog+#{@document.basename}")
         
     		# Post meta
         formatDate: (date,format='MMMM Do, YYYY') -> return moment(date).format(format)
