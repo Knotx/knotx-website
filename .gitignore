@@ -38,3 +38,8 @@ jspm_packages
 
 # DocPad out dir
 out
+
+# Intellij           #
+######################
+.idea
+*.iml
