@@ -78,7 +78,11 @@ docpadConfig = {
             previous
           {})
           
-        postsByMonth: -> arrayGroupBy(posts, (post) -> dateToMonthAndYear(current.date))                      
+        postsByMonth: -> arrayGroupBy(posts, (post) -> dateToMonthAndYear(current.date))
+        
+        getSectionLink: (section) -> 
+          @getCollection('html').findOne({basename: section}).toJSON().target or 
+          @getCollection('html').findOne({basename: section}).toJSON().url
 
     localeCode: "en"
     
