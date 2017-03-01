@@ -41,10 +41,6 @@ You will see in the message, the site is started, and is accessible on port `301
 http://YOUR_MACHINE_NAME:3010
 ```
 
-### Building the production version
-
-TBD
-
 ## Contributors section
 
 Read [CONTRIBUTORS-HOWTO.md](CONTRIBUTORS-HOWTO.md) for instructions how to add information about Contributors to the site.
@@ -55,4 +51,12 @@ Read [BLOG-HOWTO.md](BLOG-HOWTO.md) for instructions how to write blog post. If 
 
 ## Publishing to Github pages
 
-TBD
+1. Add additional `remote` to this repository
+```
+$> git remote add gh git@github.com:Knotx/knotx.github.io.git
+```
+2. Clean `out/` folder
+3. Deploy to Github Pages
+```
+$> npm run-script deploy-gh
+```

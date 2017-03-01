@@ -23,7 +23,8 @@
   "main": "node_modules/.bin/docpad",
   "scripts": {
     "start": "node_modules/.bin/docpad run",
-    "test": "node_modules/.bin/docpad generate --debug --silent",
+    "generate": "node_modules/.bin/docpad generate --debug --env static",
+    "deploy-gh": "node_modules/.bin/docpad deploy-ghpages --debug --env static",
     "info": "node_modules/.bin/docpad info --silent"
   }
 }
