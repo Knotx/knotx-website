@@ -5,16 +5,16 @@
   <meta name="description" content="<%= @getPreparedDescription() %>">
   <meta name="keywords" content="<%= @getPreparedKeywords() %>">
   <title><%= @getPreparedTitle() %></title>
-  
+
   <meta property="og:title" content="<%= @getPreparedTitle() %>"/>
   <meta property="og:type" content="article"/>
   <meta property="og:url" content="<%= @getPreparedUrl() %>"/>
   <meta property="og:site_name" content="<%= @site.name %>"/>
   <meta property="og:description" content="<%= @getPreparedDescription() %>"/>
-  <meta property="og:image" content="<%= @getPreparedOgImage() %>"/>  
-  
-  <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,700|Montserrat:200,300,400,500,700|Ubuntu:300,400,500,700" rel="stylesheet">
-  <%- @getBlock("styles").add(["/styles/bootstrap.css","/styles/github.css","/styles/knotx.css"]).toHTML() %>    
+  <meta property="og:image" content="<%= @getPreparedOgImage() %>"/>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Montserrat:200,300,400,500,700|Ubuntu:300,400,500,700" rel="stylesheet">
+  <%- @getBlock("styles").add(["/styles/bootstrap.css","/styles/github.css","/styles/knotx.css"]).toHTML() %>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
