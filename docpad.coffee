@@ -17,6 +17,10 @@ docpadConfig = {
         cleanurls:  
           trailingSlashes: true
           static: true
+        ghpages:
+          deployRemote: 'gh'
+          deployBranch: 'master'
+          outPath: '.'          
           
     templateData:
         site:
