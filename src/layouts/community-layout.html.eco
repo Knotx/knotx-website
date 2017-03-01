@@ -15,7 +15,27 @@ layout: content-layout
         <div class="row">    
           <% for member in @getCollection("commiters").toJSON(): %>
           <div class="col-sm-4">
-            <%- @partial('contributor', {member: member}) %>
+            <div class="contributor">
+              <div class="contributor-left">
+                <a href="<%= @getMemberGithub(member) %>"><img class="contributor-avatar" src="<%= member.avatar %>"></a>
+              </div>
+              <div class="contributor-body">
+                <h4><a href="<%= @getMemberGithub(member) %>"><%= member.name %></a></h4>
+                <% if member.website: %>
+                <a href="<%= member.website %>">
+                  <img class="svg" src="/img/icons/globe.svg" />
+                </a>                    
+                <% end %>
+                <a href="<%= member.github %>">
+                  <img class="svg" src="/img/icons/mark-github.svg" />
+                </a>
+                <% if member.twitter: %>
+                <a href="<%= member.twitter %>">
+                  <img class="svg" src="/img/icons/twitter-logo.svg" />
+                </a>      
+                <% end %>                                                        
+              </div>
+            </div>
           </div>
           <% end %>
         </div>
@@ -31,7 +51,27 @@ layout: content-layout
         <div class="row">    
           <% for member in @getCollection("contributors").toJSON(): %>
           <div class="col-sm-4">
-            <%- @partial('contributor', {member: member}) %>
+            <div class="contributor">
+              <div class="contributor-left">
+                <a href="<%= @getMemberGithub(member) %>"><img class="contributor-avatar" src="<%= member.avatar %>"></a>
+              </div>
+              <div class="contributor-body">
+                <h4><a href="<%= @getMemberGithub(member) %>"><%= member.name %></a></h4>
+                <% if member.website: %>
+                <a href="<%= member.website %>">
+                  <img class="svg" src="/img/icons/globe.svg" />
+                </a>                    
+                <% end %>
+                <a href="<%= member.github %>">
+                  <img class="svg" src="/img/icons/mark-github.svg" />
+                </a>
+                <% if member.twitter: %>
+                <a href="<%= member.twitter %>">
+                  <img class="svg" src="/img/icons/twitter-logo.svg" />
+                </a>      
+                <% end %>                                                        
+              </div>
+            </div>
           </div>
           <% end %>
         </div>
