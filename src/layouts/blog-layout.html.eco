@@ -1,35 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-  <%- @partial('head', @) %>
-  <body <%= @getBackground() %>>
-    <%- @partial('header', @) %>
-    <%- @partial('content-header', @) %>  
-    <!-- Blog section -->
-    <div class="container flex blog">
-      <div class="row">
-        <div class="col-sm-9">
-          <% for post in @getCollection("posts").toJSON()[0...5]: %>
-            <article>
-              <h2><a href="<%= post.url %>"><%= post.title %></a></h2>
-              <header class="meta">                
-                <a class="meta-item" href="<%= @getMember(post.author).github %>"><%= @getMember(post.author).name %></a>
-                <time class="meta-item date" 
-                      pubdate="<%= @formatDt(post.date) %>" 
-                      datetime="<%= @formatDt(post.date) %>"><%= @formatDate(post.date) %>
-              </header>
-              <section class="post">
-                <p><%= post.description %>.
-                </p>
-                <a class="readmore" href="<%= post.url %>">Read more...</a>              
-              </section>
-            </article>         
-          <% end %>
-        </div>
-        <div class="col-sm-3 recent">
-          <%- @partial('recent-posts', @) %> 
-        </div>
-      </div>
+---
+layout: content-layout
+---
+<!-- Blog section -->
+<div class="container flex blog">
+  <div class="row">
+    <div class="col-sm-9">
+      <% for post in @getCollection("posts").toJSON()[0...5]: %>
+        <article>
+          <h2><a href="<%= post.url %>"><%= post.title %></a></h2>
+          <%- @partial('contributor-meta', {author: post.author, date: post.date}) %>
+          <section class="post">
+            <p><%= post.description %>.
+            </p>
+            <a class="readmore" href="<%= post.url %>">Read more...</a>              
+          </section>
+        </article>         
+      <% end %>
     </div>
-    <%- @partial('footer', @) %>    
-  </body>
-</html>
+    <div class="col-sm-3 recent">
+      <%- @partial('recent-posts', @) %> 
+    </div>
+  </div>
+</div>

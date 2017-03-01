@@ -11,4 +11,4 @@
     </div>
   </div>
 </footer>
-<%- @getBlock("scripts").add(["/scripts/vendor/jquery.min.js","/scripts/vendor/bootstrap.min.js","/scripts/knotx.js"]).toHTML() %>
+<%- @getBlock("scripts").add(["/scripts/vendor/jquery.min.js","/scripts/vendor/bootstrap.min.js","/scripts/vendor/highlight.pack.js","/scripts/knotx.js"]).toHTML() %>

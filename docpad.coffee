@@ -17,8 +17,18 @@ docpadConfig = {
         cleanurls:  
           trailingSlashes: true
           static: true
+        ghpages:
+          deployRemote: 'gh'
+          deployBranch: 'master'
+          outPath: '.'    
+          
+    environments:
+      gh:
+        templateData:
+          deployAnalytics: true
           
     templateData:
+        deployAnalytics: false
         site:
             url: "http://knotx.io"
             name: "Knot.x Website"
@@ -28,7 +38,9 @@ docpadConfig = {
                 """
             keywords: """
                 knotx, vertx, reactive, asynchronous, templating, java, polyglot, cms
-                """     
+                """
+            image: "/img/logo-240x240.png"
+            analyticsId: "UA-92165781-1"
         
         getPreparedTitle: -> 
           if @document.title 
@@ -36,6 +48,12 @@ docpadConfig = {
               "#{@document.title} - #{@document.addToTitle}" 
             else "#{@document.title}"
           else @site.title
+            
+        getPreparedOgImage: ->
+          if @document.image
+            "#{@site.url}#{@document.image}"
+          else
+            "#{@site.url}#{@site.image}" 
 
         getPreparedUrl: -> @site.url + @document.url
         getPreparedDescription: -> @document.description or @site.description
@@ -51,6 +69,9 @@ docpadConfig = {
             @getCollection('commiters').findOne({member:userId}).toJSON()
           else
             @getCollection('contributors').findOne({member:userId}).toJSON()
+            
+        getMemberGithub: (member) ->
+          member.github or "https://github.com/#{member.member}"
         
         dateToMonthAndYear: (date) -> moment(date).format("MMMM YYYY")
         
@@ -64,15 +85,18 @@ docpadConfig = {
             previous
           {})
           
-        postsByMonth: -> arrayGroupBy(posts, (post) -> dateToMonthAndYear(current.date))                      
+        postsByMonth: -> arrayGroupBy(posts, (post) -> dateToMonthAndYear(current.date))
+        
+        getSectionLink: (section) -> 
+          @getCollection('html').findOne({basename: section}).toJSON().target or 
+          @getCollection('html').findOne({basename: section}).toJSON().url
 
     localeCode: "en"
     
     collections:
       posts: ->
         @getCollection('html')
-          .findAll({relativeOutDirPath: 'blog', layout: $ne: 'blog'},
-                   [{date:-1}])
+          .findAll({relativeOutDirPath: 'blog', layout: $ne: 'blog'},[{date:-1}])
           .on 'add', (model) ->
             model.set({addToTitle: 'Knot.x Blog Post'})
             model.setMetaDefaults({layout: "post"})          
@@ -81,8 +105,8 @@ docpadConfig = {
         @getCollection('html').findAll({relativeOutDirPath: 'commiters'})
         
       contributors: ->
-        @getCollection('html').findAll({relativeOutDirPath: 'contributors'})
-        
+        @getCollection('html').findAll({relativeOutDirPath: 'contributors', showOnPage: true})
+            
       menu: ->
         @getCollection('html').findAll({menu: true},[{order: 1}])
 }

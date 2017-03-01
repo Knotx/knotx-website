@@ -4,6 +4,8 @@ This page explains how to write a blog post for Knot.x website.
 
 As you noticed on Knotx.io website, we have a blog section. You can contribute to this section by writing blog posts.
 
+> If it's the first time you're contributing, you need to create separate PR by adding yourself to the list of contributors on knotx.io/community page. So, follow the [CONTRIBUTORS-HOWTO.md](CONTRIBUTORS-HOWTO.md) first.
+
 ## How to write post
 
 - Fork https://github.com/knotx/knotx-website repository in order to create a pull request with your content.
@@ -15,9 +17,9 @@ As you noticed on Knotx.io website, we have a blog section. You can contribute t
 ``` md
 ---
 title: My neat blog post
-description: "Short description of the post, simply excerpt"
+description: Short description of the post, simply excerpt
 author: marcinczeczko
-date: "2017-02-23"
+date: 2017-02-23
 ---
 ## Hello
 
