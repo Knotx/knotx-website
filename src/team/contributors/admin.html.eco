@@ -5,5 +5,5 @@ avatar: "https://github.com/identicons/jasonlong.png"
 github: "https://github.com/Cognifide/knotx"
 website: "http://knotx.io"
 twitter: "https://twitter.com/knotx_project"
-showOnPage: true
+showOnPage: false
 ---

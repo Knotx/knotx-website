@@ -3,7 +3,6 @@
   <%- @partial('head', @) %>
   <body <%= @getBackground() %>>
     <%- @partial('header', @) %>
-    <%- if @document.home then "" else @partial('content-header', @) %>
     <%- @content %>
     <%- @partial('footer', @) %>
   </body>

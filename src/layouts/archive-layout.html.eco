@@ -1,37 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-  <%- @partial('head', @) %>
-  <body <%= @getBackground() %>>
-    <%- @partial('header', @) %>
-    <%- @partial('content-header', @) %>  
-    <!-- Blog section -->
-    <div class="flex blog archive">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-9">            
-            <% posts = @getCollection("posts").toJSON() %>
-            <% aggregate = (post) => @dateToMonthAndYear(post.date) %>
-            <% postsByMonth = @arrayGroupBy(posts, aggregate) %>
-            <% for month in Object.keys(postsByMonth): %>
-              <h2><%= month %></h2>
-              <% for post in postsByMonth[month]: %>
-              <div class="row archive-entry">              
-                <div class="col-sm-4">
-                  <span class="archive-entry-date"><%= @formatDate(post.date)%></span>
-                </div>
-                <div class="col-sm-8">
-                  <a href="<%= post.url %>"><%= post.title %></a>                  
-                </div>
-              </div>                
-              <% end %>
-            <% end %>
-          </div>
-          <div class="col-sm-3 recent">
-            <%- @partial('recent-posts', @) %> 
-          </div>
-        </div>
+---
+layout: content-layout
+--- 
+<!-- Blog section -->
+<div class="flex blog archive">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9">            
+        <% posts = @getCollection("posts").toJSON() %>
+        <% aggregate = (post) => @dateToMonthAndYear(post.date) %>
+        <% postsByMonth = @arrayGroupBy(posts, aggregate) %>
+        <% for month in Object.keys(postsByMonth): %>
+          <h2><%= month %></h2>
+          <% for post in postsByMonth[month]: %>
+          <div class="row archive-entry">              
+            <div class="col-sm-4">
+              <span class="archive-entry-date"><%= @formatDate(post.date)%></span>
+            </div>
+            <div class="col-sm-8">
+              <a href="<%= post.url %>"><%= post.title %></a>                  
+            </div>
+          </div>                
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col-sm-3 recent">
+        <%- @partial('recent-posts', @) %> 
       </div>
     </div>
-    <%- @partial('footer', @) %>    
-  </body>
-</html>
+  </div>
+</div>

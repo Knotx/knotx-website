@@ -1,27 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-  <%- @partial('head', @) %>
-  <body>
-    <%- @partial('header', @) %>
-    <%- @partial('content-header', @) %>
-    <div class="container flex blog">
-        <div class="row">
-          <div class="col-sm-12">
-            <article>
-              <header class="meta">                
-                <a class="meta-item" href="<%= @getMemberGithub(@getMember(@document.author)) %>"><%= @getMember(@document.author).name %></a>
-                <time class="meta-item date" 
-                      pubdate="<%= @formatDt(@document.date) %>" 
-                      datetime="<%= @formatDt(@document.date) %>"><%= @formatDate(@document.date) %>
-                </time>
-              </header>
-              <section class="post">
-                <%- @content %>
-              </section>
-            </article>                        
-          </div>        
-        </div>
-    </div>        
-    <%- @partial('footer', @) %>
-  </body>
-</html>
+---
+layout: content-layout
+---
+<div class="container flex blog">
+    <div class="row">
+      <div class="col-sm-12">
+        <article>
+          <%- @partial('contributor-meta', {author: @document.author, date: @document.date}) %> 
+          <section class="post">
+            <%- @content %>
+          </section>
+        </article>                        
+      </div>        
+    </div>
+</div>        
