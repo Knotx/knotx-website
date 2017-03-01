@@ -15,11 +15,11 @@ Assuming, that core team of Knot.x decided that you contributed enough to the pr
 
 ``` md
 ---
-member: "githubuserid"
-name: "FirstName LastName"
-avatar: "https://github.com/identicons/jasonlong.png"
-website: "http://your-website"
-twitter: "https://twitter.com/your-twitter"
+member: githubuserid
+name: FirstName LastName
+avatar: https://github.com/identicons/jasonlong.png
+website: http://your-website
+twitter: https://twitter.com/your-twitter
 showOnPage: true
 ---
 ```
@@ -30,6 +30,7 @@ Each line between the `---` lines are the metadata. The **required** metadata fi
 * **avatar**: Link to the avatar, e.g. from Github
 * **website**: Link to user website, if no website leave the field *empty*
 * **twitter**: Link to the twitter feed of the user, if no twitter leave the field *empty*
+* **github**: ***Optional***. If your want to use link to different github account, e.g. organization, you can do this in this property, if not defined an `http://github.com/member` link will be exposed
 * **showOnPage**: Leave true. If you don't want to be listed on Community page, then set to false
 
 ### Making a Pull Request

@@ -1,8 +1,8 @@
 ---
 title: Hello Rest Service
 description: "Hello Rest Service - Tutorial showing how Knot.x can be used to transform static website into dynamic one. Tutorial uses Google Books API to fetch data about books, and inject it onto HTML"
-author: "tomaszmichalak"
-date: "2017-02-23"
+author: tomaszmichalak
+date: 2017-02-23
 ---
 ## Overview
 

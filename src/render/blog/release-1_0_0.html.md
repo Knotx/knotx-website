@@ -1,8 +1,8 @@
 ---
 title: Release 1.0.0
-description: "Knot.x Release 1.0.0 Announcement"
-author: "marcinczeczko"
-date: "2017-02-17"
+description: Knot.x Release 1.0.0 Announcement
+author: marcinczeczko
+date: 2017-02-17
 ---
 ## Annoucement
 Knot.x team is pleased to announce the release of Knot.x 1.0.0.

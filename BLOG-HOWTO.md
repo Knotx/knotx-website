@@ -17,9 +17,9 @@ As you noticed on Knotx.io website, we have a blog section. You can contribute t
 ``` md
 ---
 title: My neat blog post
-description: "Short description of the post, simply excerpt"
+description: Short description of the post, simply excerpt
 author: marcinczeczko
-date: "2017-02-23"
+date: 2017-02-23
 ---
 ## Hello
 
