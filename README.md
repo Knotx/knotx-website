@@ -1,8 +1,6 @@
-# Knot.x web-site
+# KNOTX.io source repository
 
-# Knot.x website repository
-
-This repository contains Knot.x Website source. The target website is generated using DocPad.
+This repository contains Knot.x website source. The target website is generated using DocPad.
 
 ## Building
 ### Prerequisites
@@ -12,11 +10,11 @@ This repository contains Knot.x Website source. The target website is generated 
 
 ### Bulding a dev version
 
-If you have npm installed and want to work on website with live reload, just got to the repo and run
+If you have npm installed and want to work on website with live reload, just go to the repo and run
 ```
 $> npm install
 ```
-After all dependences are loaded run it as follows:
+After all dependencies are downloaded run it as follows:
 ```
 $> npm start
 ```
@@ -36,7 +34,7 @@ info: Generating...
 info: Generated 31/42 files in 3.355 seconds
 OK
 ```
-You will see in the message, the site is started, and is accessible on port `3010` under you machine name:
+The site is started on port `3010` under you machine name:
 ```
 http://YOUR_MACHINE_NAME:3010
 ```
@@ -47,7 +45,7 @@ Read [CONTRIBUTORS-HOWTO.md](CONTRIBUTORS-HOWTO.md) for instructions how to add 
 
 ## The blog
 
-Read [BLOG-HOWTO.md](BLOG-HOWTO.md) for instructions how to write blog post. If you're not listed as Contributor on the site, then most probably you need to add youself, so follow the previous guide.
+Read [BLOG-HOWTO.md](BLOG-HOWTO.md) for instructions how to write a blog post. If you're not listed as Contributor on the site, then most probably you need to add youself, so follow the previous guide.
 
 ## Publishing to Github pages
 

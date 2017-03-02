@@ -1,14 +1,14 @@
-This page explains how to maintain Contributors shown on /community page of Knotx.io website.
+This page explains how to maintain Contributors shown on Knotx.io/community page.
 
 ## Community Contributors
 
-The Community page  of knotx.io website contains section showing core team members as well as all contributors to the project that are willing to be listed over there. 
+The Community page of knotx.io website contains the section showing core team members as well as all contributors to the project that are willing to be listed over there.
 
 ## How to add myself to contributors
 
 Assuming, that core team of Knot.x decided that you contributed enough to the project to be listed on the page, you can request to be added as follows:
 - Fork https://github.com/knotx/knotx-website repository in order to create a pull request with your content.
-- Create new brnach from the `master` branch, e.g. `contrib/my-name`
+- Create new branch from the `master` branch, e.g. `contrib/my-name`
 - Inside `src/team/contributors` folder create an file with `eco` extension.
 > The filename must be in the form `githubuserid.html.eco`. For example, you want to add `marcinczeczko` Github user, then filename should be `marcinczeczko.html.eco`
 - Content of the file must have metadata only, as follows:
@@ -35,5 +35,5 @@ Each line between the `---` lines are the metadata. The **required** metadata fi
 
 ### Making a Pull Request
 Once you finish writing your Contributor entry:
-- create a pull request and will review/publish on the site.
-- The pull request should only contain the file related to your entry.
+- create a pull request and we will review/publish on the site.
+- the pull request should only contain the file related to your entry.
