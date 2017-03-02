@@ -1,15 +1,15 @@
-This page explains how to write a blog post for Knot.x website.
+This page explains how to write a blog post.
 
 ## The Blog
 
-As you noticed on Knotx.io website, we have a blog section. You can contribute to this section by writing blog posts.
+As you noticed on Knotx.io website, we have the blog section. You can contribute to this section by writing blog posts.
 
 > If it's the first time you're contributing, you need to create separate PR by adding yourself to the list of contributors on knotx.io/community page. So, follow the [CONTRIBUTORS-HOWTO.md](CONTRIBUTORS-HOWTO.md) first.
 
 ## How to write post
 
 - Fork https://github.com/knotx/knotx-website repository in order to create a pull request with your content.
-- Create new brnach from the `master` branch, e.g. `blog/my-blog-name`
+- Create new branch from the `master` branch, e.g. `blog/my-blog-name`
 - Inside `src/render/blog` folder create markdown file.
 > Post markdown filename must be in the form `title.html.md`. For example, you want to create post with the title `My neat blog post` then filename should be `my-neat-blog-post.html.md`
 - Content of the file must start with metadata in the header of the file:
@@ -30,7 +30,7 @@ This is sample blog post, etc...
 Each line between the `---` lines are metadata. The **required** metadata fields are:
 
 * **title**: the post title
-* **description**: excerpt of the post, visible on the post list
+* **description**: the excerpt of the post, visible on the post list
 * **date**: the publication date. The date must be provided using the `YYYY-MM-DD` format
 * **author**: the Github account of the author, such as `marcinczeczko` or `skejven`
 
@@ -59,5 +59,5 @@ For instance, for your neat post, you want use one asset `asset.png`, so:
 
 ### Making a Pull Request
 Once you finish writing your post:
-- create a pull request and will review/publish your post soon.
-- The pull request should only contain the file related to your post.
+- create a pull request and we will review/publish your post soon.
+- the pull request should only contain files related to your post.
