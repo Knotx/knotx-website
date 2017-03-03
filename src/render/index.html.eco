@@ -13,17 +13,17 @@ layout: default
         <h2>Connects <strong>CMS, CRM</strong> or other web platforms<br/>
           to create a <strong>unified customer experience.</strong></h2>
         <span class="github-btn">
-          <iframe src="https://ghbtns.com/github-btn.html?user=Cognifide&amp;repo=knotx&amp;type=star&amp;count=true&amp;size=large" frameborder="0" scrolling="0" width="160px" height="30px">
+          <iframe src="https://ghbtns.com/github-btn.html?user=Cognifide&amp;repo=knotx&amp;type=star&amp;count=true&amp;size=large" frameborder="0" scrolling="0" width="160" height="30">
           </iframe>
         </span>
         <span class="github-btn">
-          <iframe src="https://ghbtns.com/github-btn.html?user=Cognifide&amp;repo=knotx&amp;type=fork&amp;count=true&amp;size=large" frameborder="0" scrolling="0" width="160px" height="30px">
+          <iframe src="https://ghbtns.com/github-btn.html?user=Cognifide&amp;repo=knotx&amp;type=fork&amp;count=true&amp;size=large" frameborder="0" scrolling="0" width="160" height="30">
           </iframe>
-        </span>            
+        </span>
       </div>
     </div>
   </div>
-  
+
   <!-- Intro -->
   <div class="feature intro">
     <div class="container">
@@ -50,9 +50,9 @@ layout: default
         <div class="col-sm-6">
           <h2>Features</h2>
           <p>
-            Knot.x assembles all features/services into HTML pages in a very efficient manner. 
-            It loads and analyses static pages from Repository, collects dynamic features 
-            asynchronously and injects them into your page.                
+            Knot.x assembles all features/services into HTML pages in a very efficient manner.
+            It loads and analyses static pages from Repository, collects dynamic features
+            asynchronously and injects them into your page.
           </p>
         </div>
         <div class="col-sm-5 col-sm-offset-1">
@@ -71,8 +71,8 @@ layout: default
         <div class="col-sm-6 col-sm-offset-1 text-right">
           <h2>Forms</h2>
           <p>
-            Knot.x supports simple and multi-step forms. Easily handles submission errors, 
-            form validations and redirects. Knot.x allows you to define a graph of 
+            Knot.x supports simple and multi-step forms. Easily handles submission errors,
+            form validations and redirects. Knot.x allows you to define a graph of
             interconnected steps, responding to user input or site visitor choices.
           </p>
         </div>
@@ -86,7 +86,7 @@ layout: default
         <div class="col-sm-6">
           <h2>Prototyping</h2>
           <p>
-            Knot.x gives you the ability to use simple Mocks. This allows you to expose your sample 
+            Knot.x gives you the ability to use simple Mocks. This allows you to expose your sample
             data directly to pages even if the real service is not available yet, and switch to
             the real service without any further development work.
           </p>
@@ -107,15 +107,15 @@ layout: default
         <div class="col-sm-6 text-right">
           <h2>Extensions</h2>
           <p>
-            Knot.x is a fully modular platform with very flexible extension points that we 
+            Knot.x is a fully modular platform with very flexible extension points that we
             call Knots and Adapters that are efficently communicates with Knot.x Core using
             event bus. Thanks to the polyglot nature of Vert.x you can implement extensions
-            in languages other than Java.             
+            in languages other than Java.
           </p>
         </div>
       </div>
     </div>
-  </div>         
+  </div>
   <!-- Learn more -->
   <div class="feature learn-more">
     <div class="container">
@@ -128,5 +128,5 @@ layout: default
         </div>
       </div>
     </div>
-  </div>      
+  </div>
 </div>

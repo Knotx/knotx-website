@@ -4,5 +4,4 @@
     <li><a href="<%= post.url %>"><%= post.title %></a></li>
   <% end %>
 </ul>
-<a class="archive-link" href="/archive/">« Show all by date</a>            
-</div>
+<a class="archive-link" href="/archive/">« Show all by date</a>

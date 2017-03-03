@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
       </button>
       <a href="/" class="navbar-brand">
-        <img src="/img/logo-knotx.png" class="navbar-brand-logo"/>
+        <img src="/img/logo-knotx.png" class="navbar-brand-logo" alt="Knot.x Logo"/>
       </a>
     </div>
     <div class="collapse navbar-collapse">

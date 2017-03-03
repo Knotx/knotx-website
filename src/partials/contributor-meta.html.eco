@@ -1,6 +1,6 @@
-<header class="meta">                
+<header class="meta">
   <a class="meta-item" href="<%= @getMemberGithub(@getMember(@author)) %>"><%= @getMember(@author).name %></a>
-  <time class="meta-item date" 
-        pubdate="<%= @formatDt(@date) %>" 
+  <time class="meta-item date"
         datetime="<%= @formatDt(@date) %>"><%= @formatDate(@date) %>
+  </time>
 </header>
