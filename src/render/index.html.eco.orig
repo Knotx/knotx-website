@@ -1,0 +1,136 @@
+---
+title: Knot.x Homepage
+description: Knot.x connects CMS, CRM or other web platforms to create a unified customer experience.
+home: true
+layout: default
+---
+
+<div class="flex homepage">
+  <div class="index-header" id="content">
+    <div class="container">
+      <div class="banner text-center">
+        <h1>Knot.x</h1>
+        <h2>Connects <strong>CMS, CRM</strong> or other web platforms<br/>
+          to create a <strong>unified customer experience.</strong></h2>
+        <span class="github-btn">
+          <iframe src="https://ghbtns.com/github-btn.html?user=Cognifide&amp;repo=knotx&amp;type=star&amp;count=true&amp;size=large" frameborder="0" scrolling="0" width="160" height="30">
+          </iframe>
+        </span>
+        <span class="github-btn">
+          <iframe src="https://ghbtns.com/github-btn.html?user=Cognifide&amp;repo=knotx&amp;type=fork&amp;count=true&amp;size=large" frameborder="0" scrolling="0" width="160" height="30">
+          </iframe>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Intro -->
+  <div class="feature intro">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <img src="img/logo-240x240.png" class="img-responsive img-centered" alt=""/>
+        </div>
+        <div class="col-sm-9">
+          <blockquote>
+            <p>Let’s imagine an online banking website containing different features like a chat box, exchange rates, stock data and user profile information. The site has a high performance characteristic, despite its complexity and target publishing channels.
+              All those features come from different providers/vendors having their own teams working in various modes, technologies and release cycles.
+              Knot.x connects all of them in a controlled and isolated way, preventing any undesired interferences. It combines asynchronous programming principles and message-driven architecture providing a scalable platform for modern sites.
+              Knot.x connects all of the above to create a unified customer experience.
+            </p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Features -->
+  <div class="feature gray-background">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2>Features</h2>
+          <p>
+            Knot.x assembles all features/services into HTML pages in a very efficient manner.
+            It loads and analyses static pages from Repository, collects dynamic features
+            asynchronously and injects them into your page.
+          </p>
+        </div>
+        <div class="col-sm-5 col-sm-offset-1">
+          <img src="img/knotx-intro-features-1.png" class="img-responsive img-centered" alt=""/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Forms -->
+  <div class="feature white-background">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-5">
+          <img src="img/knotx-intro-forms-1.png" class="img-responsive img-centered" alt=""/>
+        </div>
+        <div class="col-sm-6 col-sm-offset-1 text-right">
+          <h2>Forms</h2>
+          <p>
+            Knot.x supports simple and multi-step forms. Easily handles submission errors,
+            form validations and redirects. Knot.x allows you to define a graph of
+            interconnected steps, responding to user input or site visitor choices.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Prototyping -->
+  <div class="feature gray-background">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2>Prototyping</h2>
+          <p>
+            Knot.x gives you the ability to use simple Mocks. This allows you to expose your sample
+            data directly to pages even if the real service is not available yet, and switch to
+            the real service without any further development work.
+          </p>
+        </div>
+        <div class="col-sm-5 col-sm-offset-1">
+          <img src="img/knotx-intro-prototyping-1.png" class="img-responsive img-centered" alt=""/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Extensions -->
+  <div class="feature white-background">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+          <img src="img/knotx-intro-extensions.png" class="img-responsive img-centered" alt=""/>
+        </div>
+        <div class="col-sm-6 text-right">
+          <h2>Extensions</h2>
+          <p>
+            Knot.x is a fully modular platform with very flexible extension points that we
+            call Knots and Adapters that are efficently communicates with Knot.x Core using
+            event bus. Thanks to the polyglot nature of Vert.x you can implement extensions
+            in languages other than Java.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Learn more -->
+  <div class="feature learn-more">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <h2>Ready to learn more?</h2>
+          <p>
+            <a href="<%= @getSectionLink('wiki') %>" class="btn btn-default btn-lg doc-btn">Explore the Docs</a>
+          </p>
+        </div>
+      </div>
+    </div>
+<<<<<<< HEAD
+  </div>      
+=======
+  </div>
+>>>>>>> W3c fixes
+</div>
