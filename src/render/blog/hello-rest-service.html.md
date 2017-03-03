@@ -1,35 +1,36 @@
 ---
 title: Hello Rest Service
-description: "Hello Rest Service - Tutorial showing how Knot.x can be used to transform static website into dynamic one. Tutorial uses Google Books API to fetch data about books, and inject it onto HTML"
+description: "Hello Rest Service - Tutorial showing how Knot.x can be used to transform a static website into a dynamic one. The tutorial uses the Google Books API to fetch data about books, and injects it into an HTML template"
 author: tomaszmichalak
 date: 2017-02-23
 ---
 ## Overview
 
 In this tutorial, we’re going to show how Knot.x can be used to quickly transform your 
-static website into dynamic one. Instead of manually coded HTML presenting available books, 
-we’re going to inject this data to the HTML, while data about books will come from external service.
+static website into a dynamic one. Instead of a manually coded HTML document presenting available books, 
+we’re going to use an HTML template and populate it with data loaded from an external service.
 
-This article concentrates on integration with service using Knot.x, instead of client side. 
+This article concentrates on the steps required to integrate with a service using Knot.x, instead of client side JavaScript. 
 In the next article we are going to compare that solution with a frontend integration.
 
 What you’re going to learn:
 
 - How to transform static HTML into dynamic content
-- How configure Knot.x to use simple REST services to get data
-- How to use data from services to dynamically populate HTML
+- How to configure Knot.x to use simple REST services to get data
+- How to use data from such services to dynamically populate HTML
 
-If you want to skip configuration part and simply run the demo, please checkout
-[Github/hello-rest-service](https://github.com/Knotx/knotx-tutorials/tree/master/hello-rest-service) and follow the README.md to see how to run it.
+If you want to skip the configuration part and simply run the demo, please checkout
+[Github/hello-rest-service](https://github.com/Knotx/knotx-tutorials/tree/master/hello-rest-service) and follow the `README.md` to see how to run it.
 
 ## Book service – the service we’re going to integrate with
 
-We’re going to use [Google Books API](https://developers.google.com/books/) as a service feed with books. 
-To make the tutorial easy, we use very simple endpoint that [search all volumes](https://developers.google.com/books/docs/v1/using#WorkingVolumes) for the given query.
+We’re going to use the [Google Books API](https://developers.google.com/books/) as a service feed with books. 
+To make the tutorial easy to follow, we use a very simple endpoint that [searches for all volumes](https://developers.google.com/books/docs/v1/using#WorkingVolumes) for the given query.
 
-The goal is to display all volumes related to **java** term 
+The goal is to display all volumes related to **java**  
 ([https://www.googleapis.com/books/v1/volumes?q=java](https://www.googleapis.com/books/v1/volumes?q=java)).
-Sample JSON result of the service looks like below:
+
+A sample JSON response of the service looks like this:
 
 ``` json
 {
@@ -64,40 +65,40 @@ Sample JSON result of the service looks like below:
 ```
 
 ## Our application
-Knot.x provides the functionality that combines service data with HTML in a very efficient manner. 
-It can get a JSON response from a service and then using Handlebars engine render the dynamic part. 
-This can be achieved without any custom code – it is only the matter of configuration.
+Knot.x has the ability to combine service data with HTML in a very efficient manner. 
+It can get a JSON response from a service and then, using the Handlebars engine, render the dynamic part. 
+This can be achieved without any custom code – it is only a matter of configuration.
 
-The diagram below depicts how a request from a user is handled with the Knot.x application.
+The diagram below depicts how a request from a user is handled by the Knot.x application.
 
 ![Books service diagram](/img/blog/hello-rest-service/books-service-diagram.jpg)
 
-As soon as request comes to Knot.x, it initiates HTML template fetch from the repository. 
-In real cases, the repository is used to be an external system like CMS that is available through HTTP. 
-However for the demonstration purposes we simply get those HTML pages from local filesystem, using 
-Knot.x File system repository connector.
+As soon as a request comes to Knot.x, it causes an HTML template to be fetched from the repository. 
+In real cases, the repository is usually an external system, like a CMS, that is available over HTTP. 
+However, for the purpose of demonstration, we simply get those HTML pages from the local filesystem using 
+the Knot.x File system repository connector.
 
 At this point, Knot.x detects all services required to render your dynamic page. Actual service 
-endpoints are defined in Knot.x configuration, on the HTML level, each dynamic part simply points 
+endpoints are defined in Knot.x configuration, on the HTML level, each dynamic part simply specifies 
 which endpoint it requires (by name). The unique set of services required, initiates process of 
-querying services for the data, followed by invocation of the Handlebars engine. Handlebars engine 
-takes the markup plus data of services and produces the final markup of the dynamic HTML snippet.
+querying services for the data, followed by an invocation of the Handlebars engine. The Handlebars engine 
+combines the markup and the data obtained form the services to produce the final markup of the dynamic HTML snippet.
 
 Finally, the rendered HTML is returned to the requesting user.
 
 ## Start with Knot.x
 
-Now it’s the time to prepare the environment in order to run Knot.x. 
-First, let’s download required files from nexus repository and create the folder structure that we’re going to use in this tutorial.
+Now it’s the time to prepare the environment required to run Knot.x. 
+First, let’s download all required files from the Nexus repository and create the folder structure that we’re going to use in this tutorial.
 
 Download the following files:
 1. [Knot.x standalone fat jar](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.fat.jar)
 2. [JSON configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.json)
 3. [Log configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.logback.xml)
 
-Additionally, download books.html file from github, that we’re going to transform into a dynamic one.
+Additionally, download the fle `books.html` from GitHub. We’re going to transform it into a dynamic one.
 
-The directory three will be like this:
+The directory tree should look like this:
 
 ```
 ├── knotx-standalone-1.0.0.json  (download from nexus)
@@ -110,7 +111,7 @@ The directory three will be like this:
 ```
 
 
-To simplify Knot.x execution, create `run.sh` script in the root folder with the following content:
+To simplify Knot.x execution, create a `run.sh` script with the following content in the root folder:
 
 ```
 #!/bin/bash
@@ -118,16 +119,16 @@ java -Dvertx.disableDnsResolver=true -Dlogback.configurationFile=knotx-standalon
 -cp "app/*" io.knotx.launcher.LogbackLauncher -conf knotx-standalone-1.0.0.json
 ```
 
-You can try to run Knot.x application with `./run.sh` command. But for now stop it and follow next steps to configure.
+You can try running Knot.x application with `./run.sh` command. But for now stop it and follow next steps to configure it to do something useful.
 More details about Knot.x deployment and setup can be found [here](https://github.com/Cognifide/knotx/wiki/KnotxDeployment).
 
 ## Configure Knot.x
 
 > All the configurations used in this tutorial are available on [Github/knotx-tutorials](https://github.com/Knotx/knotx-tutorials/tree/master/hello-rest-service)
 
-As we already have base Knot.x setup, let’s start adopting it to our needs. 
-If you open `knotx-standalone-1.0.0.json` file in text editor, you can find that it contains array 
-with list of modules. These are the [Knot.x modules](https://github.com/Cognifide/knotx/wiki/KnotxModules) 
+As we already have a base Knot.x setup, let’s start adapting it to our needs. 
+If you open the `knotx-standalone-1.0.0.json` file in a text editor, you wil see that it contains an array 
+containing a list of modules. These are the [Knot.x modules](https://github.com/Cognifide/knotx/wiki/KnotxModules) 
 that are going to be started.
 
 ``` json
@@ -147,10 +148,10 @@ that are going to be started.
 ```
 
 All of the above modules are explained on the project [Wiki](https://github.com/Cognifide/knotx/wiki). 
-In this tutorial, we’re going to pay attention only about a few of them.
+In this tutorial, we’re going to pay attention to but a few of them.
 
-In order to change default configuration of any of the module, you need to modify 
-this configuration JSON by adding `config` JsonObject for the module(s) you want to modify, e.g.:
+In order to change the default configuration of any of the modules, you need to modify 
+this configuration JSON by adding a `config` JsonObject for the module(s) you want to modify, e.g.:
 
 ```json
 {
@@ -171,10 +172,10 @@ You can find more details on how to configure Knot.x on [Wiki – How to Configu
 
 ### Repository configuration
 
-As mentioned before, we are going to fetch HTML template from our local file system. 
-Knot.x is shipped with a dedicated module called [`FileSystemRepositoryConnector`](https://github.com/Cognifide/knotx/wiki/FilesystemRepositoryConnector)
-for this purpose. You need set up the connector to use `/library` folder from where requested HTML files 
-(consisting of handlebars snippets) will be fetched.
+As mentioned before, we are going to fetch an HTML template from our local file system. 
+Knot.x is shipped with a dedicated module called [`FileSystemRepositoryConnector`](https://github.com/Cognifide/knotx/wiki/FilesystemRepositoryConnector) designed
+for this very purpose. You need set up the connector to use the `/library` folder from where requested HTML files 
+(containing Handlebars snippets) will be fetched.
 
 ```json
 {
@@ -191,15 +192,15 @@ for this purpose. You need set up the connector to use `/library` folder from wh
 }
 ```
 
-Different repository connectors can be used, so we need to somehow tell Knot.x which one should be used. 
-You can define a condition when our repository should be used, and the condition is simply a RegExp of the requested URI.
+Different repository connectors can be used at the same time, so we need to tell Knot.x which one should be used to process a given request. 
+You can use regular expressions to match request URIs to different repositories.
 
-Our template file (books.html) is available in `html` folder, under `library` root folder. 
-It means, that our target is that whenever user does `GET /html/books.html` request, 
-the Knot.x should look for the `/html/books.html` file in `/library` folder on local file system.
+Our template file (`books.html`) is available in the `html` folder, under the `library` root folder. 
+It means, that our target is that whenever a user performs a `GET` request for `/html/books.html`, 
+ Knot.x should look for the `/html/books.html` file inside the `/library` folder on the local file system.
 In order to achieve that, we need to tell KnotxServer module that:
 
-> Any request to `/html/.*` should fetch template from file system repository.
+> Any request to `/html/.*` should fetch a template from the file system repository.
 
 ```json
 {
@@ -223,17 +224,17 @@ In order to achieve that, we need to tell KnotxServer module that:
 You might notice the `address` field in the above configuration. This is the internal event bus 
 address of the Repository Connector, in this case it’s the address of our File System Repository Connector.
 
-> All configuration options and default values, such as address fields, for each Knot.x module are described in the [Wiki documentation](https://github.com/Cognifide/knotx/wiki)
+> All configuration options and default values, such as address fields, for each Knot.x module are described in the [documentation](https://github.com/Cognifide/knotx/wiki).
 
 ### Processing chain configuration
 
-Next step, is to configure how HTML template should be processed. We want to configure that:
+The next step is to configure how the HTML template should be processed. We want to set it up so that:
 
-- Only `GET` requests with URI starting with `/html` will be allowed
-- If requested template requires data from services, they should be delivered
-- Handlebars engine will be used
+- Only `GET` requests with URIs starting with `/html` are allowed
+- If a requested template requires data from services, they should be delivered
+- The Handlebars engine is be used
 
-Just change the KnotxServer module configuration as below:
+Just change the `KnotxServer` module configuration as shown below:
 
 ```json
   "knotx:io.knotx.KnotxServer": {
@@ -263,23 +264,22 @@ Just change the KnotxServer module configuration as below:
   }
 ```
 
-We added `routing` object to this configuration. As you see, we specified the request 
-condition as intended. And we said Knot.x that if condition is met, the module on `knotx.knot.service`
-address should process our snippets. This is the [Service Knot](https://github.com/Cognifide/knotx/wiki/ServiceKnot)
-module, that in fact is responsible for an integration with external services.
+We added a `routing` object to this configuration. As you can see, we specified the request 
+condition as intended. We also told Knot.x that if the condition is met, the module listening on the `knotx.knot.service`
+address should process our snippets. This is in fact the [Service Knot](https://github.com/Cognifide/knotx/wiki/ServiceKnot)
+module that is responsible for integration with external services.
 
-Then, according to the configuration, next element in the processing chain is the 
-[Handlebars Knot](https://github.com/Cognifide/knotx/wiki/HandlebarsKnot), that supposed to do 
-actual evaluation of page.
+Then, according to the configuration, the next element in the processing chain is the 
+[Handlebars Knot](https://github.com/Cognifide/knotx/wiki/HandlebarsKnot) that is supposed to take care of assembling the full page.
 
 ### Book service configuration
-The last module to configure, is the previously mentioned [Service Knot](https://github.com/Cognifide/knotx/wiki/ServiceKnot). 
+The last module left to configure is the previously mentioned [Service Knot](https://github.com/Cognifide/knotx/wiki/ServiceKnot). 
 The configuration of this module consists of services which can be used in any template 
-processed by Knot.x. Each service has associated `name`, that is actually being used on HTML 
-level and address of the Adapter that is handling the actual communication with external world.
-This kind of mapping, makes possible a quick exchange of service that’s being used. 
-You can supply multiple Adapter modules for any kind of protocol or interface. And as soon as 
-your adapter implementation provides same structure of data, you can use it instead of other implementation.
+processed by Knot.x. Each service has an associated `name`, that is actually being used on HTML 
+level and an address of the Adapter that is handling communication with the outside world.
+This kind of mapping makes possible a quick substitution of the acutal service being used. 
+You can supply multiple Adapter modules for any kind of protocol or interface. And as long as 
+the data provided by your adapter implementation has teh same structure, you can swap it for another implementation.
 
 ```json
   "modules": [
@@ -311,18 +311,17 @@ your adapter implementation provides same structure of data, you can use it inst
 ```
 
 We’re saying here, that:
-- One service will be used, and its name is `bookslist`
+- One service will be used and its name is `bookslist`
 - The adapter address for this name is `knotx.adapter.service.http`
 - Each service request using this name will be done under the path `/books/v1/volumes?q=java`
 
 > As you see we specified the URI but not the address of the service. The actual endpoint will be 
-configured on the Adapter level. This approach to the configuration, allows you to have two services
-defined, each using same adapter (so the same endpoint also), but have different name and 
-different path.
+configured on the Adapter level. This configuration approach allows you to have two services
+defined, each using the same adapter (and therefore the same endpoint), but have a different name and path.
 
 The adapter address points to the [`HttpServiceAdapter`](https://github.com/Cognifide/knotx/wiki/HttpServiceAdapter) 
-that is available out of the box. So, as you can suspect, remaining configuration 
-will happen in the adapter module.
+that is available out of the box. So, as you can suspect, the remaining configuration 
+will happen in the Adapter module.
 
 So let’s do this.
 
@@ -359,19 +358,19 @@ So let’s do this.
   }
 ```
 
-We’re saying here:
-- HTTP Client making actual calls to HTTP service, should consider using SSL if required
-- List of services to which we’re going to make calls, in our case just one
+We’re saying here that:
+- The HTTP Client making calls to HTTP services should consider using SSL if necessary
+- List of services to which we’re going to make calls, in our case there's just one
   - If the service URI starts with `/books`, e.g. `/books/v1/volumes?q=java`
   - Then use `www.googleapis.com:443`
 
-At this point, we can say that Knot.x configuration is finished. You can download final 
-configuration file [here](https://github.com/Knotx/knotx-tutorials/blob/master/hello-rest-service/knotx-standalone-1.0.0.json).
+At this point, we can say that Knot.x configuration is finished. You can download the final 
+configuration file from [here](https://github.com/Knotx/knotx-tutorials/blob/master/hello-rest-service/knotx-standalone-1.0.0.json).
 
 ## Template definition
 
 Now it’s the time for the markup. You started with `books.html` having only static markup. 
-Now, you can modify it, by removing  book items and insert new ***dynamic*** snippet.
+Now, you can modify it by removing book items and inserting a new ***dynamic*** snippet.
 
 ```html
 <script data-knotx-knots="services,handlebars"
@@ -400,14 +399,14 @@ Now, you can modify it, by removing  book items and insert new ***dynamic*** sni
 
 The most important elements of the above markup are:
 
-- `data-knotx-service="bookslist"` - defines that service name `bookslist` is required,
-- `_result` object in Handlebars expressions, is the root of data fetched from service,
-- the path to object under `_result` is actually the path to object in the JSON returned by the service `https://www.googleapis.com/books/v1/volumes?q=java`
+- `data-knotx-service="bookslist"` - defines that the service named `bookslist` is required,
+- `_result` object in Handlebars expressions is the root of data fetched from service,
+- the path to the object under `_result` is actually the path to an object in the JSON document returned by the service `https://www.googleapis.com/books/v1/volumes?q=java`
 
-> Knot.x provides the extendable Handlebars mechanism, that allows you to specify very lightweight templates by implementing your own custom Handlebars helpers.
+> Knot.x provides the extensible Handlebars mechanism that allows you to specify very lightweight templates by implementing your own custom Handlebars helpers.
 
 The final HTML markup can be found [here](https://github.com/Knotx/knotx-tutorials/blob/master/hello-rest-service/library/html/books.html).
 
 ## Run ***dynamic*** page
-So, now it’s time to run our new ***dynamic*** page. Just start Knot.x using `./run.sh` command 
+So, now it’s time to run our new, ***dynamic*** page. Just start Knot.x using the `./run.sh` command 
 and go to [`http://localhost:8092/html/books.html`](http://localhost:8092/html/books.html) in your favourite browser.
