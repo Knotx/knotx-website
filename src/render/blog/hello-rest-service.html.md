@@ -96,7 +96,7 @@ Download the following files:
 2. [JSON configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.json)
 3. [Log configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.logback.xml)
 
-Additionally, download the fle `books.html` from GitHub. We’re going to transform it into a dynamic one.
+Additionally, download the file `books.html` from GitHub. We’re going to transform it into a dynamic one.
 
 The directory tree should look like this:
 
@@ -279,7 +279,7 @@ processed by Knot.x. Each service has an associated `name`, that is actually bei
 level and an address of the Adapter that is handling communication with the outside world.
 This kind of mapping makes possible a quick substitution of the acutal service being used. 
 You can supply multiple Adapter modules for any kind of protocol or interface. And as long as 
-the data provided by your adapter implementation has teh same structure, you can swap it for another implementation.
+the data provided by your adapter implementation has the same structure, you can swap it for another implementation.
 
 ```json
   "modules": [
