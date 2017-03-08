@@ -26,7 +26,7 @@ layout: content-layout
                   <img class="svg" src="/img/icons/globe.svg" alt="Website Link"/>
                 </a>
                 <% end %>
-                <a href="<%= member.github %>">
+                <a href="<%= @getMemberGithub(member) %>">
                   <img class="svg" src="/img/icons/mark-github.svg" alt="Github Link" />
                 </a>
                 <% if member.twitter: %>
@@ -62,7 +62,7 @@ layout: content-layout
                   <img class="svg" src="/img/icons/globe.svg" alt="Website Link" />
                 </a>
                 <% end %>
-                <a href="<%= member.github %>">
+                <a href="<%= @getMemberGithub(member) %>">
                   <img class="svg" src="/img/icons/mark-github.svg" alt="Github Link" />
                 </a>
                 <% if member.twitter: %>
