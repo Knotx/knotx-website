@@ -490,7 +490,7 @@ Application directory should contain now the following artifacts:
 ├── knotx-standalone-1.0.0.json
 ├── knotx-standalone-1.0.0.logback.xml
 ├── app
-│   ├── knotx-standalone-1.0.0.fat.jar
+│   ├── custom-service-adapter-1.0.0-fat.jar
 │   ├── knotx-standalone-1.0.0.fat.jar
 ├── content
 │   ├── local
