@@ -6,7 +6,7 @@ date: 2017-03-14
 ---
 ## Overview
 
-Hello Knot.x users!
+Hello _Knot.x_ users!
 
 In this post we will show you how easy it is to inject data coming directly from a database into an HTML template.
 When developing advanced systems on the Web, we are often asked to integrate some external services and use
@@ -168,8 +168,8 @@ public class BooksDbAdapter extends AbstractVerticle {
 
 ## Configuration
 
-Now we will create a simple configuration and its model. Configuration file defines a verticle that
-will initialise the whole Service Adapter and enables to pass properties.
+Now we will create a simple configuration for our custom code. The configuration file defines a _Verticle_ that
+will initialise the whole _Service Adapter_ and enable us to pass properties to the custom class.
 
 Create `io.knotx.example.BooksDbAdapter.json` in `/src/main/resources/`:
 
@@ -187,11 +187,10 @@ Create `io.knotx.example.BooksDbAdapter.json` in `/src/main/resources/`:
 }
 ```
 
-This configuration file is prepared to run this custom Service Adapter starting 
-`io.knotx.tutorials.BooksDbAdapter` verticle and listening at `knotx.adapter.service.custom` address
-on the event bus.
+This configuration file is prepared to run the custom _Service Adapter_, starting the
+`io.knotx.tutorials.BooksDbAdapter` _Verticle_ and listening at the address `knotx.adapter.service.custom` on the event bus.
 
-Now we implement configuration Java Model:
+Now we will implement a Java model to read the configuration:
 
 ```java
 package io.knotx.tutorials;
@@ -219,11 +218,11 @@ public class BooksDbAdapterConfiguration {
 }
 ```
 
-## Registering service proxy
+## Registering a Service Proxy
 
-Next step would be registering [`AdapterProxy`](https://github.com/Cognifide/knotx/wiki/Adapter#how-to-extend) 
-that handles request. Simplest way here is to create `BooksDbAdapterProxyImpl` class 
-that extends [`AbstractAdapterProxy`](https://github.com/Cognifide/knotx/blob/master/knotx-core/src/main/java/io/knotx/adapter/AbstractAdapterProxy.java):
+The next step would be to register an [`AdapterProxy`](https://github.com/Cognifide/knotx/wiki/Adapter#how-to-extend) 
+to handle incoming requests. The simplest way to achieve this is to create a class 
+that extends [`AbstractAdapterProxy`](https://github.com/Cognifide/knotx/blob/master/knotx-core/src/main/java/io/knotx/adapter/AbstractAdapterProxy.java). Let's call it `BooksDbAdapterProxyImpl`:
 
 ```java
 package io.knotx.tutorials.impl;
@@ -250,8 +249,8 @@ public class BooksDbAdapterProxyImpl extends AbstractAdapterProxy {
 }
 ```
 
-Now we should register this `AdapterProxy` in `start()` method of our `BooksDbAdapter` and setup
-it with the following configuration:
+Now we should register this `AdapterProxy` in the `start()` method of our `BooksDbAdapter` and set it up
+with the following configuration:
 
 ```java
 public class BooksDbAdapter extends AbstractVerticle {
@@ -289,9 +288,9 @@ public class BooksDbAdapter extends AbstractVerticle {
 }
 ```
 
-## Fetching the data from DB
+## Fetching Data from the Database
 
-Now, when we have our adapter ready we can implement data querying logic in `BooksDbAdapterProxyImpl`:
+Now, as we have our adapter ready, we can implement the data querying logic in `BooksDbAdapterProxyImpl`:
 
 ```java
 public class BooksDbAdapterProxyImpl extends AbstractAdapterProxy {
@@ -319,21 +318,21 @@ public class BooksDbAdapterProxyImpl extends AbstractAdapterProxy {
 
 What we do here is:
 - When there is a request in `processRequest`, the first thing we do is to get the `query` from the request object.
-- Then we create an [`Observable`](http://reactivex.io/documentation/observable.html) from configured JDBC Client
- which gives us a `SQLConnection` object at which the next operation will be performed. 
-- Next we perform [`flatMap`](http://reactivex.io/documentation/operators/flatmap.html) operation on `SQLConnection`
+- Then we create an [`Observable`](http://reactivex.io/documentation/observable.html) from the previously configured JDBC Client,
+ which gives us a `SQLConnection` object that will be used to perform the next operation. 
+- Next we perform a [`flatMap`](http://reactivex.io/documentation/operators/flatmap.html) operation on the `SQLConnection`
  and execute the query.
 - The last thing to do is to [`map`](http://reactivex.io/documentation/operators/map.html) a `ResultSet` 
- obtained from the query execution to `AdapterResponse` which is `processRequest` method's return contract.
- To do this we simply put all query results as `ClientResponse` body.
+ obtained from the query execution to an `AdapterResponse`, as required by the `processRequest` method's contract.
+ To do this, we simply put all query results in the body of the `ClientResponse`.
 
 # Integration
 
-We have our custom adapter. Now it's time to integrate it with Knot.x and the database.
+We have our custom Adapter. Now it's time to integrate it with _Knot.x_ and the database.
 
-## Setup Knot.x
+## Set up Knot.x
 
-Create a folder where we will start Knot.x and Custom Adapter. It should contain the following parts:
+Create a folder where we will start _Knot.x_ and the custom Adapter. It should contain the following files:
 
 ```
 ├── knotx-standalone-1.0.0.json  (download from Maven Central)
@@ -345,22 +344,22 @@ Create a folder where we will start Knot.x and Custom Adapter. It should contain
 │       ├── books.html (Contains markup of a page - see "Data and page" section)
 ```
 
-You may download Knot.x files from Maven Central Repository
+You may download _Knot.x_ files from the Maven Central Repository
 1. [Knot.x standalone fat jar](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.fat.jar)
 2. [JSON configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.json)
 3. [Log configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.logback.xml)
 
-## Setup DB
+## Set up the Database
 
-For the demonstration purposes we're going to use HSQL database in this example.
+For the purpose of demonstration, we're going to use an HSQL database in this example.
 
 Follow [this tutorial](http://o7planning.org/en/10287/installing-and-configuring-hsqldb-database)
 in order to set up the database.
-To create tables with data, use the script provided in [`db`](https://github.com/Knotx/knotx-tutorials/tree/master/custom-service-adapter/db) 
+To create tables with data, use the script provided in the [`db`](https://github.com/Knotx/knotx-tutorials/tree/master/custom-service-adapter/db) 
 folder of this tutorial.
 
-When you have your database configured, update `clientOptions` property in `io.knotx.example.BooksDbAdapter.json` file
-to point the database. If you followed the tutorial and your database runs at port `9001`, configuration
+When you have your database configured, update the `clientOptions` property in `io.knotx.example.BooksDbAdapter.json`
+to point at the database. If you followed the tutorial and your database runs at port `9001`, the configuration
 file should look like this:
 
 ```json
@@ -378,13 +377,13 @@ file should look like this:
 }
 ```
 
-Build your custom adapter using maven command `mvn clean install`.
-This should produce `custom-service-adapter-1.0.0-fat.jar` artifact in the `target` directory.
+Build your custom adapter using the Maven command: `mvn clean install`.
+The build should result with a file called `custom-service-adapter-1.0.0-fat.jar` being created in the `target` directory.
 
-## Plug in Custom Adapter
+## Plug in the Custom Adapter
 
-All you need to do now is to simply copy `custom-service-adapter-1.0.0-fat.jar` artifact into `app` 
-directory and update `knotx-standalone-1.0.0.json` configuration to add new `services`:
+All you need to do now to get the adapter up and running is to copy `custom-service-adapter-1.0.0-fat.jar` to the `app` 
+directory and update the `knotx-standalone-1.0.0.json` configuration file to add new `services`:
 
 ```json
 {
@@ -424,16 +423,16 @@ directory and update `knotx-standalone-1.0.0.json` configuration to add new `ser
 }
 ```
 
-There are 2 services available thanks to configuration above:
+There are two services available thanks to the above configuration:
 - `books-listing` which will initiate service at `knotx.adapter.service.custom` (our Custom Adapter)
 with additional `query` parameter: `SELECT * FROM books`. This query selects all records from the `books` table.
 - `authors-listing` that initiates the same service but passes another query: `SELECT * FROM authors`
 which selects all records from the `authors` table.
 
-## Prepare template
+## Prepare the template
 
-The last thing left is template configuration. We want it to display the data from `books-listing` and
-`authors-listing` services. This can be simply achieved by following snippets in `books.html` file:
+The last thing left for us to build is a template configuration. We want the template to display data from `books-listing` and
+`authors-listing` services. This can be achieved by creating a couple of simple [Handlebars](https://github.com/Cognifide/knotx/wiki/HandlebarsKnot) templates in `books.html`:
 
 ```html
     <script data-knotx-knots="services,handlebars"
@@ -454,8 +453,8 @@ The last thing left is template configuration. We want it to display the data fr
             {{/each}}
     </script>
 ```
-Which tells Knot.x to call `books-listing` service and enable the data under `_result` scope.
-We iterate through `_result` since it is a list of all books fetched from the database.
+This tells _Knot.x_ to call the `books-listing` service and make the data available in the `_result` scope.
+We iterate over `_result` since it is a list of all books fetched from the database.
 
 ```html
     <script data-knotx-knots="services,handlebars"
@@ -474,15 +473,15 @@ We iterate through `_result` since it is a list of all books fetched from the da
     </script>
 ```
 
-That makes Knot.x call `authors-listing` service and put the data under `_result` scope.
-We iterate through `_result` since it is a list of all authors fetched from the database.
+This makes _Knot.x_ call the `authors-listing` service and expose the data in the `_result` scope.
+We iterate over the entries in `_result` since it is a list of all authors fetched from the database.
 
-Final markup of the template can be downloaded from our [github codebase](https://github.com/Knotx/knotx-tutorials/tree/master/custom-service-adapter/content/local/books.html).
+The final markup of the template can be downloaded from our [GitHub repository for this tutorial](https://github.com/Knotx/knotx-tutorials/tree/master/custom-service-adapter/content/local/books.html).
 
 # Run the example
 
 Now we have all the parts ready and can run the demo.
-Application directory should contain now the following artifacts:
+The application directory should now contain the following artifacts:
 
 ```
 ├── knotx-standalone-1.0.0.json
@@ -495,11 +494,11 @@ Application directory should contain now the following artifacts:
 │       ├── books.html
 ```
 
-You can run the instance using command:
+You can run the _Knot.x_ instance using the following command:
 
 `java -Dlogback.configurationFile=knotx-standalone-1.0.0.logback.xml -cp "app/*" io.knotx.launcher.LogbackLauncher -conf knotx-standalone-1.0.0.json`
 
-When you enter the page [http://localhost:8092/content/local/books.html](http://localhost:8092/content/local/books.html)
+When you visit the page [http://localhost:8092/content/local/books.html](http://localhost:8092/content/local/books.html),
  you will see books and authors from the database listed.
 
-Code of this whole tutorial is available in [Knot.x tutorials github](https://github.com/Knotx/knotx-tutorials/tree/master/custom-service-adapter/).
+The complete code of this whole tutorial is available in the [_Knot.x_ tutorials GitHub repository](https://github.com/Knotx/knotx-tutorials/tree/master/custom-service-adapter/).
