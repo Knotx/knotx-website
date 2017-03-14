@@ -10,9 +10,9 @@ Hello _Knot.x_ users!
 
 In this post we will show you how easy it is to inject data coming directly from a database into an HTML template.
 When developing advanced systems on the Web, we are often asked to integrate some external services and use
-the data they provide to render some information on a page. It is not a rare case when the data source we integrate
-with has no Web API or even can't have it because of security reasons. This is the case we will study
-over the course of this tutorial.
+the data our clients provide to render some information on a page. It is not a rare case when the 
+data source we integrate with has no Web API or even can't have it because of security reasons. 
+This is the case we will study over the course of this tutorial.
 
 What you're going to learn:
 - How to implement a simple [Service Adapter](https://github.com/Cognifide/knotx/wiki/ServiceAdapter) 
@@ -35,7 +35,8 @@ We have two options now:
 2. Implement a _Knot.x_ [_Service Adapter_](https://github.com/Cognifide/knotx/wiki/ServiceAdapter).
 
 Option (1) may be quite expensive to implement or even not possible due to security reasons.
-In this article, we will focus on option (2).
+In this article, we will focus on option (2) and omit additional WebAPI layer. We are going to connect 
+to the database directly from Knot.x and inject the data into an HTML template.
 
 The architecture of our system will look like this:
 
@@ -44,7 +45,7 @@ The architecture of our system will look like this:
 # Data and page template
 
 In this example, we create a page that lists information about books and authors retrieved from a database.
-Page markup will look like this:
+Page markup will look like following snippet:
 
 ```html
 <!DOCTYPE html>
@@ -341,7 +342,7 @@ Create a folder where we will start _Knot.x_ and the custom Adapter. It should c
 │   ├── knotx-standalone-1.0.0.fat.jar (download from Maven Central)
 ├── content
 │   ├── local
-│       ├── books.html (Contains markup of a page - see "Data and page" section)
+│       ├── books.html (Contains markup of a page - see "Data and page template" section)
 ```
 
 You may download _Knot.x_ files from the Maven Central Repository
@@ -360,7 +361,7 @@ folder of this tutorial.
 
 When you have your database configured, update the `clientOptions` property in `io.knotx.example.BooksDbAdapter.json`
 to point at the database. If you followed the tutorial and your database runs at port `9001`, the configuration
-file should look like this:
+file should look like configuration shown below:
 
 ```json
 {
