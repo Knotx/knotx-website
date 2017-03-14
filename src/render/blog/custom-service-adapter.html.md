@@ -1,6 +1,6 @@
 ---
 title: Custom Adapter Service
-description: "Custom Adapter Service Tutorial is the next step to know Knot.x. Today we will deal with the data that comes directly from the database (so no WebAPI layer this time). Just with one simple Service Adapter we will fetch the data and then let Knot.x inject it into an HTML template."
+description: "The Custom Adapter Service Tutorial is the next step on our path to learning Knot.x. Today we will deal with data that comes directly from a database (we will not use a Web API layer this time). With just one simple Service Adapter, we will fetch the data and let Knot.x inject it into an HTML template."
 author: skejven
 date: 2017-03-14
 ---
@@ -8,21 +8,21 @@ date: 2017-03-14
 
 Hello Knot.x users!
 
-In this post we will show you how easily you can inject the data from a database directly to HTML page.
-When developing advanced web system we are often asked to integrate some external services and use
-the data from it to render some page information. It is not a rare case when the data source we integrate
-with has no WebAPI or even can't have it because of security reasons. This is the case we will study
-in this article.
+In this post we will show you how easy it is to inject data coming directly from a database into an HTML template.
+When developing advanced systems on the Web, we are often asked to integrate some external services and use
+the data they provide to render some information on a page. It is not a rare case when the data source we integrate
+with has no Web API or even can't have it because of security reasons. This is the case we will study
+over the course of this tutorial.
 
 What you're going to learn:
 - How to implement a simple [Service Adapter](https://github.com/Cognifide/knotx/wiki/ServiceAdapter) 
-and start using it with Knot.x.
+and start using it with _Knot.x_.
 - How to use [Vert.x](http://vertx.io/docs/vertx-jdbc-client/java/) to easily access your database 
-in very performant way.
+in a very performant way.
 
 If you want to skip the configuration part and simply run the demo, please checkout 
 [github/custom-service-adapter](https://github.com/Knotx/knotx-tutorials/tree/master/custom-service-adapter)
-and follow the `README.md` instructions to see the final result.
+and follow the instructions in `README.md` to compile and run the complete code.
 
 # Solution Architecture
 
