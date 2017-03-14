@@ -26,27 +26,25 @@ and follow the instructions in `README.md` to compile and run the complete code.
 
 # Solution Architecture
 
-So, we have a data source with no WebAPI to integrate with via frontend.
+So, we have a data source but no Web API to integrate with at the front-end layer.
+
 We have two options now:
 
-1. We can either implement the WebAPI layer to access the database 
-and then integrate with it using e.g. AJAX or [HTTP adapter](http://knotx.io/blog/hello-rest-service/).
+1. Implement a Web API layer to access the database and then integrate with it using e.g. AJAX or an [HTTP adapter](http://knotx.io/blog/hello-rest-service/).
  
- or...
- 
-2. We may implement Knot.x [Service Adapter](https://github.com/Cognifide/knotx/wiki/ServiceAdapter).
+2. Implement a _Knot.x_ [_Service Adapter_](https://github.com/Cognifide/knotx/wiki/ServiceAdapter).
 
 Option (1) may be quite expensive to implement or even not possible due to security reasons.
-We will focus on option (2) in this article.
+In this article, we will focus on option (2).
 
-The architecture of this tutorial's system will look like this:
+The architecture of our system will look like this:
 
 ![Solution architecture](/img/blog/custom-service-adapter/solution-architecture.png)
 
-# Data and page
+# Data and page template
 
-In this example we create a page that lists all books and authors from the database.
-Page markup would look like this:
+In this example, we create a page that lists information about books and authors retrieved from a database.
+Page markup will look like this:
 
 ```html
 <!DOCTYPE html>
@@ -93,14 +91,14 @@ Page markup would look like this:
 
 ```
 
-# Setup the project
+# Set up the project
 
-We will show you how to configure custom adapter project using Maven - feel free to use any other favourite
-project build tool. To build and run this tutorial code you need Java 8 and Maven.
+We will show you how to configure a custom adapter project using _Maven_ - feel free to use any other favourite
+project build tool. To build and run this tutorial code you need _Java 8_ and _Maven_.
 
-Create `pom.xml` file with dependencies to `knotx-core` and `knotx-adapter-common`. Additional dependencies 
+Create a `pom.xml` file with dependencies on `knotx-core` and `knotx-adapter-common`. Additional dependencies 
 we will use are [`vertx-jdbc-client`](http://vertx.io/docs/vertx-jdbc-client/java/) and 
-`hsqldb` driver. `<dependencies>` section of your project's `pom.xml` should look like this:
+`hsqldb` driver. The `<dependencies>` section of your project's `pom.xml` should look like this:
 
 ```xml
   <dependencies>
@@ -128,17 +126,17 @@ we will use are [`vertx-jdbc-client`](http://vertx.io/docs/vertx-jdbc-client/jav
   </dependencies>
 ```
 
-You may simply download ready [`pom.xml`](https://github.com/Knotx/knotx-tutorials/tree/master/custom-service-adapter/pom.xml)
-file from tutorial codebase.
+You may simply download a ready [`pom.xml`](https://github.com/Knotx/knotx-tutorials/tree/master/custom-service-adapter/pom.xml)
+file from the tutorial codebase.
 
-# Implementing Adapter
+# Implementing the Adapter
 
-In order to integrate with Knot.x we need to create a [Verticle](http://vertx.io/docs/apidocs/io/vertx/core/Verticle.html).
-The easiest way to do it is to extend Vert.x [`AbstractVerticle`](http://vertx.io/docs/apidocs/io/vertx/rxjava/core/AbstractVerticle.html).
+In order to integrate with _Knot.x_ we need to create a [_Verticle_](http://vertx.io/docs/apidocs/io/vertx/core/Verticle.html).
+The easiest way to do it is to extend the [`AbstractVerticle`](http://vertx.io/docs/apidocs/io/vertx/rxjava/core/AbstractVerticle.html) class provided by _Vert.x_.
 
-## Adapter's Heart - Verticle
+## The Adapter's Heart - Verticle
 
-Lets create a class `BooksDbAdapter` in `/src/main/java/io/knotx/tutorials/` that extends `AbstractVerticle`:
+Let's create a class named `BooksDbAdapter` in `/src/main/java/io/knotx/tutorials/` that extends `AbstractVerticle`:
 
 ```java
 package io.knotx.tutorials;
