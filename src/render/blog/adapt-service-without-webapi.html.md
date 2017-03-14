@@ -1,6 +1,6 @@
 ---
-title: Custom Adapter Service
-description: "The Custom Adapter Service Tutorial is the next step on our path to learning Knot.x. Today we will deal with data that comes directly from a database (we will not use a Web API layer this time). With just one simple Service Adapter, we will fetch the data and let Knot.x inject it into an HTML template."
+title: Adapt Service without WebAPI
+description: "The Adapt Service without WebAPI Tutorial is the next step on our path to learning Knot.x. Today we will deal with data that comes directly from a database (we will not use a Web API layer this time). With just one simple Service Adapter, we will fetch the data and let Knot.x inject it into an HTML template."
 author: skejven
 date: 2017-03-14
 ---
@@ -21,7 +21,7 @@ and start using it with _Knot.x_.
 in a very performant way.
 
 If you want to skip the configuration part and simply run the demo, please checkout 
-[github/custom-service-adapter](https://github.com/Knotx/knotx-tutorials/tree/master/custom-service-adapter)
+[github/adapt-service-without-webapi](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi)
 and follow the instructions in `README.md` to compile and run the complete code.
 
 # Solution Architecture
@@ -40,7 +40,7 @@ to the database directly from Knot.x and inject the data into an HTML template.
 
 The architecture of our system will look like this:
 
-![Solution architecture](/img/blog/custom-service-adapter/solution-architecture.png)
+![Solution architecture](/img/blog/adapt-service-without-webapi/solution-architecture.png)
 
 # Data and page template
 
@@ -127,7 +127,7 @@ we will use are [`vertx-jdbc-client`](http://vertx.io/docs/vertx-jdbc-client/jav
   </dependencies>
 ```
 
-You may simply download a ready [`pom.xml`](https://github.com/Knotx/knotx-tutorials/tree/master/custom-service-adapter/pom.xml)
+You may simply download a ready [`pom.xml`](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi/pom.xml)
 file from the tutorial codebase.
 
 # Implementing the Adapter
@@ -356,7 +356,7 @@ For the purpose of demonstration, we're going to use an HSQL database in this ex
 
 Follow [this tutorial](http://o7planning.org/en/10287/installing-and-configuring-hsqldb-database)
 in order to set up the database.
-To create tables with data, use the script provided in the [`db`](https://github.com/Knotx/knotx-tutorials/tree/master/custom-service-adapter/db) 
+To create tables with data, use the script provided in the [`db`](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi/db) 
 folder of this tutorial.
 
 When you have your database configured, update the `clientOptions` property in `io.knotx.example.BooksDbAdapter.json`
@@ -379,11 +379,11 @@ file should look like configuration shown below:
 ```
 
 Build your custom adapter using the Maven command: `mvn clean install`.
-The build should result with a file called `custom-service-adapter-1.0.0-fat.jar` being created in the `target` directory.
+The build should result with a file called `adapt-service-without-webapi-1.0.0-fat.jar` being created in the `target` directory.
 
 ## Plug in the Custom Adapter
 
-All you need to do now to get the adapter up and running is to copy `custom-service-adapter-1.0.0-fat.jar` to the `app` 
+All you need to do now to get the adapter up and running is to copy `adapt-service-without-webapi-1.0.0-fat.jar` to the `app` 
 directory and update the `knotx-standalone-1.0.0.json` configuration file to add new `services`:
 
 ```json
@@ -477,7 +477,7 @@ We iterate over `_result` since it is a list of all books fetched from the datab
 This makes _Knot.x_ call the `authors-listing` service and expose the data in the `_result` scope.
 We iterate over the entries in `_result` since it is a list of all authors fetched from the database.
 
-The final markup of the template can be downloaded from our [GitHub repository for this tutorial](https://github.com/Knotx/knotx-tutorials/tree/master/custom-service-adapter/content/local/books.html).
+The final markup of the template can be downloaded from our [GitHub repository for this tutorial](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi/content/local/books.html).
 
 # Run the example
 
@@ -488,7 +488,7 @@ The application directory should now contain the following artifacts:
 ├── knotx-standalone-1.0.0.json
 ├── knotx-standalone-1.0.0.logback.xml
 ├── app
-│   ├── custom-service-adapter-1.0.0-fat.jar
+│   ├── adapt-service-without-webapi-1.0.0-fat.jar
 │   ├── knotx-standalone-1.0.0.fat.jar
 ├── content
 │   ├── local
@@ -502,4 +502,4 @@ You can run the _Knot.x_ instance using the following command:
 When you visit the page [http://localhost:8092/content/local/books.html](http://localhost:8092/content/local/books.html),
  you will see books and authors from the database listed.
 
-The complete code of this whole tutorial is available in the [_Knot.x_ tutorials GitHub repository](https://github.com/Knotx/knotx-tutorials/tree/master/custom-service-adapter/).
+The complete code of this whole tutorial is available in the [_Knot.x_ tutorials GitHub repository](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi/).
