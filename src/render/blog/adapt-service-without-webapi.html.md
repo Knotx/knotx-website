@@ -1,6 +1,6 @@
 ---
-title: Adapt Service without WebAPI
-description: "The Adapt Service without WebAPI Tutorial is the next step on our path to learning Knot.x. Today we will deal with data that comes directly from a database (we will not use a Web API layer this time). With just one simple Service Adapter, we will fetch the data and let Knot.x inject it into an HTML template."
+title: Adapt Service without Web API
+description: "The Adapt Service without Web API Tutorial is the next step on our path to learning Knot.x. Today we will deal with data that comes directly from a database (we will not use a Web API layer this time). With just one simple Service Adapter, we will fetch the data and let Knot.x inject it into an HTML template."
 author: skejven
 date: 2017-03-14
 ---
@@ -35,7 +35,7 @@ We have two options now:
 2. Implement a _Knot.x_ [_Service Adapter_](https://github.com/Cognifide/knotx/wiki/ServiceAdapter).
 
 Option (1) may be quite expensive to implement or even not possible due to security reasons.
-In this article, we will focus on option (2) and omit additional WebAPI layer. We are going to connect 
+In this article, we will focus on option (2) and omit additional Web API layer. We are going to connect 
 to the database directly from Knot.x and inject the data into an HTML template.
 
 The architecture of our system will look like this:
@@ -133,7 +133,8 @@ file from the tutorial codebase.
 # Implementing the Adapter
 
 In order to integrate with _Knot.x_ we need to create a [_Verticle_](http://vertx.io/docs/apidocs/io/vertx/core/Verticle.html).
-The easiest way to do it is to extend the [`AbstractVerticle`](http://vertx.io/docs/apidocs/io/vertx/rxjava/core/AbstractVerticle.html) class provided by _Vert.x_.
+The easiest way to do it is to extend the [`AbstractVerticle`](http://vertx.io/docs/apidocs/io/vertx/rxjava/core/AbstractVerticle.html) 
+class provided by RXJava _Vert.x_.
 
 ## The Adapter's Heart - Verticle
 
@@ -142,9 +143,9 @@ Let's create a class named `BooksDbAdapter` in `/src/main/java/io/knotx/tutorial
 ```java
 package io.knotx.tutorials;
 
-import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Context;
 import io.vertx.core.Vertx;
+import io.vertx.rxjava.core.AbstractVerticle;
 
 public class BooksDbAdapter extends AbstractVerticle {
 
@@ -170,7 +171,7 @@ public class BooksDbAdapter extends AbstractVerticle {
 ## Configuration
 
 Now we will create a simple configuration for our custom code. The configuration file defines a _Verticle_ that
-will initialise the whole _Service Adapter_ and enable us to pass properties to the custom class.
+will initialise the whole _Service Adapter_ and enable us to pass properties to our custom adapter.
 
 Create `io.knotx.example.BooksDbAdapter.json` in `/src/main/resources/`:
 
@@ -179,7 +180,7 @@ Create `io.knotx.example.BooksDbAdapter.json` in `/src/main/resources/`:
   "main": "io.knotx.tutorials.BooksDbAdapter",
   "options": {
     "config": {
-      "address": "knotx.adapter.service.custom",
+      "address": "knotx.adapter.service.booksdb",
       "clientOptions": {
          //we will put database connection options here later
       }
@@ -189,7 +190,7 @@ Create `io.knotx.example.BooksDbAdapter.json` in `/src/main/resources/`:
 ```
 
 This configuration file is prepared to run the custom _Service Adapter_, starting the
-`io.knotx.tutorials.BooksDbAdapter` _Verticle_ and listening at the address `knotx.adapter.service.custom` on the event bus.
+`io.knotx.tutorials.BooksDbAdapter` _Verticle_ and listening at the address `knotx.adapter.service.booksdb` on the event bus.
 
 Now we will implement a Java model to read the configuration:
 
@@ -268,14 +269,12 @@ public class BooksDbAdapter extends AbstractVerticle {
 
   @Override
   public void start() throws Exception {
-    //we create RX version of vertx instance to easier handle reactive programming
-    final io.vertx.rxjava.core.Vertx rxVertx = new io.vertx.rxjava.core.Vertx(this.vertx);
     //create JDBC Clinet here and pass it to AdapterProxy - notice using clientOptions property here
-    final JDBCClient client = JDBCClient.createShared(rxVertx, configuration.getClientOptions());
+    final JDBCClient client = JDBCClient.createShared(vertx, configuration.getClientOptions());
 
-    //register the service proxy on the event bus
+    //register the service proxy on the event bus, notice using `getVertx()` here to obtain non-rx version of vertx
     consumer = ProxyHelper
-        .registerService(AdapterProxy.class, this.vertx,
+        .registerService(AdapterProxy.class, getVertx(),
             new BooksDbAdapterProxyImpl(client),
             configuration.getAddress());
   }
@@ -320,7 +319,7 @@ public class BooksDbAdapterProxyImpl extends AbstractAdapterProxy {
 What we do here is:
 - When there is a request in `processRequest`, the first thing we do is to get the `query` from the request object.
 - Then we create an [`Observable`](http://reactivex.io/documentation/observable.html) from the previously configured JDBC Client,
- which gives us a `SQLConnection` object that will be used to perform the next operation. 
+ which gives us a `SQLConnection` object that will be used to perform the next operation asynchronously. 
 - Next we perform a [`flatMap`](http://reactivex.io/documentation/operators/flatmap.html) operation on the `SQLConnection`
  and execute the query.
 - The last thing to do is to [`map`](http://reactivex.io/documentation/operators/map.html) a `ResultSet` 
@@ -368,7 +367,7 @@ file should look like configuration shown below:
   "main": "io.knotx.tutorials.BooksDbAdapter",
   "options": {
     "config": {
-      "address": "knotx.adapter.service.custom",
+      "address": "knotx.adapter.service.booksdb",
       "clientOptions": {
         "url": "jdbc:hsqldb:hsql://localhost:9001/",
         "driver_class": "org.hsqldb.jdbcDriver"
@@ -404,14 +403,14 @@ directory and update the `knotx-standalone-1.0.0.json` configuration file to add
           "services": [
             {
               "name": "books-listing",
-              "address": "knotx.adapter.service.custom",
+              "address": "knotx.adapter.service.booksdb",
               "params": {
                 "query": "SELECT * FROM books"
               }
             },
             {
               "name": "authors-listing",
-              "address": "knotx.adapter.service.custom",
+              "address": "knotx.adapter.service.booksdb",
               "params": {
                 "query": "SELECT * FROM authors"
               }
@@ -425,7 +424,7 @@ directory and update the `knotx-standalone-1.0.0.json` configuration file to add
 ```
 
 There are two services available thanks to the above configuration:
-- `books-listing` which will initiate service at `knotx.adapter.service.custom` (our Custom Adapter)
+- `books-listing` which will initiate service at `knotx.adapter.service.booksdb` (our Custom Adapter)
 with additional `query` parameter: `SELECT * FROM books`. This query selects all records from the `books` table.
 - `authors-listing` that initiates the same service but passes another query: `SELECT * FROM authors`
 which selects all records from the `authors` table.
@@ -501,5 +500,7 @@ You can run the _Knot.x_ instance using the following command:
 
 When you visit the page [http://localhost:8092/content/local/books.html](http://localhost:8092/content/local/books.html),
  you will see books and authors from the database listed.
+Now, when you add new books to database just refresh the page - new records will be visible immediately
+with no additional configuration. 
 
 The complete code of this whole tutorial is available in the [_Knot.x_ tutorials GitHub repository](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi/).
