@@ -24,7 +24,7 @@ If you want to skip the configuration part and simply run the demo, please check
 [github/adapt-service-without-webapi](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi)
 and follow the instructions in `README.md` to compile and run the complete code.
 
-# Solution Architecture
+## Solution Architecture
 
 So, we have a data source but no Web API to integrate with at the front-end layer.
 
@@ -42,7 +42,7 @@ The architecture of our system will look like this:
 
 ![Solution architecture](/img/blog/adapt-service-without-webapi/solution-architecture.png)
 
-# Data and page template
+## Data and page template
 
 In this example, we create a page that lists information about books and authors retrieved from a database.
 Page markup will look like following snippet:
@@ -92,7 +92,7 @@ Page markup will look like following snippet:
 
 ```
 
-# Set up the project
+## Set up the project
 
 We will show you how to configure a custom adapter project using _Maven_ - feel free to use any other favourite
 project build tool. To build and run this tutorial code you need _Java 8_ and _Maven_.
@@ -130,13 +130,13 @@ we will use are [`vertx-jdbc-client`](http://vertx.io/docs/vertx-jdbc-client/jav
 You may simply download a ready [`pom.xml`](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi/pom.xml)
 file from the tutorial codebase.
 
-# Implementing the Adapter
+## Implementing the Adapter
 
 In order to integrate with _Knot.x_ we need to create a [_Verticle_](http://vertx.io/docs/apidocs/io/vertx/core/Verticle.html).
 The easiest way to do it is to extend the [`AbstractVerticle`](http://vertx.io/docs/apidocs/io/vertx/rxjava/core/AbstractVerticle.html) 
 class provided by RXJava _Vert.x_.
 
-## The Adapter's Heart - Verticle
+### The Adapter's Heart - Verticle
 
 Let's create a class named `BooksDbAdapter` in `/src/main/java/io/knotx/tutorials/` that extends `AbstractVerticle`:
 
@@ -168,7 +168,7 @@ public class BooksDbAdapter extends AbstractVerticle {
 }
 ```
 
-## Configuration
+### Configuration
 
 Now we will create a simple configuration for our custom code. The configuration file defines a _Verticle_ that
 will initialise the whole _Service Adapter_ and enable us to pass properties to our custom adapter.
@@ -220,7 +220,7 @@ public class BooksDbAdapterConfiguration {
 }
 ```
 
-## Registering a Service Proxy
+### Registering a Service Proxy
 
 The next step would be to register an [`AdapterProxy`](https://github.com/Cognifide/knotx/wiki/Adapter#how-to-extend) 
 to handle incoming requests. The simplest way to achieve this is to create a class 
@@ -288,7 +288,7 @@ public class BooksDbAdapter extends AbstractVerticle {
 }
 ```
 
-## Fetching Data from the Database
+### Fetching Data from the Database
 
 Now, as we have our adapter ready, we can implement the data querying logic in `BooksDbAdapterProxyImpl`:
 
@@ -326,11 +326,11 @@ What we do here is:
  obtained from the query execution to an `AdapterResponse`, as required by the `processRequest` method's contract.
  To do this, we simply put all query results in the body of the `ClientResponse`.
 
-# Integration
+## Integration
 
 We have our custom Adapter. Now it's time to integrate it with _Knot.x_ and the database.
 
-## Set up Knot.x
+### Set up Knot.x
 
 Create a folder where we will start _Knot.x_ and the custom Adapter. It should contain the following files:
 
@@ -349,7 +349,7 @@ You may download _Knot.x_ files from the Maven Central Repository
 2. [JSON configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.json)
 3. [Log configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.logback.xml)
 
-## Set up the Database
+### Set up the Database
 
 For the purpose of demonstration, we're going to use an HSQL database in this example.
 
@@ -380,7 +380,7 @@ file should look like configuration shown below:
 Build your custom adapter using the Maven command: `mvn clean install`.
 The build should result with a file called `adapt-service-without-webapi-1.0.0-fat.jar` being created in the `target` directory.
 
-## Plug in the Custom Adapter
+### Plug in the Custom Adapter
 
 All you need to do now to get the adapter up and running is to copy `adapt-service-without-webapi-1.0.0-fat.jar` to the `app` 
 directory and update the `knotx-standalone-1.0.0.json` configuration file to add new `services`:
@@ -429,7 +429,7 @@ with additional `query` parameter: `SELECT * FROM books`. This query selects all
 - `authors-listing` that initiates the same service but passes another query: `SELECT * FROM authors`
 which selects all records from the `authors` table.
 
-## Prepare the template
+### Prepare the template
 
 The last thing left for us to build is a template configuration. We want the template to display data from `books-listing` and
 `authors-listing` services. This can be achieved by creating a couple of simple [Handlebars](https://github.com/Cognifide/knotx/wiki/HandlebarsKnot) templates in `books.html`:
@@ -478,7 +478,7 @@ We iterate over the entries in `_result` since it is a list of all authors fetch
 
 The final markup of the template can be downloaded from our [GitHub repository for this tutorial](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi/content/local/books.html).
 
-# Run the example
+## Run the example
 
 Now we have all the parts ready and can run the demo.
 The application directory should now contain the following artifacts:
