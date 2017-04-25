@@ -124,6 +124,7 @@ layout: default
           <h2>Ready to learn more?</h2>
           <p>
             <a href="<%= @getSectionLink('wiki') %>" class="btn btn-default btn-lg doc-btn">Explore the Docs</a>
+            <a href="<%= @getSectionLink('tutorials') %>" class="btn btn-default btn-lg doc-btn">Explore the Tutorials</a>
           </p>
         </div>
       </div>
