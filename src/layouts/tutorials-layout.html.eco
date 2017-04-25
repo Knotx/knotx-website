@@ -1,0 +1,19 @@
+---
+layout: content-layout
+---
+<!-- Tutorials section -->
+<div class="container flex blog">
+  <div class="row">
+    <div class="col-sm-9">
+      <% for tutorial in @getCollection("tutorials").toJSON()[0...10]: %>
+      <article>
+        <h2><a href="<%= tutorial.url %>"><%= tutorial.title %></a></h2>
+        <section class="post">
+          <p><%= tutorial.description %></p>
+          <a class="readmore" href="<%= tutorial.url %>">Read more...</a>
+        </section>
+      </article>
+      <% end %>
+    </div>
+  </div>
+</div>

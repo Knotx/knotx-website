@@ -2,6 +2,7 @@
 title: Release 1.0.0
 description: Knot.x Release 1.0.0 Announcement
 author: marcinczeczko
+keywords: release
 date: 2017-02-17
 ---
 ## Annoucement
