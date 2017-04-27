@@ -94,19 +94,19 @@ Now it’s the time to prepare the environment required to run Knot.x.
 First, let’s download all required files from the Nexus repository and create the folder structure that we’re going to use in this tutorial.
 
 Download the following files:
-1. [Knot.x standalone fat jar](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.fat.jar)
-2. [JSON configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.json)
-3. [Log configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.logback.xml)
+1. [Knot.x standalone fat jar](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.1/knotx-standalone-1.0.1.fat.jar)
+2. [JSON configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.1/knotx-standalone-1.0.1.json)
+3. [Log configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.1/knotx-standalone-1.0.1.logback.xml)
 
 Additionally, download the file `books.html` from GitHub. We’re going to transform it into a dynamic one.
 
 The directory tree should look like this:
 
 ```
-├── knotx-standalone-1.0.0.json  (download from nexus)
-├── knotx-standalone-1.0.0.logback.xml (download from nexus)
+├── knotx-standalone-1.0.1.json  (download from nexus)
+├── knotx-standalone-1.0.1.logback.xml (download from nexus)
 ├── app
-│   ├── knotx-standalone-1.0.0.fat.jar (download from nexus)
+│   ├── knotx-standalone-1.0.1.fat.jar (download from nexus)
 ├── library
 │   ├── html
 │       ├── books.html (Taken from our Github)
@@ -117,8 +117,8 @@ To simplify Knot.x execution, create a `run.sh` script with the following conten
 
 ```
 #!/bin/bash
-java -Dvertx.disableDnsResolver=true -Dlogback.configurationFile=knotx-standalone-1.0.0.logback.xml 
--cp "app/*" io.knotx.launcher.LogbackLauncher -conf knotx-standalone-1.0.0.json
+java -Dvertx.disableDnsResolver=true -Dlogback.configurationFile=knotx-standalone-1.0.1.logback.xml 
+-cp "app/*" io.knotx.launcher.LogbackLauncher -conf knotx-standalone-1.0.1.json
 ```
 
 You can try running Knot.x application with `./run.sh` command. But for now stop it and follow next steps to configure it to do something useful.
@@ -129,7 +129,7 @@ More details about Knot.x deployment and setup can be found [here](https://githu
 > All the configurations used in this tutorial are available on [Github/knotx-tutorials](https://github.com/Knotx/knotx-tutorials/tree/master/hello-rest-service)
 
 As we already have a base Knot.x setup, let’s start adapting it to our needs. 
-If you open the `knotx-standalone-1.0.0.json` file in a text editor, you wil see that it contains an array 
+If you open the `knotx-standalone-1.0.1.json` file in a text editor, you wil see that it contains an array 
 containing a list of modules. These are the [Knot.x modules](https://github.com/Cognifide/knotx/wiki/KnotxModules) 
 that are going to be started.
 
@@ -228,54 +228,9 @@ address of the Repository Connector, in this case it’s the address of our File
 
 > All configuration options and default values, such as address fields, for each Knot.x module are described in the [documentation](https://github.com/Cognifide/knotx/wiki).
 
-### Processing chain configuration
-
-The next step is to configure how the HTML template should be processed. We want to set it up so that:
-
-- Only `GET` requests with URIs starting with `/html` are allowed
-- If a requested template requires data from services, they should be delivered
-- The Handlebars engine is be used
-
-Just change the `KnotxServer` module configuration as shown below:
-
-```json
-  "knotx:io.knotx.KnotxServer": {
-    "options": {
-      "config": {
-        "repositories": [
-          {
-            "path": "/html/.*",
-            "address": "knotx.core.repository.filesystem"
-          }
-        ],
-        "routing": {
-          "GET": [
-            {
-              "path": "/html/.*",
-              "address": "knotx.knot.service",
-              "onTransition": {
-                "next": {
-                  "address": "knotx.knot.handlebars"
-                }
-              }
-            }
-          ]
-        }
-      }
-    }
-  }
-```
-
-We added a `routing` object to this configuration. As you can see, we specified the request 
-condition as intended. We also told Knot.x that if the condition is met, the module listening on the `knotx.knot.service`
-address should process our snippets. This is in fact the [Service Knot](https://github.com/Cognifide/knotx/wiki/ServiceKnot)
-module that is responsible for integration with external services.
-
-Then, according to the configuration, the next element in the processing chain is the 
-[Handlebars Knot](https://github.com/Cognifide/knotx/wiki/HandlebarsKnot) that is supposed to take care of assembling the full page.
-
 ### Book service configuration
-The last module left to configure is the previously mentioned [Service Knot](https://github.com/Cognifide/knotx/wiki/ServiceKnot). 
+The [Service Knot](https://github.com/Cognifide/knotx/wiki/ServiceKnot) module is responsible for an integration with 
+external services. 
 The configuration of this module consists of services which can be used in any template 
 processed by Knot.x. Each service has an associated `name`, that is actually being used on HTML 
 level and an address of the Adapter that is handling communication with the outside world.
@@ -367,7 +322,7 @@ We’re saying here that:
   - Then use `www.googleapis.com:443`
 
 At this point, we can say that Knot.x configuration is finished. You can download the final 
-configuration file from [here](https://github.com/Knotx/knotx-tutorials/blob/master/hello-rest-service/knotx-standalone-1.0.0.json).
+configuration file from [here](https://github.com/Knotx/knotx-tutorials/blob/master/hello-rest-service/knotx-standalone-1.0.1.json).
 
 ## Template definition
 
