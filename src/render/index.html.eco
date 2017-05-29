@@ -108,7 +108,7 @@ layout: default
           <h2>Extensions</h2>
           <p>
             Knot.x is a fully modular platform with very flexible extension points that we
-            call Knots and Adapters that are efficently communicates with Knot.x Core using
+            call Knots and Adapters that efficiently communicates with Knot.x Core using
             event bus. Thanks to the polyglot nature of Vert.x you can implement extensions
             in languages other than Java.
           </p>
