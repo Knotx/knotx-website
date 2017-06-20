@@ -103,7 +103,7 @@ pre {
 
 .banner {
   padding-top: 50px;
-  padding-bottom: 63px;
+  padding-bottom: 23px;
 
   h1 {
     font-size: 60px;
@@ -127,7 +127,24 @@ pre {
       padding-left: 10px;
       display: inline-block;
     }
+
+    .knotx-movie {
+      position:relative;
+      padding-bottom:56.25%;
+      padding-top:30px;
+      height:0;
+      overflow:hidden;
+    }
+
+    .knotx-movie iframe, .video-container object, .video-container embed {
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+    }
   }
+
   .feature {
     padding-top: 55px;
     padding-bottom: 35px;
