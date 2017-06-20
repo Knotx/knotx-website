@@ -103,7 +103,7 @@ pre {
 
 .banner {
   padding-top: 50px;
-  padding-bottom: 63px;
+  padding-bottom: 23px;
 
   h1 {
     font-size: 60px;
@@ -128,6 +128,7 @@ pre {
       display: inline-block;
     }
   }
+
   .feature {
     padding-top: 55px;
     padding-bottom: 35px;
@@ -149,6 +150,24 @@ pre {
       margin-top: 33px;
       font-size: 22px;
       font-weight: 300;
+    }
+
+    .container {
+      .knotx-movie {
+        position:relative;
+        padding-bottom:56.25%;
+        padding-top:30px;
+        height:0;
+        overflow:hidden;
+      }
+
+      .knotx-movie iframe, .video-container object, .video-container embed {
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+      }
     }
   }
 

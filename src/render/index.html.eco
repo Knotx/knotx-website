@@ -28,10 +28,12 @@ layout: default
   <div class="feature intro">
     <div class="container">
       <div class="row">
-        <div class="col-sm-3">
-          <img src="img/logo-240x240.png" class="img-responsive img-centered" alt=""/>
+        <div class="col-sm-6">
+          <div class="knotx-movie">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/dBhgsmC78Yw?rel=0" frameborder="0" allowfullscreen></iframe>
+          </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-6">
           <blockquote>
             <p>Let’s imagine an online banking website containing different features like a chat box, exchange rates, stock data and user profile information. The site has a high performance characteristic, despite its complexity and target publishing channels.
               All those features come from different providers/vendors having their own teams working in various modes, technologies and release cycles.
@@ -108,7 +110,7 @@ layout: default
           <h2>Extensions</h2>
           <p>
             Knot.x is a fully modular platform with very flexible extension points that we
-            call Knots and Adapters that are efficently communicates with Knot.x Core using
+            call Knots and Adapters that efficiently communicates with Knot.x Core using
             event bus. Thanks to the polyglot nature of Vert.x you can implement extensions
             in languages other than Java.
           </p>
