@@ -7,31 +7,27 @@ order: 5
 date: 2017-05-23
 ---
 
-<div style="float: left; text-align: left; width:100%">
-<img src="https://2017.geecon.org/assets/images/logo.png" alt="GeeCon"/>
-</div>
-
-
 ## Overview
 
-In this tutorial, we’re going to show how Knot.x can be easily scaled and extended. We will explain 
+In this tutorial, we’re going to show how Knot.x can be easily scaled and expanded. We explain 
 how to start Knot.x in cluster mode and allow different Knot.x instances to communicate with each 
-other using event bus.
+other using an event bus.
 
 This article uses code examples and configurations presented while GeeCON 2017. 
 
 What you’re going to learn:
 
 - How to scale Knot.x platform using cluster mode
-- How to extend Knot.x by running new features on dedicated Knot.x instance
+- How to expand Knot.x features by running new modules on dedicated Knot.x instance
 
-Full GeeCON 2017 demo script is available [here](https://github.com/Knotx/knotx-tutorials/conferences/geecon2017).
+The full GeeCON 2017 demo script is available [here](https://github.com/Knotx/knotx-tutorials/conferences/geecon2017).
 
 ## Prerequisites 
 
-Clone Knot.x tutorials github repository:
+Clone a tutorials github repository and open a `conferences/geecon2017` directory:
 ```
 git clone https://github.com/Knotx/knotx-tutorials.git
+cd knotx-tutorials/conferences/geecon2017
 ```
 
 Next download [Knot.x standalone fat jar](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.1/knotx-standalone-1.0.1.fat.jar)
@@ -39,7 +35,7 @@ Next download [Knot.x standalone fat jar](https://oss.sonatype.org/content/group
 
 ## Event Bus
 
-Before we start clustered Knot.x instances we want to give you some details about Knot.x architecture 
+Before we start our Knot.x instances we want to give you some details about Knot.x architecture 
 to help you with understanding what will happen in a few minutes.
 
 So basically in terms of architecture Knot.x is a bunch of isolated modules. Those modules have defined 
@@ -48,7 +44,7 @@ contracts so they are easy to test, upgrade or exchange.
 ![Event Bus](/img/blog/geecon-2017/event-bus-knotx.png)
 
 Those modules communicate via Event Bus. It is a lightweight messaging system delivered by Vert.x 
-allowing different modules, or different application instances to communicate with each in a loosely 
+allowing different modules, or <strong>different application instances</strong> to communicate with each in a loosely 
 coupled way. 
 
 
