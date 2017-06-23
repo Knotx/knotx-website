@@ -14,8 +14,11 @@ date: 2017-05-22
  
 Most of this year's content can be summarized with a single word: reactive. Frameworks like Akka, Vert.x or Spring Reactor are becoming more and more typical in modern applications. It was a great honor for us to present how these technologies can make large web platforms easier to scale, maintain and develop. Using the example of Knot.x, we explained how we can write highly efficient, modular applications powered by Vert.x and RxJava.
 
-![Knot.x Cracow](/img/blog/geecon-2017/geecon-knotx-cracow.jpg)
+<div style="float:left;width:100%;text-align:center">
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/E8risyTNdqPrmi" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+</div>
+</br>
 
-In accordance with good GeeCON practices we ended the talk with a live demo. Struggling with Murphy's law, we showed how easy it is to scale and extend Vert.x based applications. The demo script is available [here](http://knotx.io)
+In accordance with good GeeCON practices we ended the talk with a live demo. Struggling with Murphy's law, we showed how easy it is to scale and extend Vert.x based applications.
  
 We are looking forward to the next edition which takes place later this year in Prague. In the meantime you can find us at Devoxx in Cracow at the end of June!
