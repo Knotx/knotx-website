@@ -86,7 +86,7 @@ You may check the second console log and see that cluster is working:
          Member [192.168.56.1]:5702 this
  }
  ```
-
+  
 Now you can open a [Books Page](http://localhost:8092/service/books.html?q=java) in your
 favorite browser to see the console. Every time you refresh the page, Vert.x dispatches the search
 request between `instance-1` and `instance-2`. So Vert.x gives us load balancing for free.
@@ -106,8 +106,9 @@ to achieve.
 ![Knot.x extendability](/img/blog/geecon-2017/geecon-demo-extendability.png)
 
 Before the next steps checkout and build [Adapt Service Without Web API](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi)
-using Maven. Place the `custom-service-adapter-1.0.1-fat.jar` it in the `instance-2/app` folder.
+using Maven. Place the `custom-service-adapter-1.0.1-fat.jar` it in the `instance-3/app` folder.
 Then prepare the DB according to this [tutorial](http://o7planning.org/en/10287/installing-and-configuring-hsqldb-database).
+To create tables with data, use the script provided in the `instance-3/db` folder of this tutorial.
 
 Now run `instance-3` with `BooksDbAdapter` in cluster mode (assuming `instance-1` and `instance-2` are still running):
 
