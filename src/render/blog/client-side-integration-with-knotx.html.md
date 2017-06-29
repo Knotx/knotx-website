@@ -219,7 +219,7 @@ And that's it - let's build the module and proceed to setting up Knot.x instance
 
 ## Running Web API with Knot.x
 
-Create a folder where we will start _Knot.x_ and our Gateway. It should contain the following files:
+Create a folder where we will start _Knot.x_ and our Gateway. Let's name it `demo`. It should contain the following files:
 
 ```
 ├── knotx-standalone-1.1.0.json  (download from Maven Central)
@@ -362,61 +362,17 @@ To run the Knot.x example we still need to configure the repository and service 
           "catalogue": "./content/"
         }
       }
-    },
-    "knotx:io.knotx.ServiceKnot": {
-      "options": {
-        "config": {
-          "services": [
-            {
-              "name": "commodities",
-              "address": "knotx.adapter.service.http",
-              "params": {
-                "path": "/service/mock/commodities.json"
-              }
-            }
-          ]
-        }
-      }
-    },
-    "knotx:io.knotx.HttpServiceAdapter": {
-      "options": {
-        "config": {
-          "services": [
-            {
-              "path": "/service/mock/.*",
-              "domain": "localhost",
-              "port": 3000,
-              "allowedRequestHeaders": [
-                "*"
-              ]
-            }
-          ]
-        }
-      }
     }
-
 ```
 
-## Running the example
+## Running the demo
 
-### Prerequisites
-This example integrates also using backend integration approach with `commodities` service.
-Before the next steps:
- - if you haven't done that yet, checkout [`knotx-tutorials`](https://github.com/Knotx/knotx-tutorials)
- - download [Knot.x mocks fat jar](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-mocks/1.1.0/knotx-mocks-1.1.0.fat.jar)
-and place it in the `app` folder under `mocks`.
- - In `mocks` directory run:
-   ```
-   $ java -Dlogback.configurationFile=knotx.logback.xml -cp "app/*" io.knotx.launcher.LogbackLauncher -conf knotx-mocks.json
-   ```
-   to start Knot.x mocks module (it will provide some sample endpoints with JSON responses).
-
-And now the last part. Let's run the example by executing following command:
+And now the last part. Let's run the example by executing following command in `demo`:
 ```
 $ java -Dlogback.configurationFile=knotx-standalone-1.1.0.logback.xml -cp "app/*" io.knotx.launcher.LogbackLauncher -conf knotx-standalone-1.1.0.json
 ```
 to start Knot.x instance with `market-api` module.
 
-Now you may enter the [page](http://localhost:8092/example/pages/main.html) and see the rendered diagram.
+Now you may enter the [page](http://localhost:8092/example/pages/gateway-demo.html) and see the rendered diagram.
 
 If you want to find more details about this page, please see [`Devoxx PL 2017 Knot.x demo script`](https://github.com/Knotx/knotx-tutorials/tree/master/conferences/devoxx2017).
