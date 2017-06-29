@@ -12,11 +12,11 @@ Hello _Knoters_ !
 It's been some time since the last technical tutorial, so let's just get straight to the point.
 
 This tutorial explains how to use [Knot.x Gateway](https://github.com/Cognifide/knotx/wiki/GatewayMode) to create a consistent
-Web API for your client-side integration and was originally presented as part of Devoxx PL 2017 talk.
+Web API for your client-side integration. It was originally presented as part of Devoxx PL 2017 talk.
 
 What you are going to learn:
 
-- How to implement a simple Gateway.
+- How to implement a simple Gateway module / microservice.
 - How to configure Knot.x as your Web API endpoint.
 
 
@@ -26,7 +26,7 @@ and follow the instructions in `README.md` to compile and run the complete code.
 
 ## Case
 This time it will be a really simple case. We have to render a graph with markets forecast for the oil prices.
-And we already have a JS library that will create a graph for us, we just need to deliver the data and the result will look like this:
+Since we already have a JS library that will create a graph for us, we just need to deliver the data and the result will look like this:
 
 ![Forecast graph](/img/blog/client-side-integration-with-knotx/graph.png)
 
@@ -112,8 +112,8 @@ public class RequestProcessorKnotVerticle extends AbstractVerticle {
 
 ```
 
-Next step is creating `RequestProcessorKnotProxyImpl` which is an `AbstractKnotProxy`.
-This is the place where response will be created:
+The next step is to create `RequestProcessorKnotProxyImpl` which is an `AbstractKnotProxy`.
+This is the place where a response will be created:
 
 ```java
 package io.knotx.example.gateway.impl;
@@ -196,7 +196,7 @@ public class RequestProcessorKnotProxyImpl extends AbstractKnotProxy {
 
 ```
 
-Here in the `processRequest` method, a response is created. It will be just a mocked JSON with a `name` and some `rates` in a form of an JsonArray.
+Here in the `processRequest` method, the response is created. It is just the mocked JSON with the `name` and some `rates` in the form of an JsonArray.
 If you want it make more realistic, you can use a `MarketSimulation` class that I've shared [here](https://github.com/Knotx/knotx-tutorials/blob/master/conferences/devoxx2017/examples/market-api/src/main/java/io/knotx/example/gateway/impl/MarketSimulation.java).
 
 The last thing - we create a default configuration for the module.
@@ -215,11 +215,11 @@ Define the `main` verticle (the one that will setup the module) and the address 
 
 ```
 
-And that's it - let's build the module and proceed to setting up Knot.x instance.
+And that's it - let's build the module and set up Knot.x instance.
 
 ## Running Web API with Knot.x
 
-Create a folder where we will start _Knot.x_ and our Gateway. Let's name it `demo`. It should contain the following files:
+Create a folder where we will start _Knot.x_ and our Gateway module. Let's name it `demo`. It should contain the following files:
 
 ```
 ├── knotx-standalone-1.1.0.json  (download from Maven Central)
@@ -246,7 +246,7 @@ or [download repository as ZIP](https://github.com/Knotx/knotx-tutorials/archive
 ### Configuration
 
 Open `knotx-standalone-1.1.0.json` in your favourite IDE and let's configure Knot.x instance.
-First, let's define all modules that will be
+First, let's define all modules that will be:
 
 ```
 {
@@ -263,13 +263,13 @@ First, let's define all modules that will be
     "knotx:io.knotx.ResponseProviderKnot"
   ]
 }
-
 ```
 
 As you can see, one of modules is `knotx:example.io.knotx.RequestProcessorKnot` that we created in the `market-api`. By this naming convention,
 Knot.x will search for `example.io.knotx.RequestProcessorKnot.json` file in the classpath and start defined there Verticle.
 
-Now, let's override default `knotx:io.knotx.KnotxServer` settings where besides the `defaultFlow` we will define a `customFlow`.
+Now, let's override default `knotx:io.knotx.KnotxServer` settings where besides the `defaultFlow` we will define a `customFlow`. You can find 
+more details how to override the default configuration [here](https://github.com/Cognifide/knotx/wiki/KnotxDeployment).
 
 #### Note
 You will see multiple entries in `defaultFlow.repositories`. This is just for the demo purposes.
@@ -345,11 +345,11 @@ handled e.g. by Apache Server that is in front of Knot.x instance and takes care
     }
 ```
 
-So what happens inside the `customFlow`? Thanks to it we can define additional routing, that Knot.x will handle.
-In this case, we define, that `GET` requests under `/prices/.*` path will be processed by the Gateway Knot.
-And next (on transition) it will be routed to our RequestProcessorKnotProxyImpl.
+So what happens inside the `customFlow`? Thanks to it we can define an additional routing, that Knot.x will handle.
+In this case, we define, that `GET` requests under `/prices/.*` path are processed by the Gateway Knot.
+And then (on transition) it will be routed to our RequestProcessorKnotProxyImpl.
 
-Finally our request will be processed by the `responseProvider` which (in it simple, default implementation) just passes the response.
+Finally our request will be processed by the `responseProvider` which (in its simple default implementation) just forwards the response to the client.
 
 To run the Knot.x example we still need to configure the repository and service knot and adapter
 (for backend integration that is running aside client-side in this example):
