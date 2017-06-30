@@ -14,11 +14,12 @@ It's been some time since the last technical tutorial, so let's just get straigh
 This tutorial explains how to use [Knot.x Gateway](https://github.com/Cognifide/knotx/wiki/GatewayMode) to create a consistent
 Web API for your client-side integration. It was originally presented as part of Devoxx PL 2017 talk.
 
+![Gateway API](/img/blog/client-side-integration-with-knotx/knotx-gateway-api.png)
+
 What you are going to learn:
 
 - How to implement a simple Gateway module / microservice.
 - How to configure Knot.x as your Web API endpoint.
-
 
 If you want to skip the configuration part and simply run the demo, please checkout
 [github/knotx-tutorials/devox2017](https://github.com/Knotx/knotx-tutorials/tree/master/conferences/devoxx2017)
