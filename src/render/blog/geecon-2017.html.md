@@ -3,7 +3,7 @@ title: GeeCON 2017 talk
 description: "When Vert.x & RxJava meet - Knot.x: highly-efficient and scalable integration platform for modern websites"
 author: tomaszmichalak
 keywords: conference
-order: 3
+order: 4
 date: 2017-05-22
 ---
 <div style="float: left; padding-right: 20px">
