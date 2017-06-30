@@ -4,7 +4,7 @@ description: "There are two main concepts of integrating external services into 
 author: skejven
 keywords: tutorial
 order: 6
-date: 2017-06-27
+date: 2017-06-30
 ---
 ## Overview
 Hello _Knoters_ !
@@ -268,7 +268,7 @@ First, let's define all modules that will be:
 As you can see, one of modules is `knotx:example.io.knotx.RequestProcessorKnot` that we created in the `market-api`. By this naming convention,
 Knot.x will search for `example.io.knotx.RequestProcessorKnot.json` file in the classpath and start defined there Verticle.
 
-Now, let's override default `knotx:io.knotx.KnotxServer` settings where besides the `defaultFlow` we will define a `customFlow`. You can find 
+Now, let's override default `knotx:io.knotx.KnotxServer` settings where besides the `defaultFlow` we will define a `customFlow`. You can find
 more details how to override the default configuration [here](https://github.com/Cognifide/knotx/wiki/KnotxDeployment).
 
 #### Note
