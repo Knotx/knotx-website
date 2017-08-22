@@ -96,37 +96,46 @@ Page markup will look like following snippet:
 
 ## Set up the project
 
-We will show you how to configure a custom adapter project using _Maven_ - feel free to use any other favourite
+We will show you how to create a custom adapter project using _Maven_ archetype - feel free to use any other favourite
 project build tool. To build and run this tutorial code you need _Java 8_ and _Maven_.
 
-Create a `pom.xml` file with dependencies on `knotx-core` and `knotx-adapter-common`. Additional dependencies 
-we will use are [`vertx-jdbc-client`](http://vertx.io/docs/vertx-jdbc-client/java/) and 
-`hsqldb` driver. The `<dependencies>` section of your project's `pom.xml` should look like this:
+Follow the instructions from [`here`](https://github.com/Knotx/knotx-extension-archetype) to create project 
+structure for a custom adapter. You can set groupId to whatever you like, but in this example we used
+`io.knotx` (so the package will also be `io.knotx`). 
+
+Created `pom.xml` file will have dependencies on `knotx-core`, `knotx-adapter-common` and `knotx-knot-handlebars` 
+(There are also other dependencies, but for the purpose of this exercise we need only those three). 
+Additional dependencies we will use are [`vertx-jdbc-client`](http://vertx.io/docs/vertx-jdbc-client/java/) and 
+`hsqldb` driver. The `<dependencies>` section of your project's `pom.xml` should contain the following dependencies:
 
 ```xml
   <dependencies>
     <dependency>
       <groupId>io.knotx</groupId>
       <artifactId>knotx-core</artifactId>
-      <version>1.0.0</version>
+      <version>${knotx.version}</version>
     </dependency>
     <dependency>
       <groupId>io.knotx</groupId>
       <artifactId>knotx-adapter-common</artifactId>
-      <version>1.0.0</version>
+      <version>${knotx.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.knotx</groupId>
+      <artifactId>knotx-knot-handlebars</artifactId>
+      <version>${knotx.version}</version>
     </dependency>
 
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-jdbc-client</artifactId>
-      <version>3.3.3</version>
+      <version>3.4.2</version>
     </dependency>
     <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
       <version>2.3.4</version>
     </dependency>
-  </dependencies>
 ```
 
 You may simply download a ready [`pom.xml`](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi/pom.xml)
@@ -140,51 +149,69 @@ class provided by RXJava _Vert.x_.
 
 ### The Adapter's Heart - Verticle
 
-Let's create a class named `BooksDbAdapter` in `/src/main/java/io/knotx/tutorials/` that extends `AbstractVerticle`:
+There is already ExampleServiceAdapter class created in `/src/main/java/io/knotx/adapter/example/` which extends `AbstractVerticle`:
 
 ```java
-package io.knotx.tutorials;
+package io.knotx.adapter.example;
 
+import io.knotx.proxy.AdapterProxy;
 import io.vertx.core.Context;
 import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.MessageConsumer;
+import io.vertx.core.json.JsonObject;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
 import io.vertx.rxjava.core.AbstractVerticle;
+import io.vertx.serviceproxy.ProxyHelper;
 
-public class BooksDbAdapter extends AbstractVerticle {
+public class ExampleServiceAdapter extends AbstractVerticle {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(ExampleServiceAdapter.class);
+
+  private MessageConsumer<JsonObject> consumer;
+
+  private ExampleServiceAdapterConfiguration configuration;
 
   @Override
   public void init(Vertx vertx, Context context) {
     super.init(vertx, context);
-    // setup verticle with configuration
+    configuration = new ExampleServiceAdapterConfiguration(config());
   }
 
   @Override
   public void start() throws Exception {
-    // register adapter on the event bus
+    LOGGER.info("Starting <{}>", this.getClass().getSimpleName());
+    //register the service proxy on event bus
+    consumer = ProxyHelper
+        .registerService(AdapterProxy.class, getVertx(),
+            new ExampleServiceAdapterProxy(),
+            configuration.getAddress());
   }
 
   @Override
   public void stop() throws Exception {
-    // unregister adapter when no longer needed
+    ProxyHelper.unregisterService(consumer);
   }
-
 }
+
 ```
 
 ### Configuration
 
-Now we will create a simple configuration for our custom code. The configuration file defines a _Verticle_ that
+Now we will need a simple configuration for our custom code. The configuration file defines a _Verticle_ that
 will initialise the whole _Service Adapter_ and enable us to pass properties to our custom adapter.
 
-Create `io.knotx.example.BooksDbAdapter.json` in `/src/main/resources/`:
+This configuration file named `io.knotx.adapter.example.ExampleServiceAdapter.json` already exists 
+in `/src/main/resources/`:
 
 ```json
 {
-  "main": "io.knotx.tutorials.BooksDbAdapter",
+  "main": "io.knotx.adapter.example.ExampleServiceAdapter",
   "options": {
     "config": {
-      "address": "knotx.adapter.service.booksdb",
-      "clientOptions": {
-         //we will put database connection options here later
+      "address": "knotx.adapter.service.example",
+      "params": {
+        "message": "Hello Knot.x"
       }
     }
   }
@@ -192,22 +219,23 @@ Create `io.knotx.example.BooksDbAdapter.json` in `/src/main/resources/`:
 ```
 
 This configuration file is prepared to run the custom _Service Adapter_, starting the
-`io.knotx.tutorials.BooksDbAdapter` _Verticle_ and listening at the address `knotx.adapter.service.booksdb` on the event bus.
+`io.knotx.adapter.example.ExampleServiceAdapter` _Verticle_ and listening at the address `knotx.adapter.service.example` 
+on the event bus.
 
 Now we will implement a Java model to read the configuration:
 
 ```java
-package io.knotx.tutorials;
+package io.knotx.adapter.example;
 
 import io.vertx.core.json.JsonObject;
 
-public class BooksDbAdapterConfiguration {
+public class ExampleServiceAdapterConfiguration {
 
   private String address;
 
   private JsonObject clientOptions;
-
-  public BooksDbAdapterConfiguration(JsonObject config) {
+  
+  public ExampleServiceAdapterConfiguration(JsonObject config) {
     address = config.getString("address");
     clientOptions = config.getJsonObject("clientOptions", new JsonObject());
   }
@@ -220,53 +248,78 @@ public class BooksDbAdapterConfiguration {
     return address;
   }
 }
+
 ```
 
 ### Registering a Service Proxy
 
 The next step would be to register an [`AdapterProxy`](https://github.com/Cognifide/knotx/wiki/Adapter#how-to-extend) 
 to handle incoming requests. The simplest way to achieve this is to create a class 
-that extends [`AbstractAdapterProxy`](https://github.com/Cognifide/knotx/blob/master/knotx-core/src/main/java/io/knotx/adapter/AbstractAdapterProxy.java). Let's call it `BooksDbAdapterProxyImpl`:
+that extends [`AbstractAdapterProxy`](https://github.com/Cognifide/knotx/blob/master/knotx-core/src/main/java/io/knotx/adapter/AbstractAdapterProxy.java). 
+We have it already created in `/src/main/java/io/knotx/adapter/example/`. It is called ExampleServiceAdapterProxy.
 
 ```java
-package io.knotx.tutorials.impl;
+package io.knotx.adapter.example;
 
 import io.knotx.adapter.AbstractAdapterProxy;
 import io.knotx.dataobjects.AdapterRequest;
-import io.vertx.rxjava.ext.jdbc.JDBCClient;
-import rx.Observable;
+import io.knotx.dataobjects.AdapterResponse;
+import io.knotx.dataobjects.ClientResponse;
+import io.vertx.core.buffer.Buffer;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
+import rx.Single;
 
-public class BooksDbAdapterProxyImpl extends AbstractAdapterProxy {
+public class ExampleServiceAdapterProxy extends AbstractAdapterProxy {
 
-  //we will need JDBC Client here to perform DB queries
-  private final JDBCClient client;
+	private static final Logger LOGGER = LoggerFactory.getLogger(ExampleServiceAdapterProxy.class);
 
-  public BooksDbAdapterProxyImpl(JDBCClient client) {
-    this.client = client;
-  }
+	@Override
+	protected Single<AdapterResponse> processRequest(AdapterRequest adapterRequest) {
+		final String message = adapterRequest.getParams().getString("message");
+		LOGGER.info("Processing request with message: `{}`", message);
+		/**
+		 * In a real scenario, one would connect to an external service here
+		 */
+		return prepareResponse(message);
+	}
 
-  @Override
-  protected Observable<AdapterResponse> processRequest(AdapterRequest adapterRequest) {
-    // all the Custom Adapter's work will be done here
-  }
+	private Single<AdapterResponse> prepareResponse(String message) {
+		final AdapterResponse response = new AdapterResponse();
+		final ClientResponse clientResponse = new ClientResponse();
+		clientResponse.setBody(Buffer.buffer("{\"message\":\"" + message + "\"}"));
+		response.setResponse(clientResponse);
+		return Single.just(response);
+	}
 
 }
 ```
 
-Now we should register this `AdapterProxy` in the `start()` method of our `BooksDbAdapter` and set it up
+Now we should register this `AdapterProxy` in the `start()` method of our `ExampleServiceAdapter` and set it up
 with the following configuration:
 
 ```java
-public class BooksDbAdapter extends AbstractVerticle {
-  
+package io.knotx.adapter.example;
+
+import io.knotx.proxy.AdapterProxy;
+import io.vertx.core.Context;
+import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.MessageConsumer;
+import io.vertx.core.json.JsonObject;
+import io.vertx.rxjava.core.AbstractVerticle;
+import io.vertx.rxjava.ext.jdbc.JDBCClient;
+import io.vertx.serviceproxy.ProxyHelper;
+
+public class ExampleServiceAdapter extends AbstractVerticle {
+
   private MessageConsumer<JsonObject> consumer;
-  private BooksDbAdapterConfiguration configuration;
+  private ExampleServiceAdapterConfiguration configuration;
 
   @Override
   public void init(Vertx vertx, Context context) {
     super.init(vertx, context);
     // using config() method from AbstractVerticle we simply pass our JSON file configuration to Java model
-    configuration = new BooksDbAdapterConfiguration(config());
+    configuration = new ExampleServiceAdapterConfiguration(config());
   }
 
   @Override
@@ -276,9 +329,9 @@ public class BooksDbAdapter extends AbstractVerticle {
 
     //register the service proxy on the event bus, notice using `getVertx()` here to obtain non-rx version of vertx
     consumer = ProxyHelper
-        .registerService(AdapterProxy.class, getVertx(),
-            new BooksDbAdapterProxyImpl(client),
-            configuration.getAddress());
+            .registerService(AdapterProxy.class, getVertx(),
+                    new ExampleServiceAdapterProxy(client),
+                    configuration.getAddress());
   }
 
   @Override
@@ -292,64 +345,64 @@ public class BooksDbAdapter extends AbstractVerticle {
 
 ### Fetching Data from the Database
 
-Now, as we have our adapter ready, we can implement the data querying logic in `BooksDbAdapterProxyImpl`:
+Now, as we have our adapter ready, we can implement the data querying logic in `ExampleServiceAdapterProxy`:
 
 ```java
-public class BooksDbAdapterProxyImpl extends AbstractAdapterProxy {
-  
-  @Override
-  protected Observable<AdapterResponse> processRequest(AdapterRequest adapterRequest) {
-    final String query = adapterRequest.getParams().getString("query");
-    return client.getConnectionObservable()
-        .flatMap(
-            sqlConnection -> sqlConnection.queryObservable(query)
-        )
-        .map(this::toAdapterResponse);
-  }
+package io.knotx.adapter.example;
 
-  private AdapterResponse toAdapterResponse(ResultSet rs) {
-    final AdapterResponse adapterResponse = new AdapterResponse();
-    final ClientResponse clientResponse = new ClientResponse();
-    clientResponse.setBody(Buffer.buffer(new JsonArray(rs.getRows()).encode()));
-    adapterResponse.setResponse(clientResponse);
-    return adapterResponse;
-  }
-  
+import io.knotx.adapter.AbstractAdapterProxy;
+import io.knotx.dataobjects.AdapterRequest;
+import io.knotx.dataobjects.AdapterResponse;
+import io.knotx.dataobjects.ClientResponse;
+import io.vertx.core.buffer.Buffer;
+import io.vertx.core.json.JsonArray;
+import io.vertx.ext.sql.ResultSet;
+import io.vertx.rxjava.ext.jdbc.JDBCClient;
+import rx.Single;
+
+public class ExampleServiceAdapterProxy extends AbstractAdapterProxy {
+
+	//we will need JDBC Client here to perform DB queries
+	private final JDBCClient client;
+
+	public ExampleServiceAdapterProxy(JDBCClient client) {
+		this.client = client;
+	}
+
+	@Override
+	protected Single<AdapterResponse> processRequest(AdapterRequest adapterRequest) {
+		final String query = adapterRequest.getParams().getString("query");
+		return client.rxGetConnection()
+				.flatMap(
+						sqlConnection -> sqlConnection.rxQuery(query)
+				)
+				.map(this::toAdapterResponse);
+	}
+
+	private AdapterResponse toAdapterResponse(ResultSet rs) {
+		final AdapterResponse adapterResponse = new AdapterResponse();
+		final ClientResponse clientResponse = new ClientResponse();
+		clientResponse.setBody(Buffer.buffer(new JsonArray(rs.getRows()).encode()));
+		adapterResponse.setResponse(clientResponse);
+		return adapterResponse;
+	}
+
 }
 ```
 
 What we do here is:
 - When there is a request in `processRequest`, the first thing we do is to get the `query` from the request object.
-- Then we create an [`Observable`](http://reactivex.io/documentation/observable.html) from the previously configured JDBC Client,
+- Then we create a [`Single`](http://reactivex.io/documentation/single.html) from the previously configured JDBC Client,
  which gives us a `SQLConnection` object that will be used to perform the next operation asynchronously. 
 - Next we perform a [`flatMap`](http://reactivex.io/documentation/operators/flatmap.html) operation on the `SQLConnection`
  and execute the query.
-- The last thing to do is to [`map`](http://reactivex.io/documentation/operators/map.html) a `ResultSet` 
+- The last thing to do is to perform [`map`](http://reactivex.io/documentation/operators/map.html) a `ResultSet` 
  obtained from the query execution to an `AdapterResponse`, as required by the `processRequest` method's contract.
  To do this, we simply put all query results in the body of the `ClientResponse`.
 
 ## Integration
 
 We have our custom Adapter. Now it's time to integrate it with _Knot.x_ and the database.
-
-### Set up Knot.x
-
-Create a folder where we will start _Knot.x_ and the custom Adapter. It should contain the following files:
-
-```
-├── knotx-standalone-1.0.0.json  (download from Maven Central)
-├── knotx-standalone-1.0.0.logback.xml (download from Maven Central)
-├── app
-│   ├── knotx-standalone-1.0.0.fat.jar (download from Maven Central)
-├── content
-│   ├── local
-│       ├── books.html (Contains markup of a page - see "Data and page template" section)
-```
-
-You may download _Knot.x_ files from the Maven Central Repository
-1. [Knot.x standalone fat jar](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.fat.jar)
-2. [JSON configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.json)
-3. [Log configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.0.0/knotx-standalone-1.0.0.logback.xml)
 
 ### Set up the Database
 
@@ -360,16 +413,16 @@ in order to set up the database.
 To create tables with data, use the script provided in the [`db`](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi/db) 
 folder of this tutorial.
 
-When you have your database configured, update the `clientOptions` property in `io.knotx.example.BooksDbAdapter.json`
+When you have your database configured, update the `clientOptions` property in `io.knotx.adapter.example.ExampleServiceAdapter.json`
 to point at the database. If you followed the tutorial and your database runs at port `9001`, the configuration
 file should look like configuration shown below:
 
 ```json
 {
-  "main": "io.knotx.tutorials.BooksDbAdapter",
+  "main": "io.knotx.adapter.example.ExampleServiceAdapter",
   "options": {
     "config": {
-      "address": "knotx.adapter.service.booksdb",
+      "address": "knotx.adapter.service.example",
       "clientOptions": {
         "url": "jdbc:hsqldb:hsql://localhost:9001/",
         "driver_class": "org.hsqldb.jdbcDriver"
@@ -379,13 +432,34 @@ file should look like configuration shown below:
 }
 ```
 
-Build your custom adapter using the Maven command: `mvn clean install`.
-The build should result with a file called `adapt-service-without-webapi-1.0.0-fat.jar` being created in the `target` directory.
+The last thing to do is to remove ExampleServiceAdapterTest from adapter. After that, build your custom adapter using
+the Maven command: `mvn clean install`. The build should result with a file called `io-knotx-1.0-SNAPSHOT-fat.jar` 
+(fat jar is a jar which contains all project class files and resources packed together with all it's dependencies)
+being created in the `target` directory.
+
+### Set up Knot.x
+
+Create a folder where we will start _Knot.x_ and the custom Adapter. It should contain the following files:
+
+```
+├── knotx-standalone-1.1.1.json  (download from Maven Central)
+├── knotx-standalone-1.1.1.logback.xml (download from Maven Central)
+├── app
+│   ├── knotx-standalone-1.1.1.fat.jar (download from Maven Central)
+├── content
+│   ├── local
+│       ├── books.html (Contains markup of a page - see "Data and page template" section)
+```
+
+You may download _Knot.x_ files from the Maven Central Repository
+1. [Knot.x standalone fat jar](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.1.1/knotx-standalone-1.1.1.fat.jar)
+2. [JSON configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.1.1/knotx-standalone-1.1.1.json)
+3. [Log configuration file](https://oss.sonatype.org/content/groups/public/io/knotx/knotx-standalone/1.1.1/knotx-standalone-1.1.1.logback.xml)
 
 ### Plug in the Custom Adapter
 
-All you need to do now to get the adapter up and running is to copy `adapt-service-without-webapi-1.0.0-fat.jar` to the `app` 
-directory and update the `knotx-standalone-1.0.0.json` configuration file to add new `services`:
+All you need to do now to get the adapter up and running is to copy `io-knotx-1.0-SNAPSHOT-fat.jar` to the `app` 
+directory and update the `knotx-standalone-1.1.1.json` configuration file to add new `services`:
 
 ```json
 {
@@ -396,7 +470,7 @@ directory and update the `knotx-standalone-1.0.0.json` configuration file to add
     "knotx:io.knotx.FragmentAssembler",
     "knotx:io.knotx.ServiceKnot",
     "knotx:io.knotx.HandlebarsKnot",
-    "knotx:io.knotx.example.BooksDbAdapter"
+    "knotx:io.knotx.adapter.example.ExampleServiceAdapter"
   ],
   "config": {
     "knotx:io.knotx.ServiceKnot": {
@@ -405,14 +479,14 @@ directory and update the `knotx-standalone-1.0.0.json` configuration file to add
           "services": [
             {
               "name": "books-listing",
-              "address": "knotx.adapter.service.booksdb",
+              "address": "knotx.adapter.service.example",
               "params": {
                 "query": "SELECT * FROM books"
               }
             },
             {
               "name": "authors-listing",
-              "address": "knotx.adapter.service.booksdb",
+              "address": "knotx.adapter.service.example",
               "params": {
                 "query": "SELECT * FROM authors"
               }
@@ -426,7 +500,7 @@ directory and update the `knotx-standalone-1.0.0.json` configuration file to add
 ```
 
 There are two services available thanks to the above configuration:
-- `books-listing` which will initiate service at `knotx.adapter.service.booksdb` (our Custom Adapter)
+- `books-listing` which will initiate service at `knotx.adapter.service.example` (our Custom Adapter)
 with additional `query` parameter: `SELECT * FROM books`. This query selects all records from the `books` table.
 - `authors-listing` that initiates the same service but passes another query: `SELECT * FROM authors`
 which selects all records from the `authors` table.
@@ -434,7 +508,8 @@ which selects all records from the `authors` table.
 ### Prepare the template
 
 The last thing left for us to build is a template configuration. We want the template to display data from `books-listing` and
-`authors-listing` services. This can be achieved by creating a couple of simple [Handlebars](https://github.com/Cognifide/knotx/wiki/HandlebarsKnot) templates in `books.html`:
+`authors-listing` services. This can be achieved by creating a couple of simple 
+[Handlebars](https://github.com/Cognifide/knotx/wiki/HandlebarsKnot) templates in `books.html`:
 
 ```html
     <script data-knotx-knots="services,handlebars"
@@ -478,7 +553,8 @@ We iterate over `_result` since it is a list of all books fetched from the datab
 This makes _Knot.x_ call the `authors-listing` service and expose the data in the `_result` scope.
 We iterate over the entries in `_result` since it is a list of all authors fetched from the database.
 
-The final markup of the template can be downloaded from our [GitHub repository for this tutorial](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi/content/local/books.html).
+The final markup of the template can be downloaded from our
+ [GitHub repository for this tutorial](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi/content/local/books.html).
 
 ## Run the example
 
@@ -486,11 +562,11 @@ Now we have all the parts ready and can run the demo.
 The application directory should now contain the following artifacts:
 
 ```
-├── knotx-standalone-1.0.0.json
-├── knotx-standalone-1.0.0.logback.xml
+├── knotx-standalone-1.1.1.json
+├── knotx-standalone-1.1.1.logback.xml
 ├── app
-│   ├── adapt-service-without-webapi-1.0.0-fat.jar
-│   ├── knotx-standalone-1.0.0.fat.jar
+│   ├── io-knotx-1.0-SNAPSHOT-fat.jar
+│   ├── knotx-standalone-1.1.1.fat.jar
 ├── content
 │   ├── local
 │       ├── books.html
@@ -498,7 +574,7 @@ The application directory should now contain the following artifacts:
 
 You can run the _Knot.x_ instance using the following command:
 
-`java -Dlogback.configurationFile=knotx-standalone-1.0.0.logback.xml -cp "app/*" io.knotx.launcher.LogbackLauncher -conf knotx-standalone-1.0.0.json`
+`java -Dlogback.configurationFile=knotx-standalone-1.1.1.logback.xml -cp "app/*" io.knotx.launcher.LogbackLauncher -conf knotx-standalone-1.1.1.json`
 
 When you visit the page [http://localhost:8092/content/local/books.html](http://localhost:8092/content/local/books.html),
  you will see books and authors from the database listed.
