@@ -108,7 +108,7 @@ structure for a custom adapter. You can set the requested parameters to whatever
 5. project name: `First custom service adapter`
 
 Created `pom.xml` file will have dependencies on `knotx-core` and `knotx-adapter-common`
-(There are also other dependencies, but for the purpose of this exercise we need only those three). 
+(There are also other dependencies, but for the purpose of this exercise we need only those two). 
 Additional dependencies we will use are [`vertx-jdbc-client`](http://vertx.io/docs/vertx-jdbc-client/java/) and 
 `hsqldb` driver. The `<dependencies>` section of your project's `pom.xml` should contain the following dependencies:
 
@@ -260,7 +260,7 @@ We have it already created in `/src/main/java/io/knotx/tutorial/adapter/example/
 ```java
 package io.knotx.tutorial.adapter.example;
 
-import io.knotx.tutorial.adapter.AbstractAdapterProxy;
+import io.knotx.adapter.AbstractAdapterProxy;
 import io.knotx.dataobjects.AdapterRequest;
 import io.knotx.dataobjects.AdapterResponse;
 import io.knotx.dataobjects.ClientResponse;
@@ -356,7 +356,7 @@ Now, as we have our adapter ready, we can implement the data querying logic in `
 ```java
 package io.knotx.tutorial.adapter.example;
 
-import io.knotx.tutorial.adapter.AbstractAdapterProxy;
+import io.knotx.adapter.AbstractAdapterProxy;
 import io.knotx.dataobjects.AdapterRequest;
 import io.knotx.dataobjects.AdapterResponse;
 import io.knotx.dataobjects.ClientResponse;
