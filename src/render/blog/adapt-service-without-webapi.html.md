@@ -100,7 +100,8 @@ We will show you how to create a custom adapter project using _Maven_ archetype 
 project build tool. To build and run this tutorial code you need _Java 8_ and _Maven_.
 
 Follow the instructions from [`here`](https://github.com/Knotx/knotx-extension-archetype) to create project 
-structure for a custom adapter. You can set the requested parameters to whatever you like but we used these: 
+structure for a custom adapter. You can set the requested parameters to whatever you like, 
+but we used these in tutorial: 
 1. groupId: `io.knotx.tutorial`
 2. artifactId: `custom-service-adapter`
 3. version: `1.1.1`
@@ -148,7 +149,7 @@ class provided by RXJava _Vert.x_.
 
 ### The Adapter's Heart - Verticle
 
-There is already ExampleServiceAdapter class created in `/src/main/java/io/knotx/adapter/example/` which extends `AbstractVerticle`:
+There is already ExampleServiceAdapter class created in `/src/main/java/io/knotx/tutorial/adapter/example/` which extends `AbstractVerticle`:
 
 ```java
 package io.knotx.tutorial.adapter.example;
@@ -320,7 +321,8 @@ public class ExampleServiceAdapter extends AbstractVerticle {
 
   @Override
   public void init(Vertx vertx, Context context) {
-    LOGGER.debug("Starting <{}>", this.getClass().getSimpleName());
+    LOGGER.debug("Initializing <{}>", this.getClass().getSimpleName());
+
     super.init(vertx, context);
     // using config() method from AbstractVerticle we simply pass our JSON file configuration to Java model
     configuration = new ExampleServiceAdapterConfiguration(config());
@@ -329,6 +331,7 @@ public class ExampleServiceAdapter extends AbstractVerticle {
   @Override
   public void start() throws Exception {
     LOGGER.debug("Starting <{}>", this.getClass().getSimpleName());
+
     //create JDBC Clinet here and pass it to AdapterProxy - notice using clientOptions property here
     final JDBCClient client = JDBCClient.createShared(vertx, configuration.getClientOptions());
 
@@ -337,13 +340,17 @@ public class ExampleServiceAdapter extends AbstractVerticle {
         .registerService(AdapterProxy.class, getVertx(),
             new ExampleServiceAdapterProxy(client),
             configuration.getAddress());
+
+    LOGGER.debug("Started <{}>", this.getClass().getSimpleName());
   }
 
   @Override
   public void stop() throws Exception {
-    LOGGER.debug("Starting <{}>", this.getClass().getSimpleName());
+    LOGGER.debug("Stopping <{}>", this.getClass().getSimpleName());
+
     // unregister adapter when no longer needed
     ProxyHelper.unregisterService(consumer);
+    LOGGER.debug("Stopped <{}>", this.getClass().getSimpleName());
   }
 
 }
@@ -387,7 +394,10 @@ public class ExampleServiceAdapterProxy extends AbstractAdapterProxy {
         .flatMap(
             sqlConnection -> sqlConnection.rxQuery(query)
         )
-        .map(this::toAdapterResponse);
+        .map(this::toAdapterResponse)
+        .doOnSuccess(
+            adapterResponse -> LOGGER.debug("Data from database was processed: `{}`", adapterResponse.toString())
+        );
   }
 
   private AdapterResponse toAdapterResponse(ResultSet rs) {
