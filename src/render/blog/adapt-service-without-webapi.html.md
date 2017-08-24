@@ -99,7 +99,7 @@ Page markup will look like following snippet:
 We will show you how to create a custom adapter project using _Maven_ archetype - feel free to use any other favourite
 project build tool. To build and run this tutorial code you need _Java 8_ and _Maven_.
 
-Follow the instructions from [`here`](https://github.com/Knotx/knotx-extension-archetype) to create project 
+Follow the instructions from [`here`](https://github.com/Knotx/knotx-extension-archetype) to create a project 
 structure for a custom adapter. You can set the requested parameters to whatever you like, 
 but we used these in tutorial: 
 1. groupId: `io.knotx.tutorial`
@@ -272,25 +272,25 @@ import rx.Single;
 
 public class ExampleServiceAdapterProxy extends AbstractAdapterProxy {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ExampleServiceAdapterProxy.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ExampleServiceAdapterProxy.class);
 
-	@Override
-	protected Single<AdapterResponse> processRequest(AdapterRequest adapterRequest) {
-		final String message = adapterRequest.getParams().getString("message");
-		LOGGER.info("Processing request with message: `{}`", message);
-		/**
-		 * In a real scenario, one would connect to an external service here
-		 */
-		return prepareResponse(message);
-	}
+  @Override
+  protected Single<AdapterResponse> processRequest(AdapterRequest adapterRequest) {
+    final String message = adapterRequest.getParams().getString("message");
+    LOGGER.info("Processing request with message: `{}`", message);
+    /**
+     * In a real scenario, one would connect to an external service here
+     */
+    return prepareResponse(message);
+  }
 
-	private Single<AdapterResponse> prepareResponse(String message) {
-		final AdapterResponse response = new AdapterResponse();
-		final ClientResponse clientResponse = new ClientResponse();
-		clientResponse.setBody(Buffer.buffer("{\"message\":\"" + message + "\"}"));
-		response.setResponse(clientResponse);
-		return Single.just(response);
-	}
+  private Single<AdapterResponse> prepareResponse(String message) {
+    final AdapterResponse response = new AdapterResponse();
+    final ClientResponse clientResponse = new ClientResponse();
+    clientResponse.setBody(Buffer.buffer("{\"message\":\"" + message + "\"}"));
+    response.setResponse(clientResponse);
+    return Single.just(response);
+  }
 
 }
 ```
