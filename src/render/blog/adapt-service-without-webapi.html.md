@@ -110,7 +110,7 @@ but we used these in tutorial:
 
 Created `pom.xml` file will have dependencies on `knotx-core` and `knotx-adapter-common`
 (There are also other dependencies, but for the purpose of this exercise we need only those two). 
-Additional dependencies we will use are [`vertx-jdbc-client`](http://vertx.io/docs/vertx-jdbc-client/java/) and 
+Additionally, we will use also [`vertx-jdbc-client`](http://vertx.io/docs/vertx-jdbc-client/java/) and 
 `hsqldb` driver. The `<dependencies>` section of your project's `pom.xml` should contain the following dependencies:
 
 ```xml
