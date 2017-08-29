@@ -12,17 +12,17 @@ Hello _Knot.x_ users!
 
 In this post we will show you how easy it is to inject data coming directly from a database into an HTML template.
 When developing advanced systems on the Web, we are often asked to integrate some external services and use
-the data our clients provide to render some information on a page. It is not a rare case when the 
-data source we integrate with has no Web API or even can't have it because of security reasons. 
+the data our clients provide to render some information on a page. It is not a rare case when the
+data source we integrate with has no Web API or even can't have it because of security reasons.
 This is the case we will study over the course of this tutorial.
 
 What you're going to learn:
-- How to implement a simple [Service Adapter](https://github.com/Cognifide/knotx/wiki/ServiceAdapter) 
+- How to implement a simple [Service Adapter](https://github.com/Cognifide/knotx/wiki/ServiceAdapter)
 and start using it with _Knot.x_.
-- How to use [Vert.x](http://vertx.io/docs/vertx-jdbc-client/java/) to easily access your database 
+- How to use [Vert.x](http://vertx.io/docs/vertx-jdbc-client/java/) to easily access your database
 in a very performant way.
 
-If you want to skip the configuration part and simply run the demo, please checkout 
+If you want to skip the configuration part and simply run the demo, please checkout
 [github/adapt-service-without-webapi](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi)
 and follow the instructions in `README.md` to compile and run the complete code.
 
@@ -33,11 +33,11 @@ So, we have a data source but no Web API to integrate with at the front-end laye
 We have two options now:
 
 1. Implement a Web API layer to access the database and then integrate with it using e.g. AJAX or an [HTTP adapter](http://knotx.io/blog/hello-rest-service/).
- 
+
 2. Implement a _Knot.x_ [_Service Adapter_](https://github.com/Cognifide/knotx/wiki/ServiceAdapter).
 
 Option (1) may be quite expensive to implement or even not possible due to security reasons.
-In this article, we will focus on option (2) and omit additional Web API layer. We are going to connect 
+In this article, we will focus on option (2) and omit additional Web API layer. We are going to connect
 to the database directly from Knot.x and inject the data into an HTML template.
 
 The architecture of our system will look like this:
@@ -99,9 +99,9 @@ Page markup will look like following snippet:
 We will show you how to create a custom adapter project using _Maven_ archetype - feel free to use any other favourite
 project build tool. To build and run this tutorial code you need _Java 8_ and _Maven_.
 
-Follow the instructions from [`here`](https://github.com/Knotx/knotx-extension-archetype) to create a project 
-structure for a custom adapter. You can set the requested parameters to whatever you like, 
-but we used these in tutorial: 
+Follow the instructions from [`here`](https://github.com/Knotx/knotx-extension-archetype) to create a project
+structure for a custom adapter (archetype `knotx-adapter-archetype`). You can set the requested parameters to whatever you like,
+but we used these in tutorial:
 1. groupId: `io.knotx.tutorial`
 2. artifactId: `custom-service-adapter`
 3. version: `1.1.1`
@@ -109,8 +109,8 @@ but we used these in tutorial:
 5. project name: `First custom service adapter`
 
 Created `pom.xml` file will have dependencies on `knotx-core` and `knotx-adapter-common`
-(There are also other dependencies, but for the purpose of this exercise we need only those two). 
-Additionally, we will use also [`vertx-jdbc-client`](http://vertx.io/docs/vertx-jdbc-client/java/) and 
+(There are also other dependencies, but for the purpose of this exercise we need only those two).
+Additionally, we will use also [`vertx-jdbc-client`](http://vertx.io/docs/vertx-jdbc-client/java/) and
 `hsqldb` driver. The `<dependencies>` section of your project's `pom.xml` should contain the following dependencies:
 
 ```xml
@@ -144,7 +144,7 @@ file from the tutorial codebase.
 ## Implementing the Adapter
 
 In order to integrate with _Knot.x_ we need to create a [_Verticle_](http://vertx.io/docs/apidocs/io/vertx/core/Verticle.html).
-The easiest way to do it is to extend the [`AbstractVerticle`](http://vertx.io/docs/apidocs/io/vertx/rxjava/core/AbstractVerticle.html) 
+The easiest way to do it is to extend the [`AbstractVerticle`](http://vertx.io/docs/apidocs/io/vertx/rxjava/core/AbstractVerticle.html)
 class provided by RXJava _Vert.x_.
 
 ### The Adapter's Heart - Verticle
@@ -201,7 +201,7 @@ public class ExampleServiceAdapter extends AbstractVerticle {
 Now we will need a simple configuration for our custom code. The configuration file defines a _Verticle_ that
 will initialise the whole _Service Adapter_ and enable us to pass properties to our custom adapter.
 
-This configuration file named `io.knotx.tutorial.adapter.example.ExampleServiceAdapter.json` already exists 
+This configuration file named `io.knotx.tutorial.adapter.example.ExampleServiceAdapter.json` already exists
 in `/src/main/resources/`:
 
 ```json
@@ -219,7 +219,7 @@ in `/src/main/resources/`:
 ```
 
 This configuration file is prepared to run the custom _Service Adapter_, starting the
-`io.knotx.tutorial.adapter.example.ExampleServiceAdapter` _Verticle_ and listening at the address `knotx.adapter.service.example` 
+`io.knotx.tutorial.adapter.example.ExampleServiceAdapter` _Verticle_ and listening at the address `knotx.adapter.service.example`
 on the event bus.
 
 Now we will implement a Java model to read the configuration:
@@ -234,7 +234,7 @@ public class ExampleServiceAdapterConfiguration {
   private String address;
 
   private JsonObject clientOptions;
-  
+
   public ExampleServiceAdapterConfiguration(JsonObject config) {
     address = config.getString("address");
     clientOptions = config.getJsonObject("clientOptions", new JsonObject());
@@ -253,9 +253,9 @@ public class ExampleServiceAdapterConfiguration {
 
 ### Registering a Service Proxy
 
-The next step would be to register an [`AdapterProxy`](https://github.com/Cognifide/knotx/wiki/Adapter#how-to-extend) 
-to handle incoming requests. The simplest way to achieve this is to create a class 
-that extends [`AbstractAdapterProxy`](https://github.com/Cognifide/knotx/blob/master/knotx-core/src/main/java/io/knotx/adapter/AbstractAdapterProxy.java). 
+The next step would be to register an [`AdapterProxy`](https://github.com/Cognifide/knotx/wiki/Adapter#how-to-extend)
+to handle incoming requests. The simplest way to achieve this is to create a class
+that extends [`AbstractAdapterProxy`](https://github.com/Cognifide/knotx/blob/master/knotx-core/src/main/java/io/knotx/adapter/AbstractAdapterProxy.java).
 We have it already created in `/src/main/java/io/knotx/tutorial/adapter/example/`. It is called ExampleServiceAdapterProxy.
 
 ```java
@@ -413,10 +413,10 @@ public class ExampleServiceAdapterProxy extends AbstractAdapterProxy {
 What we do here is:
 - When there is a request in `processRequest`, the first thing we do is to get the `query` from the request object.
 - Then we create a [`Single`](http://reactivex.io/documentation/single.html) from the previously configured JDBC Client,
- which gives us a `SQLConnection` object that will be used to perform the next operation asynchronously. 
+ which gives us a `SQLConnection` object that will be used to perform the next operation asynchronously.
 - Next we perform a [`flatMap`](http://reactivex.io/documentation/operators/flatmap.html) operation on the `SQLConnection`
  and execute the query.
-- The last thing to do is to perform [`map`](http://reactivex.io/documentation/operators/map.html) a `ResultSet` 
+- The last thing to do is to perform [`map`](http://reactivex.io/documentation/operators/map.html) a `ResultSet`
  obtained from the query execution to an `AdapterResponse`, as required by the `processRequest` method's contract.
  To do this, we simply put all query results in the body of the `ClientResponse`.
 
@@ -430,7 +430,7 @@ For the purpose of demonstration, we're going to use an HSQL database in this ex
 
 Follow [this tutorial](http://o7planning.org/en/10287/installing-and-configuring-hsqldb-database)
 in order to set up the database.
-To create tables with data, use the script provided in the [`db`](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi/db) 
+To create tables with data, use the script provided in the [`db`](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi/db)
 folder of this tutorial.
 
 When you have your database configured, update the `clientOptions` property in `io.knotx.tutorial.adapter.example.ExampleServiceAdapter.json`
@@ -453,7 +453,7 @@ file should look like configuration shown below:
 ```
 
 The last thing to do is to remove ExampleServiceAdapterTest from adapter. After that, build your custom adapter using
-the Maven command: `mvn clean install`. The build should result with a file called `custom-service-adapter-1.1.1-fat.jar` 
+the Maven command: `mvn clean install`. The build should result with a file called `custom-service-adapter-1.1.1-fat.jar`
 (fat jar is a jar which contains all project class files and resources packed together with all it's dependencies)
 being created in the `target` directory.
 
@@ -478,7 +478,7 @@ You may download _Knot.x_ files from the Maven Central Repository
 
 ### Plug in the Custom Adapter
 
-All you need to do now to get the adapter up and running is to copy `custom-service-adapter-1.1.1-fat.jar` to the `app` 
+All you need to do now to get the adapter up and running is to copy `custom-service-adapter-1.1.1-fat.jar` to the `app`
 directory and update the `knotx-standalone-1.1.1.json` configuration file to add new `services`:
 
 ```json
@@ -528,7 +528,7 @@ which selects all records from the `authors` table.
 ### Prepare the template
 
 The last thing left for us to build is a template configuration. We want the template to display data from `books-listing` and
-`authors-listing` services. This can be achieved by creating a couple of simple 
+`authors-listing` services. This can be achieved by creating a couple of simple
 [Handlebars](https://github.com/Cognifide/knotx/wiki/HandlebarsKnot) templates in `books.html`:
 
 ```html
@@ -599,6 +599,6 @@ You can run the _Knot.x_ instance using the following command:
 When you visit the page [http://localhost:8092/content/local/books.html](http://localhost:8092/content/local/books.html),
  you will see books and authors from the database listed.
 Now, when you add new books to database just refresh the page - new records will be visible immediately
-with no additional configuration. 
+with no additional configuration.
 
 The complete code of this whole tutorial is available in the [_Knot.x_ tutorials GitHub repository](https://github.com/Knotx/knotx-tutorials/tree/master/adapt-service-without-webapi/).
