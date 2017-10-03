@@ -108,8 +108,9 @@ but we used these in tutorial:
 4. package name: `io.knotx.tutorial`
 5. project name: `First custom service adapter`
 
-Created `pom.xml` file will have dependencies on `knotx-core` and `knotx-adapter-common`
-(There are also other dependencies, but for the purpose of this exercise we need only those two).
+Created `pom.xml` file will have dependencies on `knotx-core` and `knotx-adapter-common` with `scope` set to `provided`. This is because we will have
+those dependencies on the classpath provided by `knotx-standalone-1.1.1.fat.jar` 
+(there are also other dependencies, but for the purpose of this exercise we need only those two).
 Additionally, we will use also [`vertx-jdbc-client`](http://vertx.io/docs/vertx-jdbc-client/java/) and
 `hsqldb` driver. The `<dependencies>` section of your project's `pom.xml` should contain the following dependencies:
 
@@ -119,11 +120,13 @@ Additionally, we will use also [`vertx-jdbc-client`](http://vertx.io/docs/vertx-
       <groupId>io.knotx</groupId>
       <artifactId>knotx-core</artifactId>
       <version>${knotx.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>io.knotx</groupId>
       <artifactId>knotx-adapter-common</artifactId>
       <version>${knotx.version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -394,10 +397,7 @@ public class ExampleServiceAdapterProxy extends AbstractAdapterProxy {
         .flatMap(
             sqlConnection -> sqlConnection.rxQuery(query)
         )
-        .map(this::toAdapterResponse)
-        .doOnSuccess(
-            adapterResponse -> LOGGER.debug("Data from database was processed: `{}`", adapterResponse.toString())
-        );
+        .map(this::toAdapterResponse);
   }
 
   private AdapterResponse toAdapterResponse(ResultSet rs) {
