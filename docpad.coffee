@@ -77,6 +77,11 @@ docpadConfig = {
         getMemberGithub: (member) ->
           member.github or "https://github.com/#{member.member}"
 
+        printKnotxVersion: (version) ->
+          if version
+            "Knot.x version: #{version}"
+          else ""
+
         dateToMonthAndYear: (date) -> moment(date).format("MMMM YYYY")
 
         arrayGroupBy: (array, aggregate) ->
