@@ -21,8 +21,10 @@ avatar: https://github.com/identicons/jasonlong.png
 website: http://your-website
 twitter: https://twitter.com/your-twitter
 showOnPage: true
+knotxVersion: 1.2.0
 ---
 ```
+
 Each line between the `---` lines are the metadata. The **required** metadata fields are:
 
 * **member**: Github User ID
@@ -32,6 +34,7 @@ Each line between the `---` lines are the metadata. The **required** metadata fi
 * **twitter**: Link to the twitter feed of the user, if no twitter leave the field *empty*
 * **github**: ***Optional***. If your want to use link to different github account, e.g. organization, you can do this in this property, if not defined an `http://github.com/member` link will be exposed
 * **showOnPage**: Leave true. If you don't want to be listed on Community page, then set to false
+* **knotxVersion**: version of Knot.x for which this blog post was written or last updated
 
 ### Making a Pull Request
 Once you finish writing your Contributor entry:

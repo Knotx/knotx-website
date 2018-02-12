@@ -3,4 +3,5 @@
   <time class="meta-item date"
         datetime="<%= @formatDt(@date) %>"><%= @formatDate(@date) %>
   </time>
+  <span class="meta-item"><%= @printKnotxVersion(@knotxVersion) %></span>
 </header>
