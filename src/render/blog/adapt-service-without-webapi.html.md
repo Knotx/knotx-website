@@ -399,7 +399,7 @@ public class ExampleServiceAdapterProxy extends AbstractAdapterProxy {
   @Override
   protected Single<AdapterResponse> processRequest(AdapterRequest adapterRequest) {
     final String query = adapterRequest.getParams().getString("query");
-    LOGGER.info("Processing request with query: `{}`", query);
+    LOGGER.debug("Processing request with query: `{}`", query);
     return client.rxGetConnection()
         .flatMap(
             sqlConnection -> sqlConnection.rxQuery(query)
