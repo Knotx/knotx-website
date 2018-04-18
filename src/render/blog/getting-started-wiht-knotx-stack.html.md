@@ -4,8 +4,8 @@ description: "In this tutorial, we explain how to start playing with Knot.x usin
 author: skejven
 keywords: tutorial
 order: 7
-date: 2018-04-17
-knotxVersion: 1.3.0-SNAPSHOT
+date: 2018-04-18
+knotxVersion: 1.3.0
 ---
 ## Overview
 
@@ -76,6 +76,10 @@ Lets now configure Knot.x to do the magic for us.
 We need to do following things:
 - provide the page template, for the tutorial purpose we will use `fileSystemRepo`,
 - provide the datasource, we will use the Google Books API.
+
+> All configuration options and default values, such as address fields, for each Knot.x module are 
+described directly in the configuration files of those modules in `conf`.
+
 
 ### Templates repository configuration
 By default `fileSystemRepo` is not enabled in Knot.x Stack, because it purposes are purely academical.
@@ -160,15 +164,6 @@ Create `content` directory in `KNOTX_HOME` and put there following page template
     </script>
     
     </div>
-  <hr/>
-  <div class="row">
-    <div class="col-sm-12">
-      <p>
-        <a class="btn btn-primary btn-large"
-           href="http://knotx.io/blog/getting-started-with-knotx-stack/">Go back to the tutorial</a>
-      </p>
-    </div>
-  </div>
 </div>
 </body>
 </html>
@@ -186,7 +181,10 @@ config.fileSystemRepo {
 
 In `fileSystemRepo.conf` let's define the `content` directory to be our file repository:
 ```hocon
+# Event bus address on which the File System Repository connector listens on. Default is 'knotx.core.repository.filesystem'
+# Here below, we use a global constant defined in `application.conf`
 address = ${global.address.fileSystemRepo}
+# Path to the directory on the local filesystem which will be the root for requested templates
 catalogue = "./content/"
 ```
 
@@ -212,10 +210,14 @@ Let's now define it in the configuration.
 
 To do so, open `conf/includes/serviceKnot.conf` and add `bookslist` service:
 ```hocon
+# List of mappings between service aliases and service adapters.
 services = [
   {
+    # Name of the service that will be used in HTML snippets
     name = bookslist
+    # Event bus address of the service adapter that is responsible for handling physicall communication with a data source
     address = ${global.address.adapter.basic}
+    # Arbitrary parameters to be send to service adapter. In this case we send the query that is part of request path to google books API
     params {
       path= "/books/v1/volumes?q=java"
     }
@@ -225,19 +227,28 @@ services = [
 Now, as we have `bookslist` datasource, let's configure Adapter available under `knotx.adapter.service.http` 
 (the value of `${global.address.adapter.basic}`). In `conf/includes/serviceAdapter.conf`:
 
-- Enable SSL by setting `ssl = true`.
+- Enable SSL by setting `ssl = true` in the `clientOptions` configuration.
 - Add new service entry:
 
 ```hocon
 services = [
   {
+    # A regexp.
+    # Any request to the service made by the adapter, is being made to the service with a given
+    # physical conenction details, only if the given path matching this path regexp
     path = "/books.*"
+    # A domain or IP of actual HTTP service the adapter will talk to
     domain =  "www.googleapis.com"
+    # HTTP port of the service, since this is SSL connection, port wourld be 443
     port = 443
+    # List of request headers that will be send to the given service endpoint.
+    # Each header can be use wildcards '*' to generalize list, we pass all headers here.
     allowedRequestHeaders = [
       ".*"
     ]
+    # Additional request query parameters to be send in each request. We don't need here any.
     queryParams {}
+    # Additional headers to be send in each request to the service. We don't need here any.
     additionalHeaders {}
   }
 ]
