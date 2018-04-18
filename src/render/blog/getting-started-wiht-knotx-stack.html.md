@@ -228,6 +228,20 @@ Now, as we have `bookslist` datasource, let's configure Adapter available under 
 (the value of `${global.address.adapter.basic}`). In `conf/includes/serviceAdapter.conf`:
 
 - Enable SSL by setting `ssl = true` in the `clientOptions` configuration.
+
+```hocon
+clientOptions {
+...
+  # If your services are using SSL you'd need to configure here low level details on how the
+  # SSL connection is to be maintaned. Currently, if configured all defined in 'services' section
+  # will use SSL
+  #
+  # Enable SSL
+  ssl = true
+...
+}
+```
+
 - Add new service entry:
 
 ```hocon
