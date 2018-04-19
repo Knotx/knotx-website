@@ -257,9 +257,8 @@ services = [
     port = 443
     # List of request headers that will be send to the given service endpoint.
     # Each header can be use wildcards '*' to generalize list, we pass all headers here.
-    allowedRequestHeaders = [
-      ".*"
-    ]
+    # For the purpose of this tutorial, we deny all request headers.
+    allowedRequestHeaders = [ ]
     # Additional request query parameters to be send in each request. We don't need here any.
     queryParams {}
     # Additional headers to be send in each request to the service. We don't need here any.
