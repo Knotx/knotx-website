@@ -5,6 +5,7 @@ author: tomaszmichalak
 keywords: tutorial
 order: 5
 date: 2017-05-23
+knotxVersion: 1.0.1
 ---
 
 ## Overview
@@ -86,7 +87,7 @@ You may check the second console log and see that cluster is working:
          Member [192.168.56.1]:5702 this
  }
  ```
-  
+
 Now you can open a [Books Page](http://localhost:8092/service/books.html?q=java) in your
 favorite browser to see the console. Every time you refresh the page, Vert.x dispatches the search
 request between `instance-1` and `instance-2`. So Vert.x gives us load balancing for free.
