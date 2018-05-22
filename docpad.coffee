@@ -77,9 +77,14 @@ docpadConfig = {
         getMemberGithub: (member) ->
           member.github or "https://github.com/#{member.member}"
 
+        getGithubReleaseTag: (version) ->
+          if version
+            "https://github.com/Cognifide/knotx/releases/tag/#{version}"
+          else "https://github.com/Cognifide/knotx"
+
         printKnotxVersion: (version) ->
           if version
-            "Knot.x version: #{version}"
+            "Knot.x #{version}"
           else ""
 
         dateToMonthAndYear: (date) -> moment(date).format("MMMM YYYY")
