@@ -4,7 +4,7 @@ description: "In this tutorial, we explain how to start playing with Knot.x usin
 author: skejven
 keywords: tutorial
 order: 7
-date: 2018-04-18
+date: 2018-05-18
 knotxVersion: 1.3.0
 ---
 ## Overview
@@ -20,7 +20,7 @@ What you’re going to learn:
 - How to transform static HTML into dynamic content and configure Knot.x to use simple REST services to get data
 - How to use data from such services to dynamically populate HTML
 
-## Setup bare Knot.x instance
+## Setup basic Knot.x instance
 
 **Prerequisites**
 You will need following things to use Knot.x stack:
@@ -69,7 +69,7 @@ to start Knot.x instance. You should see that instance is running and all its mo
       Deployed server=java:io.knotx.server.KnotxServerVerticle [1d044822-8c95-4ae4-b2f8-6886412400eb]
 ```
 
-Congratulation! That's it. You have your own bare Knot.x instance running.
+Congratulation! That's it. You have your own basic Knot.x instance running.
 
 ## Hello Service configuration
 Lets now configure Knot.x to do the magic for us.
