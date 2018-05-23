@@ -5,6 +5,7 @@ author: skejven
 keywords: tutorial
 order: 6
 date: 2017-06-30
+knotxVersion: 1.1.0
 ---
 ## Overview
 Hello _Knoters_ !
