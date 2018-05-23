@@ -27,7 +27,7 @@ You will need following things to use Knot.x stack:
 - JDK 8
 - Linux or OSX bash console (for Windows users we recommend using e.g. Ubuntu with [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)).
 
-Download [Knotx-stack package](https://github.com/Knotx/knotx-stack/releases) and unzip it to any repository.
+Download [Knot.x distribution](http://knotx.io/download) and unzip it to any repository.
 
 For the purpose of this tutorial let's call the structure of unzipped stack `KNOTX_HOME`.
 `KNOTX_HOME` which is Knot.x instance with configuration and dependencies has following structure:
@@ -53,7 +53,7 @@ For the purpose of this tutorial let's call the structure of unzipped stack `KNO
 │   ├── ...
 ```
 
-Now, run 
+Now, run
 ```cmd
 bin/knotx run-knotx
 ```
@@ -77,7 +77,7 @@ We need to do following things:
 - provide the page template, for the tutorial purpose we will use `fileSystemRepo`,
 - provide the datasource, we will use the Google Books API.
 
-> All configuration options and default values, such as address fields, for each Knot.x module are 
+> All configuration options and default values, such as address fields, for each Knot.x module are
 described directly in the configuration files of those modules in `conf`.
 
 
@@ -85,14 +85,14 @@ described directly in the configuration files of those modules in `conf`.
 By default `fileSystemRepo` is not enabled in Knot.x Stack, because it purposes are purely academical.
 It is not designed to be used as production ready solution (you should use `httpRepo` there).
 
-Add 
+Add
 ```hocon
 "fileSystemRepo=io.knotx.repository.fs.FilesystemRepositoryConnectorVerticle"
 ```
 entry to `modules` in `conf/application.conf`. By doing that you say Knot.x instance to start `FilesystemRepositoryConnector`
 with name `fileSystemRepo`. It will be later referenced by this name in configurations.
 
-Uncomment 
+Uncomment
 ```hocon
 fileSystemRepo = knotx.core.repository.filesystem
 ```
@@ -162,7 +162,7 @@ Create `content` directory in `KNOTX_HOME` and put there following page template
          </div>
       {{/each}}
     </script>
-    
+
     </div>
 </div>
 </body>
@@ -224,7 +224,7 @@ services = [
   }
 ]
 ```
-Now, as we have `bookslist` datasource, let's configure Adapter available under `knotx.adapter.service.http` 
+Now, as we have `bookslist` datasource, let's configure Adapter available under `knotx.adapter.service.http`
 (the value of `${global.address.adapter.basic}`). In `conf/includes/serviceAdapter.conf`:
 
 - Enable SSL by setting `ssl = true` in the `clientOptions` configuration.
