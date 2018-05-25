@@ -29,7 +29,7 @@ layout: default
     <div class="container">
       <div class="row">
         <div class="col-sm-1">
-          <h2>System Administrator</h2>
+          <h2>System Admin</h2>
           <p>
             manages the platform
           </p>
