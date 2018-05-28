@@ -9,9 +9,8 @@ layout: default
   <div class="index-header" id="content">
     <div class="container">
       <div class="banner text-center">
-        <h1>Knot.x</h1>
-        <h2>Connects <strong>CMS, CRM</strong> or other web platforms<br/>
-          to create a <strong>unified customer experience.</strong></h2>
+        <h1><strong>Knot.x</strong> connects <strong>CMS, CRM</strong> or other web platforms<br/>
+          to create a <strong>unified customer experience.</strong></h1>
         <span class="github-btn">
           <p>
             <a class="btn btn-default btn-lg" href="/download" role="button">
@@ -20,6 +19,7 @@ layout: default
             </a>
           </p>
         </span>
+        <h4>reactive <i>Vert.x-based</i>  integration platform</h4>
       </div>
     </div>
   </div>
@@ -31,29 +31,29 @@ layout: default
         <div class="col-sm-1">
           <h2>System Admin</h2>
           <p>
-            manages the platform
+            manages the distributed platform.
           </p>
         </div>
         <div class="col-sm-2">
-          <h2>Experience Manageable Integrations + Continuous Replatforming</h2>
+          <h2>Manageable Integrations & Continuous Replatforming</h2>
           <p>
             combines various systems in a controlled and isolated way, preventing any
-            undesired interferences; gradually embed new systems, CMSes on your website
+            undesired interferences, allows you to gradually add new systems.
           </p>
         </div>
         <div class="col-sm-2">
           <h2>Resilience</h2>
           <p>
-            keeps your platform always available. Even if a module breaks, it can redeploy
-            themselves into a new location/server
+            keeps your platform always available. Should a module break, it can be redeployed
+            automatically on a new server or in a new location, if necessary.
           </p>
         </div>
         <div class="col-sm-2">
           <h2>Microservices 2.0</h2>
           <p>
-            fine-grained modular integration logic (modules with precise responsibility) with
+            fine-grained, integration logic encapsulated in clearly-defined modules, with
             manageable contracts, allowing them to be scaled separately without affecting the
-            codebase
+            codebase.
           </p>
         </div>
         <div class="col-sm-2">
@@ -64,7 +64,7 @@ layout: default
           </p>
         </div>
         <div class="col-sm-1">
-          <h2>Extendable & Polyglot</h2>
+          <h2>Extensible & Polyglot</h2>
           <p>
             extension points supporting multiple programming languages
           </p>
@@ -72,9 +72,10 @@ layout: default
         <div class="col-sm-2">
           <h2>Channels / Users</h2>
           <p>
-            the IoT is coming, modern platforms have to support both different channels like tablets,
-            mobiles, computers and other applications. With Knot.x you can address the need of
-            any channel, SPA, etc.
+            the Internet of Things is coming. Modern platforms have to be made available to user via
+            a variety of channels like tablets, mobiles, computers, as well as connected devices
+            and other applications. Knot.x gives you the tools to reach your customers regardless
+            of the approach.
           </p>
         </div>
         <div class="row">
@@ -92,13 +93,15 @@ layout: default
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
-          <h2>Manageable Integrations</h2>
+          <h2>Manageable Integrations & Continuous Replatforming</h2>
           <p>
-            Knot.x can combine experiences of the legacy CMS and the Adobe Experience Manager (or
-            other modern CMS) together with a dynamic data from CRM. The integration can be gradually
-            introduced, first by integrating AEM driven components, then dynamic components from CRM.
-            Knot.x allows to integrate with all kind of systems from CRMs via custom web-services to
-            low-level storages like databases, caches.
+            Knot.x can combine the experiences of a legacy CMS and a modern one (such as the Adobe
+            Experience Manager) while your site is undergoing a migration. Moreover it connects the
+            authoring experience that CMS gives with the dynamic data from external systems (such as
+            CRM, stock exchange service). So the integration can be gradually introduced, first by
+            integrating AEM-driven components, then dynamic components from various systems like CRM.
+            Knot.x integrates with all kinds of systems from CMS, through web services, to low-level
+            storages like databases or caches and it's not limited to HTTP.
           </p>
         </div>
         <div class="col-sm-5 col-sm-offset-1">
@@ -117,9 +120,8 @@ layout: default
         <div class="col-sm-6 col-sm-offset-1 text-right">
           <h2>Resilience</h2>
           <p>
-            Knot.x supports simple and multi-step forms. Easily handles submission errors,
-            form validations and redirects. Knot.x allows you to define a graph of
-            interconnected steps, responding to user input or site visitor choices.
+            Knot.x infuses the required resilience into the platform to avoid failure cascading and
+            keep the platform responsive even when facing failures.
           </p>
         </div>
       </div>
@@ -132,11 +134,13 @@ layout: default
         <div class="col-sm-6">
           <h2>Microservices 2.0</h2>
           <p>
-            Knot.x was build with micro-services principles in mind, all modules are are <b>independent</b>
-            on each other. Each module can run on different data center or host keeping the
-            intercommunication behind the scene. Unified communication between modules over the
-            internal <b>event bus</b> hides the communication complexity and enables you to build each module
-            in languages other than java (<b>ruby</b>, <b>groovy</b>, <b>java script</b>, <b>kotlin</b>, <b>scala</b>).
+            Knot.x was built with micro-services principles in mind, the modules are not dependent
+            on one another. Each module can run in a different data center or host, keeping the
+            intercommunication behind the scenes. Unified communication between
+            modules over the internal <strong>event bus</strong> hides the communication complexity
+            and enables you to build each module in languages other than Java (<strong>Ruby</strong>,
+            <strong>Groovy</strong>, <strong>Java script</strong>, <strong>Kotlin</strong>,
+            <strong>Scala</strong>).
           </p>
         </div>
         <div class="col-sm-5 col-sm-offset-1">
@@ -155,10 +159,10 @@ layout: default
         <div class="col-sm-6 text-right">
           <h2>Scaling</h2>
           <p>
-            Scalability is the knot.x first citizen, thanks to the modularity you can scale each
+            Scalability is the Knot.x first-class citizen, thanks to the modularity you can scale each
             module vertically (on one host) and/or horizontally (over multiple hosts) to get best
-            possible performance or response to an unexpected huge load. With message-driven
-            architecture, scaling does not affect the codebase at all.
+            possible performance or response to an unexpected increase in website traffic. With message-driven
+            architecture, you can extend the system to handle the scale without changing a line of code.
           </p>
         </div>
       </div>
