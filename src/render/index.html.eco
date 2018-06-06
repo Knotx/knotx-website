@@ -35,7 +35,7 @@ layout: default
         <area target="" alt="Scaling" title="Scaling" href="#scaling" coords="777,46,986,252" shape="rect">
         <area target="" alt="Extensible &amp; Polyglot" title="Extensible &amp; Polyglot" href="#extensible" coords="985,82,1065,247" shape="rect">
         <area target="" alt="Channels / Users" title="Channels / Users" href="#channels" coords="1077,58,1329,259" shape="rect">
-        <area target="" alt="Manageable Integrations &amp; Continuous Replatforming" title="Manageable Integrations &amp; Continuous Replatforming" href="#integrations" coords="138,18,351,305" shape="rect">
+        <area id="default" target="" alt="Manageable Integrations &amp; Continuous Replatforming" title="Manageable Integrations &amp; Continuous Replatforming" href="#integrations" coords="138,18,351,305" shape="rect">
       </map>
 
         <div class="imageMapPop" id="system-admin">
