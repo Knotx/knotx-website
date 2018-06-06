@@ -9,110 +9,161 @@ layout: default
   <div class="index-header" id="content">
     <div class="container">
       <div class="banner text-center">
-        <h1>Knot.x</h1>
-        <h2>Connects <strong>CMS, CRM</strong> or other web platforms<br/>
-          to create a <strong>unified customer experience.</strong></h2>
+        <h1><strong>Knot.x</strong> connects <strong>CMS, CRM</strong> or other web platforms<br/>
+          to create a <strong>unified customer experience.</strong></h1>
         <span class="github-btn">
-          <iframe src="https://ghbtns.com/github-btn.html?user=Cognifide&amp;repo=knotx&amp;type=star&amp;count=true&amp;size=large" frameborder="0" scrolling="0" width="160" height="30">
-          </iframe>
+          <p>
+            <a class="btn btn-default btn-lg" href="/download" role="button">
+              <span class="fa fa-download"></span>
+              Knot.x 1.3.0
+            </a>
+          </p>
         </span>
-        <span class="github-btn">
-          <iframe src="https://ghbtns.com/github-btn.html?user=Cognifide&amp;repo=knotx&amp;type=fork&amp;count=true&amp;size=large" frameborder="0" scrolling="0" width="160" height="30">
-          </iframe>
-        </span>
+        <h4>reactive <i>Vert.x-based</i>  integration platform</h4>
       </div>
     </div>
   </div>
 
-  <!-- Intro -->
-  <div class="feature intro">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="knotx-movie">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/dBhgsmC78Yw?rel=0" frameborder="0" allowfullscreen></iframe>
-          </div>
+  <!-- diagram -->
+  <div class="diagram gray-background">
+    <div class="hoverDiagram" id="hover-diagram">
+      <img src="img/knotx-platform-overview.png" usemap="#image-map">
+      <map name="image-map">
+        <area target="" alt="System Admin" title="System Admin" href="#system-admin" coords="135,262,-1,79" shape="rect">
+        <area target="" alt="Resilience" title="Resilience" href="#resilience" coords="350,11,567,315" shape="rect">
+        <area target="" alt="Microservices" title="Microservices" href="#microservices" coords="568,92,776,316" shape="rect">
+        <area target="" alt="Scaling" title="Scaling" href="#scaling" coords="777,46,986,252" shape="rect">
+        <area target="" alt="Extensible &amp; Polyglot" title="Extensible &amp; Polyglot" href="#extensible" coords="985,82,1065,247" shape="rect">
+        <area target="" alt="Channels / Users" title="Channels / Users" href="#channels" coords="1077,58,1329,259" shape="rect">
+        <area id="default" target="" alt="Manageable Integrations &amp; Continuous Replatforming" title="Manageable Integrations &amp; Continuous Replatforming" href="#integrations" coords="138,18,351,305" shape="rect">
+      </map>
+
+        <div class="imageMapPop" id="system-admin">
+          <h2>System Admin</h2>
+          <p>manages the distributed platform.</p>
         </div>
-        <div class="col-sm-6">
-          <blockquote>
-            <p>Let’s imagine an online banking website containing different features like a chat box, exchange rates, stock data and user profile information. The site has a high performance characteristic, despite its complexity and target publishing channels.
-              All those features come from different providers/vendors having their own teams working in various modes, technologies and release cycles.
-              Knot.x connects all of them in a controlled and isolated way, preventing any undesired interferences. It combines asynchronous programming principles and message-driven architecture providing a scalable platform for modern sites.
-              Knot.x connects all of the above to create a unified customer experience.
-            </p>
-          </blockquote>
+        <div class="imageMapPop" id="integrations">
+          <h2>Manageable Integrations & Continuous Replatforming</h2>
+          <p>
+            combines various systems in a controlled and isolated way, preventing any
+            undesired interferences, allows you to gradually add new systems.
+          </p>
         </div>
-      </div>
+        <div class="imageMapPop" id="resilience">
+          <h2>Resilience</h2>
+          <p>
+            keeps your platform always available. Should a module break, it can be redeployed
+            automatically on a new server or in a new location, if necessary.
+          </p>
+        </div>
+        <div class="imageMapPop" id="microservices">
+          <h2>Microservices 2.0</h2>
+          <p>
+            fine-grained, integration logic encapsulated in clearly-defined modules, with
+            manageable contracts, allowing them to be scaled separately without affecting the
+            codebase.
+          </p>
+        </div>
+        <div class="imageMapPop" id="scaling">
+          <h2>Scaling</h2>
+          <p>
+            integration logic can be precisely scaled vertically and horizontally, the platform
+            provides load balancing for free (the platform implements reactive principles)
+          </p>
+        </div>
+        <div class="imageMapPop" id="extensible">
+          <h2>Extensible & Polyglot</h2>
+          <p>
+            extension points supporting multiple programming languages
+          </p>
+        </div>
+        <div class="imageMapPop" id="channels">
+          <h2>Channels / Users</h2>
+          <p>
+            the Internet of Things is coming. Modern platforms have to be made available to user via
+            a variety of channels like tablets, mobiles, computers, as well as connected devices
+            and other applications. Knot.x gives you the tools to reach your customers regardless
+            of the approach.
+          </p>
+        </div>
     </div>
   </div>
-  <!-- Features -->
-  <div class="feature gray-background">
+
+  <!-- Manageable Integrations -->
+  <div class="feature white-background">
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
-          <h2>Features</h2>
+          <h2>Manageable Integrations & Continuous Replatforming</h2>
           <p>
-            Knot.x assembles all features/services into HTML pages in a very efficient manner.
-            It loads and analyses static pages from Repository, collects dynamic features
-            asynchronously and injects them into your page.
+            Knot.x can combine the experiences of a legacy CMS and a modern one (such as the Adobe
+            Experience Manager) while your site is undergoing a migration. Moreover it connects the
+            authoring experience that CMS gives with the dynamic data from external systems (such as
+            CRM, stock exchange service). So the integration can be gradually introduced, first by
+            integrating AEM-driven components, then dynamic components from various systems like CRM.
+            Knot.x integrates with all kinds of systems from CMS, through web services, to low-level
+            storages like databases or caches and it's not limited to HTTP.
           </p>
         </div>
         <div class="col-sm-5 col-sm-offset-1">
-          <img src="img/knotx-intro-features-1.png" class="img-responsive img-centered" alt=""/>
+          <img src="img/knotx-manageable-integrations.png" class="img-responsive img-centered" alt=""/>
         </div>
       </div>
     </div>
   </div>
-  <!-- Forms -->
-  <div class="feature white-background">
+  <!-- Resilience -->
+  <div class="feature gray-background">
     <div class="container">
       <div class="row">
         <div class="col-sm-5">
-          <img src="img/knotx-intro-forms-1.png" class="img-responsive img-centered" alt=""/>
+          <img src="img/knotx-resilience.png" class="img-responsive img-centered" alt=""/>
         </div>
         <div class="col-sm-6 col-sm-offset-1 text-right">
-          <h2>Forms</h2>
+          <h2>Resilience</h2>
           <p>
-            Knot.x supports simple and multi-step forms. Easily handles submission errors,
-            form validations and redirects. Knot.x allows you to define a graph of
-            interconnected steps, responding to user input or site visitor choices.
+            Knot.x infuses the required resilience into the platform to avoid failure cascading and
+            keep the platform responsive even when facing failures.
           </p>
         </div>
       </div>
     </div>
   </div>
-  <!-- Prototyping -->
-  <div class="feature gray-background">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
-          <h2>Prototyping</h2>
-          <p>
-            Knot.x gives you the ability to use simple Mocks. This allows you to expose your sample
-            data directly to pages even if the real service is not available yet, and switch to
-            the real service without any further development work.
-          </p>
-        </div>
-        <div class="col-sm-5 col-sm-offset-1">
-          <img src="img/knotx-intro-prototyping-1.png" class="img-responsive img-centered" alt=""/>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Extensions -->
+  <!-- Microservices 2.0 -->
   <div class="feature white-background">
     <div class="container">
       <div class="row">
+        <div class="col-sm-6">
+          <h2>Microservices 2.0</h2>
+          <p>
+            Knot.x was built with micro-services principles in mind, the modules are not dependent
+            on one another. Each module can run in a different data center or host, keeping the
+            intercommunication behind the scenes. Unified communication between
+            modules over the internal <strong>event bus</strong> hides the communication complexity
+            and enables you to build each module in languages other than Java (<strong>Ruby</strong>,
+            <strong>Groovy</strong>, <strong>Java script</strong>, <strong>Kotlin</strong>,
+            <strong>Scala</strong>).
+          </p>
+        </div>
         <div class="col-sm-5 col-sm-offset-1">
-          <img src="img/knotx-intro-extensions.png" class="img-responsive img-centered" alt=""/>
+          <img src="img/knotx-microservices.png" class="img-responsive img-centered" alt=""/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Scaling -->
+  <div class="feature gray-background">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+          <img src="img/knotx-scaling.png" class="img-responsive img-centered" alt=""/>
         </div>
         <div class="col-sm-6 text-right">
-          <h2>Extensions</h2>
+          <h2>Scaling</h2>
           <p>
-            Knot.x is a fully modular platform with very flexible extension points that we
-            call Knots and Adapters that efficiently communicates with Knot.x Core using
-            event bus. Thanks to the polyglot nature of Vert.x you can implement extensions
-            in languages other than Java.
+            Scalability is the Knot.x first-class citizen, thanks to the modularity you can scale each
+            module vertically (on one host) and/or horizontally (over multiple hosts) to get best
+            possible performance or response to an unexpected increase in website traffic. With message-driven
+            architecture, you can extend the system to handle the scale without changing a line of code.
           </p>
         </div>
       </div>

@@ -1,0 +1,31 @@
+---
+title: Business
+description: Knot.x business story
+layout: content-layout
+menu: true
+order: 2
+---
+
+<div class="flex blog">
+  <!-- Intro -->
+  <div class="feature intro">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="knotx-movie">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/dBhgsmC78Yw?rel=0" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <blockquote>
+            <p>Let’s imagine an online banking website containing different features like a chat box, exchange rates, stock data and user profile information. The site has a high performance characteristic, despite its complexity and target publishing channels.
+              All those features come from different providers/vendors having their own teams working in various modes, technologies and release cycles.
+              Knot.x connects all of them in a controlled and isolated way, preventing any undesired interferences. It combines asynchronous programming principles and message-driven architecture providing a scalable platform for modern sites.
+              Knot.x connects all of the above to create a unified customer experience.
+            </p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

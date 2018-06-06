@@ -106,15 +106,15 @@ pre {
   padding-bottom: 23px;
 
   h1 {
-    font-size: 60px;
-    font-weight: 800;
-    font-family: 'Ubuntu', sans-serif;
-    text-transform: capitalize;
-  }
-  h2 {
+    font-size: 30px;
     font-weight: 300;
     font-family: 'Ubuntu', sans-serif;
-    line-height: 48px;
+    line-height: 40px;
+  }
+  h4 {
+    font-weight: 200;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 32px;
   }
 }
 
@@ -206,6 +206,28 @@ pre {
     .doc-btn:hover {
       background-color: @theme-primary;
       color: #fff;
+    }
+  }
+
+  .diagram {
+    padding-top: 55px;
+    padding-bottom: 35px;
+
+    .p {
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 800;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    img {
+      margin: 0 auto;
+      display: block;
     }
   }
 }
@@ -465,3 +487,77 @@ footer {
     }
   }
 }
+
+
+// diagram hover maps:
+.imageMapPop {
+  display: none;
+}
+
+/*
+ * qTip2 - Pretty powerful tooltips - v3.0.3
+ * http://qtip2.com
+ *
+ * Copyright (c) 2016
+ * Released under the MIT licenses
+ * http://jquery.org/license
+ *
+ * Date: Wed May 11 2016 10:31 GMT+0100+0100
+ * Plugins: None
+ * Styles: core
+ */
+.qtip{
+  position: absolute;
+  left: -28000px;
+  top: -28000px;
+  display: none;
+  max-width: 280px;
+  min-width: 50px;
+  font-size: 14px;
+  line-height: 1.1;
+  box-shadow: none;
+  padding: 0;
+
+  h2 {
+    font-size: 16px;
+    margin: 5px 0;
+    font-weight: bold;
+  }
+}
+
+.qtip-content{
+  position: relative;
+  padding: 10px;
+  overflow: hidden;
+
+  text-align: left;
+  word-wrap: break-word;
+}
+
+/* Default tooltip style */
+.qtip-default{
+  border: 2px solid @theme-primary;
+
+  background-color: #bc5a97; //@theme-primary;
+  color: #fff;
+}
+
+.qtip .qtip-tip{
+  margin: 0 auto;
+  overflow: hidden;
+  z-index: 10;
+
+}
+
+.qtip .qtip-tip,
+.qtip .qtip-tip .qtip-vml,
+.qtip .qtip-tip canvas{
+  position: absolute;
+
+  color: #123456;
+  background: transparent;
+  border: 0 dashed transparent;
+}
+
+.qtip .qtip-tip canvas{ top: 0; left: 0; }
+
