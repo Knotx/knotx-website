@@ -12,4 +12,13 @@ $(document).ready(function () {
       }
     });
   });
+  var defaultTooltip = $('#default').qtip('api');
+  defaultTooltip.toggle(true);
+  var firstView = true;
+  $('.hoverDiagram').mouseenter(function() {
+    if (firstView) {
+      defaultTooltip.toggle(false);
+    }
+    firstView = false;
+  });
 });
