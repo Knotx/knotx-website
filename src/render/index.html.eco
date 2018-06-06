@@ -26,29 +26,37 @@ layout: default
 
   <!-- diagram -->
   <div class="diagram gray-background">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-1">
+    <div class="hoverDiagram" id="hover-diagram">
+      <img src="img/knotx-platform-overview.png" usemap="#image-map">
+      <map name="image-map">
+        <area target="" alt="System Admin" title="System Admin" href="#system-admin" coords="135,262,-1,79" shape="rect">
+        <area target="" alt="Resilience" title="Resilience" href="#resilience" coords="350,11,567,315" shape="rect">
+        <area target="" alt="Microservices" title="Microservices" href="#microservices" coords="568,92,776,316" shape="rect">
+        <area target="" alt="Scaling" title="Scaling" href="#scaling" coords="777,46,986,252" shape="rect">
+        <area target="" alt="Extensible &amp; Polyglot" title="Extensible &amp; Polyglot" href="#extensible" coords="985,82,1065,247" shape="rect">
+        <area target="" alt="Channels / Users" title="Channels / Users" href="#channels" coords="1077,58,1329,259" shape="rect">
+        <area id="default" target="" alt="Manageable Integrations &amp; Continuous Replatforming" title="Manageable Integrations &amp; Continuous Replatforming" href="#integrations" coords="138,18,351,305" shape="rect">
+      </map>
+
+        <div class="imageMapPop" id="system-admin">
           <h2>System Admin</h2>
-          <p>
-            manages the distributed platform.
-          </p>
+          <p>manages the distributed platform.</p>
         </div>
-        <div class="col-sm-2">
+        <div class="imageMapPop" id="integrations">
           <h2>Manageable Integrations & Continuous Replatforming</h2>
           <p>
             combines various systems in a controlled and isolated way, preventing any
             undesired interferences, allows you to gradually add new systems.
           </p>
         </div>
-        <div class="col-sm-2">
+        <div class="imageMapPop" id="resilience">
           <h2>Resilience</h2>
           <p>
             keeps your platform always available. Should a module break, it can be redeployed
             automatically on a new server or in a new location, if necessary.
           </p>
         </div>
-        <div class="col-sm-2">
+        <div class="imageMapPop" id="microservices">
           <h2>Microservices 2.0</h2>
           <p>
             fine-grained, integration logic encapsulated in clearly-defined modules, with
@@ -56,20 +64,20 @@ layout: default
             codebase.
           </p>
         </div>
-        <div class="col-sm-2">
+        <div class="imageMapPop" id="scaling">
           <h2>Scaling</h2>
           <p>
             integration logic can be precisely scaled vertically and horizontally, the platform
             provides load balancing for free (the platform implements reactive principles)
           </p>
         </div>
-        <div class="col-sm-1">
+        <div class="imageMapPop" id="extensible">
           <h2>Extensible & Polyglot</h2>
           <p>
             extension points supporting multiple programming languages
           </p>
         </div>
-        <div class="col-sm-2">
+        <div class="imageMapPop" id="channels">
           <h2>Channels / Users</h2>
           <p>
             the Internet of Things is coming. Modern platforms have to be made available to user via
@@ -78,15 +86,8 @@ layout: default
             of the approach.
           </p>
         </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <img src="img/knotx-platform-overview.png" class="img-responsive img-centered" alt="Knot.x Platform Overview"/>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
-
 
   <!-- Manageable Integrations -->
   <div class="feature white-background">

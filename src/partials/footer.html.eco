@@ -11,7 +11,7 @@
     </div>
   </div>
 </footer>
-<%- @getBlock("scripts").add(["/scripts/vendor/jquery.min.js","/scripts/vendor/bootstrap.min.js","/scripts/vendor/highlight.pack.js","/scripts/knotx.js"]).toHTML() %>
+<%- @getBlock("scripts").add(["/scripts/vendor/jquery.min.js","/scripts/vendor/bootstrap.min.js","/scripts/vendor/highlight.pack.js","/scripts/knotx.js", "/scripts/vendor/jquery.qtip.min.js","/scripts/hovermap.js"]).toHTML() %>
 <% if @document.layout == 'post': %>
 <script id="dsq-count-scr" src="//knotx-io.disqus.com/count.js" async></script>
 <% end %>
