@@ -9,8 +9,8 @@ layout: default
   <div class="index-header" id="content">
     <div class="container">
       <div class="banner text-center">
-        <h1><strong>Knot.x</strong> connects <strong>CMS, CRM</strong> or other web platforms<br/>
-          to create a <strong>unified customer experience.</strong></h1>
+        <h1><strong>Knot.x</strong></h1><h2> connects <strong>CMS, CRM</strong> or other web platforms<br/>
+          to create a <strong>unified customer experience.</strong></h2>
         <span class="github-btn">
           <p>
             <a class="btn btn-default btn-lg" href="/download" role="button">
@@ -25,8 +25,8 @@ layout: default
   </div>
 
   <!-- diagram -->
-  <div class="diagram gray-background">
-    <div class="hoverDiagram" id="hover-diagram">
+  <div class="diagram gray-background hidden-xs hidden-sm">
+    <div class="hoverDiagram hidden-xs hidden-sm" id="hover-diagram">
       <img src="img/knotx-platform-overview.png" usemap="#image-map">
       <map name="image-map">
         <area target="" alt="System Admin" title="System Admin" href="#system-admin" coords="135,262,-1,79" shape="rect">
@@ -42,7 +42,7 @@ layout: default
           <h2>System Admin</h2>
           <p>manages the distributed platform.</p>
         </div>
-        <div class="imageMapPop" id="integrations">
+        <div class="imageMapPop hidden-xs hidden-sm" id="integrations">
           <h2>Manageable Integrations & Continuous Replatforming</h2>
           <p>
             combines various systems in a controlled and isolated way, preventing any

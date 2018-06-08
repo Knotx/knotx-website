@@ -106,10 +106,13 @@ pre {
   padding-bottom: 23px;
 
   h1 {
-    font-size: 30px;
-    font-weight: 300;
+    font-size: 60px;
+    font-weight: 800;
     font-family: 'Ubuntu', sans-serif;
-    line-height: 40px;
+    text-transform: capitalize;
+  }
+  h2 {
+    font-weight: 300;
   }
   h4 {
     font-weight: 200;
@@ -150,24 +153,6 @@ pre {
       margin-top: 33px;
       font-size: 22px;
       font-weight: 300;
-    }
-
-    .container {
-      .knotx-movie {
-        position:relative;
-        padding-bottom:56.25%;
-        padding-top:30px;
-        height:0;
-        overflow:hidden;
-      }
-
-      .knotx-movie iframe, .video-container object, .video-container embed {
-        position:absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-      }
     }
   }
 
@@ -230,6 +215,22 @@ pre {
       display: block;
     }
   }
+}
+
+.knotx-movie {
+  position:relative;
+  padding-bottom:56.25%;
+  padding-top:30px;
+  height:0;
+  overflow:hidden;
+}
+
+.knotx-movie iframe, .video-container object, .video-container embed {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
 }
 
 .info, .blog {
@@ -522,6 +523,10 @@ footer {
     font-size: 16px;
     margin: 5px 0;
     font-weight: bold;
+  }
+
+  @media (max-width: 991px) {
+    display: none !important;
   }
 }
 
