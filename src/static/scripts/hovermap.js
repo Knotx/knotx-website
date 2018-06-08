@@ -13,7 +13,9 @@ $(document).ready(function () {
     });
   });
   var defaultTooltip = $('#default').qtip('api');
-  defaultTooltip.toggle(true);
+  if (defaultTooltip) {
+    defaultTooltip.toggle(true);
+  }
   var firstView = true;
   $('.hoverDiagram').mouseenter(function() {
     if (firstView) {
