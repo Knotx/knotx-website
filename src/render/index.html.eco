@@ -140,7 +140,7 @@ layout: default
             intercommunication behind the scenes. Unified communication between
             modules over the internal <strong>event bus</strong> hides the communication complexity
             and enables you to build each module in languages other than Java (<strong>Ruby</strong>,
-            <strong>Groovy</strong>, <strong>Java script</strong>, <strong>Kotlin</strong>,
+            <strong>Groovy</strong>, <strong>JavaScript</strong>, <strong>Kotlin</strong>,
             <strong>Scala</strong>).
           </p>
         </div>
