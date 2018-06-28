@@ -57,7 +57,7 @@ Now, run
 ```cmd
 bin/knotx run-knotx
 ```
-to start Knot.x instance. You should see that instance is running and all its modules are starting:
+to start Knot.x instance. You should see that instance is running and all its modules are starting. Following entries should appear in the `logs/knotx.log` file:
 ```
 2018-04-17 09:48:39.849 [vert.x-eventloop-thread-0] INFO  i.k.launcher.KnotxStarterVerticle - Knot.x STARTED
       Deployed httpRepo=java:io.knotx.repository.http.HttpRepositoryConnectorVerticle [233dced4-658a-422b-870f-51f12a7ced21]
