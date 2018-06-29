@@ -23,6 +23,9 @@ docpadConfig = {
           deployRemote: 'gh'
           deployBranch: 'master'
           outPath: '.'
+        cleanurls:
+          simpleRedirects:
+            '/blog/getting-started-wiht-knotx-stack': '/blog/getting-started-with-knotx-stack'
 
     environments:
       gh:
