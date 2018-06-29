@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Knot.x Stack
-description: "In this tutorial, we explain how to start playing with Knot.x using Knotx Stack. We will do similar again Hello Rest Service Tutorial showing how Knot.x can be used to transform a static website into a dynamic one."
+description: "In this tutorial, we explain how to start playing with Knot.x using Knot.x Stack. We will do similar again Hello Rest Service Tutorial showing how Knot.x can be used to transform a static website into a dynamic one."
 author: skejven
 keywords: tutorial
 order: 7
@@ -85,20 +85,22 @@ described directly in the configuration files of those modules in `conf`.
 By default `fileSystemRepo` is not enabled in Knot.x Stack, because it purposes are purely academical.
 It is not designed to be used as production ready solution (you should use `httpRepo` there).
 
-Add
+
+Edit the `conf/application.conf` file and 
+- add the following entry to `modules` 
 ```hocon
 "fileSystemRepo=io.knotx.repository.fs.FilesystemRepositoryConnectorVerticle"
 ```
-entry to `modules` in `conf/application.conf`. By doing that you say Knot.x instance to start `FilesystemRepositoryConnector`
-with name `fileSystemRepo`. It will be later referenced by this name in configurations.
+By doing that you say Knot.x instance to start `FilesystemRepositoryConnector` with name `fileSystemRepo`. It will be later referenced by this name in configurations.
 
-Uncomment
+- uncomment `fileSystemRepo` in `global.address` section to define the Event Bus address of the Filesystem Repository.
 ```hocon
 fileSystemRepo = knotx.core.repository.filesystem
 ```
-in `global.address` section to define the Event Bus address of the Filesystem Repository.
 
-Save the changes in `conf/application.conf`. You may see that Knot.x instance reloaded modules and `fileSystemRepo` is now one of available modules.
+
+- Save the changes in `conf/application.conf`. 
+You may see that Knot.x instance reloaded modules and `fileSystemRepo` is now one of available modules. No restart required!
 
 ```
       Deployed httpRepo=java:io.knotx.repository.http.HttpRepositoryConnectorVerticle [c81f07ae-9345-482a-bd7f-af3e261876e0]
@@ -113,7 +115,7 @@ Save the changes in `conf/application.conf`. You may see that Knot.x instance re
 
 Now, let's configure `fileSystemRepo` to read files from the local filesystem.
 
-Create `content` directory in `KNOTX_HOME` and put there following page template with knotx snippet (`<script data-knotx-knots="services,handlebars">...`):
+Create `content` directory in `KNOTX_HOME` and put there following page template with Knot.x snippet (`<script data-knotx-knots="services,handlebars">...`):
 
 *books.html*
 ```html
@@ -169,7 +171,18 @@ Create `content` directory in `KNOTX_HOME` and put there following page template
 </html>
 ```
 
-Now, create `fileSystemRepo.conf` configuration file under `conf/includes` and include it somwhere in `application.conf`:
+Create `conf/includes/fileSystemRepo.conf` file with the following: 
+```hocon
+# Event bus address on which the File System Repository connector listens on. Default is 'knotx.core.repository.filesystem'
+# Here below, we use a global constant defined in `conf/application.conf`
+address = ${global.address.fileSystemRepo}
+# Path to the directory on the local filesystem which will be the root for requested templates
+catalogue = "./content/"
+```
+This way we define the `content` directory that will to be our file repository.
+
+
+Next we need to reference it at the end of `conf/application.conf` file by adding the following:
 
 ```hocon
 config.fileSystemRepo {
@@ -179,16 +192,9 @@ config.fileSystemRepo {
 }
 ```
 
-In `fileSystemRepo.conf` let's define the `content` directory to be our file repository:
-```hocon
-# Event bus address on which the File System Repository connector listens on. Default is 'knotx.core.repository.filesystem'
-# Here below, we use a global constant defined in `application.conf`
-address = ${global.address.fileSystemRepo}
-# Path to the directory on the local filesystem which will be the root for requested templates
-catalogue = "./content/"
-```
 
-And switch `defaultFlow` in `server.conf` routing to use `fileSystemRepo` instead of default `httpRepo`:
+
+Replace `httpRepo` with  `fileSystemRepo` in `conf/server.conf` in  `defaultFlow` section.
 
 ```hocon
 ...
@@ -224,25 +230,10 @@ services = [
   }
 ]
 ```
-Now, as we have `bookslist` datasource, let's configure Adapter available under `knotx.adapter.service.http`
-(the value of `${global.address.adapter.basic}`). In `conf/includes/serviceAdapter.conf`:
+Now, as we have `bookslist` datasource, let's edit `conf/includes/serviceAdapter.conf` file and configure Adapter available under `knotx.adapter.service.http`.
 
-- Enable SSL by setting `ssl = true` in the `clientOptions` configuration.
 
-```hocon
-clientOptions {
-...
-  # If your services are using SSL you'd need to configure here low level details on how the
-  # SSL connection is to be maintaned. Currently, if configured all defined in 'services' section
-  # will use SSL
-  #
-  # Enable SSL
-  ssl = true
-...
-}
-```
-
-- Add new service entry:
+- Set up service entry:
 
 ```hocon
 services = [
@@ -266,6 +257,22 @@ services = [
   }
 ]
 ```
+
+- Enable SSL by setting `ssl = true` in the `clientOptions` configuration.
+
+```hocon
+clientOptions {
+...
+  # If your services are using SSL you'd need to configure here low level details on how the
+  # SSL connection is to be maintaned. Currently, if configured all defined in 'services' section
+  # will use SSL
+  #
+  # Enable SSL
+  ssl = true
+...
+}
+```
+
 
 Save configuration file, Knot.x will reload its modules once again.
 
