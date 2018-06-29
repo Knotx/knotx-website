@@ -117,7 +117,7 @@ docpadConfig = {
 
       tutorials: ->
               @getCollection('html')
-                .findAll({relativeOutDirPath: 'blog', keywords:'tutorial'},[{order: 1}])
+                .findAll({relativeOutDirPath: 'blog', keywords:'tutorial'},[{order: -1}])
                 .on 'add', (model) ->
                   model.set({addToTitle: 'Knot.x Tutorials'})
                   model.setMetaDefaults({layout: "post"})
