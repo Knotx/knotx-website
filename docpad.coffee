@@ -19,13 +19,12 @@ docpadConfig = {
         cleanurls:
           trailingSlashes: true
           static: true
+          simpleRedirects:
+            '/blog/getting-started-wiht-knotx-stack': '/blog/getting-started-with-knotx-stack'
         ghpages:
           deployRemote: 'gh'
           deployBranch: 'master'
           outPath: '.'
-        cleanurls:
-          simpleRedirects:
-            '/blog/getting-started-wiht-knotx-stack': '/blog/getting-started-with-knotx-stack'
 
     environments:
       gh:
