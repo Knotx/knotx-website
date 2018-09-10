@@ -25,6 +25,9 @@ docpadConfig = {
           deployRemote: 'gh'
           deployBranch: 'master'
           outPath: '.'
+        highlightjs:
+          aliases:
+            hocon: 'ruby'
 
     environments:
       gh:
