@@ -3,7 +3,10 @@
   <time class="meta-item date"
         datetime="<%= @formatDt(@date) %>"><%= @formatDate(@date) %>
   </time>
-  <% if @knotxVersion: %>
-    <span class="meta-item"><a class="meta-item" href="<%= @getGithubReleaseTag(@knotxVersion) %>"><%= @printKnotxVersion(@knotxVersion) %></a></span>
-  <% end %>
+
+  <div class="meta-item">
+    <% for knotxVersion in (@knotxVersions || []): %>
+      <a class="meta-item" href="<%= @getGithubReleaseTag(knotxVersion) %>"><%= @printKnotxVersion(knotxVersion) %></a>
+    <% end %>
+  </div>
 </div>

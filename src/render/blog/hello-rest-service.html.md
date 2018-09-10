@@ -5,7 +5,8 @@ author: tomaszmichalak
 keywords: tutorial
 order: 2
 date: 2017-02-23
-knotxVersion: 1.2.0
+knotxVersions:
+  - 1.2.0
 ---
 ## Overview
 

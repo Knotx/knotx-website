@@ -5,7 +5,8 @@ author: marcinczeczko
 keywords: release
 order: 1
 date: 2017-02-17
-knotxVersion: 1.0.0
+knotxVersions:
+    - 1.0.0
 ---
 ## Annoucement
 Knot.x team is pleased to announce the release of Knot.x 1.0.0.

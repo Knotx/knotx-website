@@ -13,7 +13,7 @@ order: 7
       <% for post in @getCollection("posts").toJSON()[0...15]: %>
       <article>
         <h2><a href="<%= post.url %>"><%= post.title %></a></h2>
-        <%- @partial('contributor-meta', {author: post.author, date: post.date, knotxVersion: post.knotxVersion}) %>
+        <%- @partial('contributor-meta', {author: post.author, date: post.date, knotxVersions: post.knotxVersions}) %>
         <section class="post">
           <p><%= post.description %></p>
           <a class="readmore" href="<%= post.url %>">Read more...</a>

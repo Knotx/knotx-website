@@ -5,7 +5,8 @@ author: skejven
 keywords: tutorial
 order: 3
 date: 2017-03-16
-knotxVersion: 1.2.0
+knotxVersions:
+  - 1.2.0
 ---
 ## Overview
 
