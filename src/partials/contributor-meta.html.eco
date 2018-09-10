@@ -1,7 +1,7 @@
-<header class="meta">
+<div class="meta">
   <a class="meta-item" href="<%= @getMemberGithub(@getMember(@author)) %>"><%= @getMember(@author).name %></a>
   <time class="meta-item date"
         datetime="<%= @formatDt(@date) %>"><%= @formatDate(@date) %>
   </time>
   <span class="meta-item"><a class="meta-item" href="<%= @getGithubReleaseTag(@knotxVersion) %>"><%= @printKnotxVersion(@knotxVersion) %></a></span>
-</header>
+</div>
