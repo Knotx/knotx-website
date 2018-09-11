@@ -6,6 +6,7 @@ keywords: tutorial
 order: 3
 date: 2017-03-16
 knotxVersions:
+  - 1.3.0
   - 1.2.0
 ---
 ## Overview

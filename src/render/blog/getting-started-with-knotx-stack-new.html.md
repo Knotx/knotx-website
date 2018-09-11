@@ -7,8 +7,6 @@ order: 7
 date: 2018-09-10
 knotxVersions:
   - current
-  - 1.3.0
-  - 1.2.0  
 ---
 ## Overview
 
