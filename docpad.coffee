@@ -92,9 +92,6 @@ docpadConfig = {
             "#{version}"
           else ""
 
-        testVersion: (version) ->
-          console.log(version)
-
         dateToMonthAndYear: (date) -> moment(date).format("MMMM YYYY")
 
         arrayGroupBy: (array, aggregate) ->
@@ -124,11 +121,11 @@ docpadConfig = {
             model.setMetaDefaults({layout: "post"})
 
       tutorials: ->
-              @getCollection('html')
-                .findAll({relativeOutDirPath: 'blog', keywords:'tutorial'},[{order: -1}])
-                .on 'add', (model) ->
-                  model.set({addToTitle: 'Knot.x Tutorials'})
-                  model.setMetaDefaults({layout: "post"})
+        @getCollection('html')
+          .findAll({relativeOutDirPath: 'blog', keywords:'tutorial'},[{order: -1}])
+          .on 'add', (model) ->
+            model.set({addToTitle: 'Knot.x Tutorials'})
+            model.setMetaDefaults({layout: "post"})
 
       commiters: ->
         @getCollection('html').findAll({relativeOutDirPath: 'commiters'})
