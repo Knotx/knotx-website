@@ -47,19 +47,21 @@ docpadConfig = {
             image: "/img/logo-240x240.png"
             analyticsId: "UA-92165781-1"
 
-        test: ->
+        
+        getTutorialsVersions: (version) ->
           obj = @getCollection('html')
-            .findAll({relativeOutDirPath:  /tutorials(\/.*)?/},[{order: -1}])
-            .on 'add', (model) ->
-              model.set({addToTitle: 'Knot.x Tutorials'})
-              model.setMetaDefaults({layout: "post"})
-            .toJSON()
-
-          return JSON.stringify(obj, null, 2)
-
-        getTutorials: ->
-          @getCollection('tutorials')          
-          .toJSON()
+            .findAll({relativeOutDirPath:  /tutorials\/.*/, keywords: "tutorial"},[{order: -1}])         
+            .toJSON().reduce((acc, val) => 
+              versionsUrls = val.knotxVersions.map((v) -> {version: v, url: val.url})
+              
+              if acc[val.relativeDirPath]
+                acc[val.relativeDirPath] = acc[val.relativeDirPath].concat(versionsUrls)
+              else 
+                acc[val.relativeDirPath] = versionsUrls
+              
+              return acc
+            ,{})
+          return obj[version]
 
         getPreparedTitle: ->
           if @document.title
