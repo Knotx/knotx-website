@@ -19,8 +19,6 @@ docpadConfig = {
         cleanurls:
           trailingSlashes: true
           static: true
-          simpleRedirects:
-            '/blog/getting-started-wiht-knotx-stack': '/blog/getting-started-with-knotx-stack'
         ghpages:
           deployRemote: 'gh'
           deployBranch: 'master'
@@ -48,6 +46,20 @@ docpadConfig = {
                 """
             image: "/img/logo-240x240.png"
             analyticsId: "UA-92165781-1"
+
+        test: ->
+          obj = @getCollection('html')
+            .findAll({relativeOutDirPath:  /tutorials(\/.*)?/},[{order: -1}])
+            .on 'add', (model) ->
+              model.set({addToTitle: 'Knot.x Tutorials'})
+              model.setMetaDefaults({layout: "post"})
+            .toJSON()
+
+          return JSON.stringify(obj, null, 2)
+
+        getTutorials: ->
+          @getCollection('tutorials')          
+          .toJSON()
 
         getPreparedTitle: ->
           if @document.title
@@ -115,14 +127,14 @@ docpadConfig = {
     collections:
       posts: ->
         @getCollection('html')
-          .findAll({relativeOutDirPath: 'blog', layout: $ne: 'blog'},[{date:-1}])
+          .findAll({relativeOutDirPath: 'blog'},[{date:-1}])
           .on 'add', (model) ->
             model.set({addToTitle: 'Knot.x Blog Post'})
             model.setMetaDefaults({layout: "post"})
 
       tutorials: ->
         @getCollection('html')
-          .findAll({relativeOutDirPath: 'blog', keywords:'tutorial'},[{order: -1}])
+          .findAll({relativeOutPath:  /^tutorials\/.+?\/index\.html$/},[{order: -1}])
           .on 'add', (model) ->
             model.set({addToTitle: 'Knot.x Tutorials'})
             model.setMetaDefaults({layout: "post"})

@@ -9,7 +9,11 @@ order: 3
 <div class="container flex blog">
     <div class="row">
       <div class="col-sm-9">
-        <% for tutorial in @getCollection("tutorials").toJSON()[0...10]: %>
+        
+        
+        <p>============================================</p>
+
+        <% for tutorial in @getTutorials(): %>
         <article>
           <h2><a href="<%= tutorial.url %>"><%= tutorial.title %></a></h2>
           <%- @partial('contributor-meta', {author: tutorial.author, date: tutorial.date, knotxVersions: tutorial.knotxVersions}) %>
@@ -18,8 +22,7 @@ order: 3
             <a class="readmore" href="<%= tutorial.url %>">Read more...</a>
           </section>
         </article>
-        <% end %>
-      </div>
+        <% end %>        
     </div>
   </div>
-  
+</div>
