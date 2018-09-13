@@ -5,7 +5,7 @@ This repository contains Knot.x website source. The target website is generated 
 ## Building
 ### Prerequisites
 
-- Node.js 0.12.x or higher installed
+- Node.js 6.x or higher installed
 - Npm
 
 ### Bulding a dev version
