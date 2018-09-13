@@ -19,7 +19,7 @@
     "docpad-plugin-partials": "~2.13.0",
     "docpad-plugin-stylus": "~2.14.0",
     "md5": "^2.2.1",
-    "moment": "^2.17.1"
+    "moment": "^2.22.2"
   },
   "main": "node_modules/.bin/docpad",
   "scripts": {
