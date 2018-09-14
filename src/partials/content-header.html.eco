@@ -5,6 +5,13 @@
       <div class="col-sm-12">
         <h1><%= @document.title %></h1>
       </div>
-    </div>
+    </div>    
   </div>
+  <% if @isEdge(@document.knotxVersions): %>
+    <div class="row edge">
+      <div class="container">
+        <h5>This post may be changed. It referes to development version.</h5>
+      </div>
+    </div>
+  <% end %>
 </div>

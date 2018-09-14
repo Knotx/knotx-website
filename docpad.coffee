@@ -63,6 +63,8 @@ docpadConfig = {
             ,{})
           return obj[version]
 
+        isEdge: (knotxVersions) -> knotxVersions && knotxVersions.includes("edge")
+
         getPreparedTitle: ->
           if @document.title
             if @document.addToTitle
