@@ -2,7 +2,7 @@ This page explains how to write a blog post.
 
 ## The Blog
 
-As you noticed on Knotx.io website, we have the blog section. You can contribute to this section by writing blog posts.
+As you noticed on Knotx.io website, we have the blog and tutorial section. You can contribute to this sections by writing posts.
 
 > If it's the first time you're contributing, you need to create separate PR by adding yourself to the list of contributors on knotx.io/community page. So, follow the [CONTRIBUTORS-HOWTO.md](CONTRIBUTORS-HOWTO.md) first.
 
@@ -12,6 +12,13 @@ As you noticed on Knotx.io website, we have the blog section. You can contribute
 - Create new branch from the `master` branch, e.g. `blog/my-blog-name`
 - Inside `src/render/blog` folder create markdown file.
 > Post markdown filename must be in the form `title.html.md`. For example, you want to create post with the title `My neat blog post` then filename should be `my-neat-blog-post.html.md`
+- Inside `src/render/tutorials` folder create markdown file.
+> - If it is only one version for tutorial, markdown filename must be in the form `tutorial-name/index.html.md`. For example, you want to create tutorial with the title `My neat tutorial post` then filename should be `index.html.md` in folder  `my-neat-tutorial-post` 
+> - If it is more versions for tutorial, markdown filename must be in the form `tutorial-name/version.html.md`. For example, you want to create tutorial with the title `My neat tutorial post` for Knot.x 1.3 then filename should be `1_3.html.md` in folder  `my-neat-tutorial-post`. Last stable version should be a `target` 
+metadata for redirect in index.html.md inside tutorial folder.
+
+Remember about `knotxVersions` metadata in post.
+
 - Content of the file must start with metadata in the header of the file:
 
 ``` md
