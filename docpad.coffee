@@ -19,12 +19,13 @@ docpadConfig = {
         cleanurls:
           trailingSlashes: true
           static: true
-          simpleRedirects:
-            '/blog/getting-started-wiht-knotx-stack': '/blog/getting-started-with-knotx-stack'
         ghpages:
           deployRemote: 'gh'
           deployBranch: 'master'
           outPath: '.'
+        highlightjs:
+          aliases:
+            hocon: 'ruby'
 
     environments:
       gh:
@@ -45,6 +46,24 @@ docpadConfig = {
                 """
             image: "/img/logo-240x240.png"
             analyticsId: "UA-92165781-1"
+
+        
+        getTutorialsVersions: (version) ->
+          obj = @getCollection('html')
+            .findAll({relativeOutDirPath:  /tutorials\/.*/, keywords: "tutorial"},[{order: -1}])         
+            .toJSON().reduce((acc, val) => 
+              versionsUrls = val.knotxVersions.map((v) -> {version: v, url: val.url})
+              
+              if acc[val.relativeDirPath]
+                acc[val.relativeDirPath] = acc[val.relativeDirPath].concat(versionsUrls)
+              else 
+                acc[val.relativeDirPath] = versionsUrls
+              
+              return acc
+            ,{})
+          return obj[version]
+
+        isEdge: (knotxVersions) -> knotxVersions && knotxVersions.includes("edge")
 
         getPreparedTitle: ->
           if @document.title
@@ -80,13 +99,13 @@ docpadConfig = {
           member.github or "https://github.com/#{member.member}"
 
         getGithubReleaseTag: (version) ->
-          if version
+          if /^\d+\.\d+\.\d+$/.test(version)
             "https://github.com/Cognifide/knotx/releases/tag/#{version}"
           else "https://github.com/Cognifide/knotx"
 
         printKnotxVersion: (version) ->
           if version
-            "Knot.x #{version}"
+            "#{version}"
           else ""
 
         dateToMonthAndYear: (date) -> moment(date).format("MMMM YYYY")
@@ -112,17 +131,17 @@ docpadConfig = {
     collections:
       posts: ->
         @getCollection('html')
-          .findAll({relativeOutDirPath: 'blog', layout: $ne: 'blog'},[{date:-1}])
+          .findAll({relativeOutDirPath: 'blog'},[{date:-1}])
           .on 'add', (model) ->
             model.set({addToTitle: 'Knot.x Blog Post'})
             model.setMetaDefaults({layout: "post"})
 
       tutorials: ->
-              @getCollection('html')
-                .findAll({relativeOutDirPath: 'blog', keywords:'tutorial'},[{order: -1}])
-                .on 'add', (model) ->
-                  model.set({addToTitle: 'Knot.x Tutorials'})
-                  model.setMetaDefaults({layout: "post"})
+        @getCollection('html')
+          .findAll({relativeOutPath:  /^tutorials\/.+?\/index\.html$/},[{order: -1}])
+          .on 'add', (model) ->
+            model.set({addToTitle: 'Knot.x Tutorials'})
+            model.setMetaDefaults({layout: "post"})
 
       commiters: ->
         @getCollection('html').findAll({relativeOutDirPath: 'commiters'})

@@ -1,11 +1,11 @@
 ---
 title: Getting Started with Knot.x Stack
-description: "In this tutorial, we explain how to start playing with Knot.x using Knot.x Stack. We will do similar again Hello Rest Service Tutorial showing how Knot.x can be used to transform a static website into a dynamic one."
 author: skejven
 keywords: tutorial
-order: 7
-date: 2018-05-18
-knotxVersion: 1.3.0
+date: 2018-09-10
+layout: post
+knotxVersions:
+  - edge
 ---
 ## Overview
 
@@ -214,28 +214,47 @@ defaultFlow {
 As you probably noticed in the template snippet, `bookslist` datasource is defined (`data-knotx-service="bookslist"`).
 Let's now define it in the configuration.
 
-To do so, open `conf/includes/serviceKnot.conf` and add `bookslist` service:
+To do so, open `conf/includes/dataBridge.conf` and add `bookslist` service:
 ```hocon
-# List of mappings between service aliases and service adapters.
-services = [
+# Event bus settings
+address = ${global.bridge.address}
+# List of mappings between service aliases and datasources.
+# You can define here as many service definitions as required for your project.
+dataDefinitions = [
+  # Definition of the single datasource to be used in the HTML snippets.
+  # You can define an array of such services here.
   {
     # Name of the service that will be used in HTML snippets
     name = bookslist
-    # Event bus address of the service adapter that is responsible for handling physicall communication with a data source
-    address = ${global.address.adapter.basic}
     # Arbitrary parameters to be send to service adapter. In this case we send the query that is part of request path to google books API
     params {
       path= "/books/v1/volumes?q=java"
     }
+    # Event bus address of the service adapter that is responsible for handling physicall communication with a data source
+    adapter = ${global.bridge.dataSource.http.address}
   }
 ]
 ```
-Now, as we have `bookslist` datasource, let's edit `conf/includes/serviceAdapter.conf` file and configure Adapter available under `knotx.adapter.service.http`.
+Now, as we have `bookslist` datasource, let's edit `conf/includes/dataSourceHttp.conf` file and configure Adapter available under `knotx.adapter.service.http`.
 
 
-- Set up service entry:
+Set up service entry and enable SSL by setting ssl = true in the clientOptions configuration.
 
 ```hocon
+# Event bus address of the Basic HTTP Datasource
+address = ${global.bridge.dataSource.http.address}
+
+clientOptions {
+  maxPoolSize = 1000
+  idleTimeout = 120 # seconds
+  # If your datasources are using SSL you'd need to configure here low level details on how the
+  # SSL connection is to be maintaned. Currently, if configured all defined in 'datasources' section
+  # will use SSL
+  ssl = true
+}
+
+# List of datasource services that are supported by this datasource adapter.
+# You can define here as many service definitions as required for your project.
 services = [
   {
     # A regexp.
@@ -256,23 +275,13 @@ services = [
     additionalHeaders {}
   }
 ]
-```
 
-- Enable SSL by setting `ssl = true` in the `clientOptions` configuration.
-
-```hocon
-clientOptions {
-...
-  # If your services are using SSL you'd need to configure here low level details on how the
-  # SSL connection is to be maintaned. Currently, if configured all defined in 'services' section
-  # will use SSL
-  #
-  # Enable SSL
-  ssl = true
-...
+# Statically defined HTTP request header sent in every request to any datasource
+customRequestHeader {
+  name = X-User-Agent
+  value = Knot.x
 }
 ```
-
 
 Save configuration file, Knot.x will reload its modules once again.
 
