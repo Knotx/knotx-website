@@ -22,7 +22,6 @@ some additional entries:
 keywords: tutorial
 knotxVersions:
   - 1.3.0
-  - 1.2.0
 ```
 
 The `index.html.md` file contains redirect details:
@@ -33,6 +32,25 @@ The `index.html.md` file contains redirect details:
 layout: redirect
 target: /tutorials/my-tutorial-name/1_3/
 ---
+```
+
+that point the last stable / released version.
+
+If you want to update the tutorial to the last SNAPSHOT version you can create the `edge.html.md` file 
+with the metadata key:
+
+```
+knotxVersions:
+  - edge
+```
+
+Please notice also that the same tutorial can be correct for more than one version, then you can specify
+those versions in the metadata section:
+
+```
+knotxVersions:
+  - 1.2.0
+  - 1.3.0
 ```
 
 ## Making a Pull Request
