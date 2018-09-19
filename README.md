@@ -43,11 +43,13 @@ http://YOUR_MACHINE_NAME:3010
 
 Read [CONTRIBUTORS-HOWTO.md](CONTRIBUTORS-HOWTO.md) for instructions how to add information about Contributors to the site.
 
-## The blog
+## Blogs
 
-Read [BLOG-HOWTO.md](BLOG-HOWTO.md) for instructions how to write a blog post. If you're not listed as Contributor on the site, then most probably you need to add youself, so follow the previous guide.
+Read [BLOG-HOWTO.md](BLOG-HOWTO.md) for instructions how to write a blog post.
 
-## Publishing to Github pages
+## Tutorials
+
+Read [TUTORIAL-HOWTO.md](TUTORIAL-HOWTO.md) for instructions how to write a tutorial. 
 
 1. Add additional `remote` to this repository
 ```
