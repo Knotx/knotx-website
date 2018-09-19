@@ -54,7 +54,7 @@ For instance, for your neat post, you want use one asset `asset.png`, so:
 ![Asset Title](/img/blog/my-neat-blog-post/asset.png)
 ```
 
-### Making a Pull Request
+## Making a Pull Request
 Once you finish writing your post:
 - create a pull request and we will review/publish your post soon.
 - the pull request should only contain files related to your post.
