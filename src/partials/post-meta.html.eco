@@ -4,9 +4,9 @@
         datetime="<%= @formatDt(@date) %>"><%= @formatDate(@date) %>
   </time>
 
-  <div class="meta-item">
+  <div class="post-versions">    
     <% for version in (@versions || []): %>
-      <a class="meta-item" href="<%= version.url %>"><%= version.version %></a>
+      <a class="post-btn" href="<%= version.url %>"><%= version.version %></a>
     <% end %>
   </div>
 </header>
