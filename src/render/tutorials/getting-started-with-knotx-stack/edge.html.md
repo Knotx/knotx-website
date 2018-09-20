@@ -3,7 +3,7 @@ title: Getting Started with Knot.x Stack
 author: skejven
 keywords: tutorial
 date: 2018-09-10
-layout: post
+layout: tutorial
 knotxVersions:
   - edge
 ---
