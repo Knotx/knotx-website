@@ -9,17 +9,17 @@
   "dependencies": {
     "docpad": "~6.79.4",
     "docpad-plugin-cleanurls": "~2.11.0",
-    "docpad-plugin-coffeescript": "~2.5.0",
-    "docpad-plugin-eco": "~2.1.0",
+    "docpad-plugin-coffeescript": "~2.7.0",
+    "docpad-plugin-eco": "~2.3.0",
     "docpad-plugin-ghpages": "~2.7.0",
-    "docpad-plugin-highlightjs": "~2.4.0",
-    "docpad-plugin-less": "~2.4.1",
-    "docpad-plugin-livereload": "~2.7.1",
-    "docpad-plugin-marked": "~2.3.0",
-    "docpad-plugin-partials": "~2.9.2",
-    "docpad-plugin-stylus": "~2.11.0",
+    "docpad-plugin-highlightjs": "~2.6.0",
+    "docpad-plugin-less": "~2.6.0",
+    "docpad-plugin-livereload": "~2.10.0",
+    "docpad-plugin-marked": "~2.5.0",
+    "docpad-plugin-partials": "~2.13.0",
+    "docpad-plugin-stylus": "~2.14.0",
     "md5": "^2.2.1",
-    "moment": "^2.17.1"
+    "moment": "^2.22.2"
   },
   "main": "node_modules/.bin/docpad",
   "scripts": {

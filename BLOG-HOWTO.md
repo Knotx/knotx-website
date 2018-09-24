@@ -1,17 +1,14 @@
+# Blog section
+
 This page explains how to write a blog post.
 
-## The Blog
+## How to write a blog
 
-As you noticed on Knotx.io website, we have the blog section. You can contribute to this section by writing blog posts.
+- Fork the https://github.com/knotx/knotx-website repository in order to create a pull request with your content.
+- Create a new branch from the `master` branch, e.g. `blog/my-blog-name`
+- Inside the `src/render/blog` folder create a markdown file.
+> A post markdown filename must be in the form `title.html.md`. For example, you want to create the blog with the title `My neat blog post` then the filename should be `my-neat-blog-post.html.md`
 
-> If it's the first time you're contributing, you need to create separate PR by adding yourself to the list of contributors on knotx.io/community page. So, follow the [CONTRIBUTORS-HOWTO.md](CONTRIBUTORS-HOWTO.md) first.
-
-## How to write post
-
-- Fork https://github.com/knotx/knotx-website repository in order to create a pull request with your content.
-- Create new branch from the `master` branch, e.g. `blog/my-blog-name`
-- Inside `src/render/blog` folder create markdown file.
-> Post markdown filename must be in the form `title.html.md`. For example, you want to create post with the title `My neat blog post` then filename should be `my-neat-blog-post.html.md`
 - Content of the file must start with metadata in the header of the file:
 
 ``` md
@@ -57,7 +54,7 @@ For instance, for your neat post, you want use one asset `asset.png`, so:
 ![Asset Title](/img/blog/my-neat-blog-post/asset.png)
 ```
 
-### Making a Pull Request
+## Making a Pull Request
 Once you finish writing your post:
 - create a pull request and we will review/publish your post soon.
 - the pull request should only contain files related to your post.

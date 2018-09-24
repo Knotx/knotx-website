@@ -5,7 +5,7 @@ layout: content-layout
     <div class="row">
       <div class="col-sm-12">
         <article>
-          <%- @partial('contributor-meta', {author: @document.author, date: @document.date, knotxVersions: @document.knotxVersions}) %>
+          <%- @partial('post-meta', {author: @document.author, date: @document.date, versions: @getTutorialsVersions(@document.relativeDirPath)}) %>
           <section class="post">
             <%- @content %>
           </section>
