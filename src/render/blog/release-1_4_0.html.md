@@ -13,14 +13,20 @@ knotxVersions:
 ### Release Notes
 
 #### [knotx-core](https://github.com/Cognifide/knotx)
- - [PR-427](https://github.com/Cognifide/knotx/pull/427) - HttpRepositoryConnectorProxyImpl logging improvements
- - [PR-422](https://github.com/Cognifide/knotx/pull/422) - Configurable Handlebars delimiters
- - [PR-428](https://github.com/Cognifide/knotx/pull/428) - Mark all Service Knot related classes deprecated.
- - [PR-432](https://github.com/Cognifide/knotx/pull/432) - Port unit and integration tests to JUnit 5
- - [PR-440](https://github.com/Cognifide/knotx/pull/440) - Enable different Vert.x Config stores types fix.
- - [PR-443](https://github.com/Cognifide/knotx/pull/443) - Update maven plugins versions.
- - [PR-445](https://github.com/Cognifide/knotx/pull/445) - Vert.x version upgrade to 3.5.3
- - [PR-458](https://github.com/Cognifide/knotx/pull/458) - Remove unused StringToPattern function
+- [PR-427](https://github.com/Cognifide/knotx/pull/427) - HttpRepositoryConnectorProxyImpl logging improvements
+- [PR-422](https://github.com/Cognifide/knotx/pull/422) - Configurable Handlebars delimiters
+- [PR-428](https://github.com/Cognifide/knotx/pull/428) - Mark all Service Knot related classes deprecated.
+- [PR-432](https://github.com/Cognifide/knotx/pull/432) - Port unit and integration tests to JUnit 5
+- [PR-440](https://github.com/Cognifide/knotx/pull/440) - Enable different Vert.x Config stores types fix.
+- [PR-443](https://github.com/Cognifide/knotx/pull/443) - Update maven plugins versions.
+- [PR-445](https://github.com/Cognifide/knotx/pull/445) - Vert.x version upgrade to 3.5.3
+- [PR-458](https://github.com/Cognifide/knotx/pull/458) - Remove unused StringToPattern function
+
+#### [knotx-dependencies](https://github.com/Knotx/knotx-dependencies)
+- [PR-2](https://github.com/Knotx/knotx-dependencies/pull/2) - JUnit 5 libraries added
+- [PR-7](https://github.com/Knotx/knotx-dependencies/pull/7) - Configure Knot.x Data Bridge in BOM file
+- [PR-9](https://github.com/Knotx/knotx-dependencies/pull/9) - Updated JUnit, added Apache Collections v4 and AssertJ versions
+- [PR-10](https://github.com/Knotx/knotx-dependencies/pull/10) - Vert.x version upgraded to 3.5.3
 
 #### [knotx-junit5](https://github.com/Knotx/knotx-junit5)
 First release of the Knot.x Junit5 module that enables full support for Junit5 in Knot.x tests.
@@ -37,7 +43,7 @@ that replaces old [Knot.x Service Knot](https://github.com/Cognifide/knotx/wiki/
 
 
 #### [knotx-example-project](https://github.com/Knotx/knotx-example-project)
- - [PR-19](https://github.com/Knotx/knotx-example-project/pull/19) - Fixed http repo headers conifg
+- [PR-19](https://github.com/Knotx/knotx-example-project/pull/19) - Fixed http repo headers conifg
 
 ### Upgrade Notes
 
