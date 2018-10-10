@@ -2,23 +2,23 @@
 title: Getting Started with Knot.x Stack
 author: skejven
 keywords: tutorial
-date: 2018-09-10
+date: 2018-10-10
 layout: tutorial
 knotxVersions:
   - edge
 ---
 ## Overview
 
-We start this tutorial with great news! Finally [Knot.x Stack](https://github.com/Knotx/knotx-stack) is available.
+We start this tutorial with the great news! Finally [Knot.x Stack](https://github.com/Knotx/knotx-stack) is available.
 
-Let's just cut to the point. In this tutorial we will configure Knot.x instance with simple page that
-uses external datasource (Google API Books) to fetch the dynamic data and display it on our page.
+Let's just cut to the point. In this tutorial we will configure Knot.x instance with a simple page that
+uses an external datasource (Google API Books) to fetch the dynamic data and display it on our page.
 
 What you’re going to learn:
 
 - How to setup Knot.x instance using [Knot.x Stack](https://github.com/Knotx/knotx-stack)
-- How to transform static HTML into dynamic content and configure Knot.x to use simple REST services to get data
-- How to use data from such services to dynamically populate HTML
+- How to transform a static HTML into the dynamic content and configure Knot.x to use REST services to get data
+- How to use the data from such services to dynamically populate HTML
 
 ## Setup basic Knot.x instance
 
@@ -27,10 +27,10 @@ You will need following things to use Knot.x stack:
 - JDK 8
 - Linux or OSX bash console (for Windows users we recommend using e.g. Ubuntu with [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)).
 
-Download [Knot.x distribution](http://knotx.io/download) and unzip it to any repository.
+Download [Knot.x distribution](http://knotx.io/download) and unzip it.
 
 For the purpose of this tutorial let's call the structure of unzipped stack `KNOTX_HOME`.
-`KNOTX_HOME` which is Knot.x instance with configuration and dependencies has following structure:
+`KNOTX_HOME` which is Knot.x instance with all configuration files and dependencies has following structure:
 
 ```
 ├── bin
@@ -41,11 +41,11 @@ For the purpose of this tutorial let's call the structure of unzipped stack `KNO
 │   ├── default-cluster.xml       // basic configuration of Knot.x instance cluster
 │   ├── includes                  // additional modules configuration which are included in `application.conf`
 │   │   ├── actionKnot.conf
+│   │   ├── dataBridge.conf
+│   │   ├── dataSourceHttp.conf
 │   │   ├── hbsKnot.conf
 │   │   ├── httpRepo.conf
 │   │   ├── server.conf
-│   │   ├── serviceAdapter.conf
-│   │   └── serviceKnot.conf
 │   └── logback.xml          // logger configuration
 ├── knotx-stack.json         // stack descriptor, defines instance libraries and dependencies
 ├── lib                      // contains instance libraries and dependencies, instance classpath
@@ -57,15 +57,15 @@ Now, run
 ```cmd
 bin/knotx run-knotx
 ```
-to start Knot.x instance. You should see that instance is running and all its modules are starting. Following entries should appear in the `logs/knotx.log` file:
+to start the Knot.x instance. You should see that the instance is running with all deployed modules. Following entries should appear in the `logs/knotx.log` file:
 ```
 2018-04-17 09:48:39.849 [vert.x-eventloop-thread-0] INFO  i.k.launcher.KnotxStarterVerticle - Knot.x STARTED
       Deployed httpRepo=java:io.knotx.repository.http.HttpRepositoryConnectorVerticle [233dced4-658a-422b-870f-51f12a7ced21]
       Deployed assembler=java:io.knotx.assembler.FragmentAssemblerVerticle [9a075059-4b73-4f50-9890-d38282e2ace4]
-      Deployed serviceKnot=java:io.knotx.knot.service.ServiceKnotVerticle [0c5ac5ea-a196-4678-8f11-e6af84f23e7c]
+      Deployed dataBridge=java:io.knotx.databridge.core.DataBridgeKnot [0c5ac5ea-a196-4678-8f11-e6af84f23e7c]
+      Deployed dataSourceHttp=java:io.knotx.databridge.http.HttpDataSourceAdapter [ba9429fb-ef52-4241-8c11-94977b0a30c9]
       Deployed splitter=java:io.knotx.splitter.FragmentSplitterVerticle [da1384fb-641a-4835-a313-03ecc1c42458]
       Deployed hbsKnot=java:io.knotx.knot.templating.HandlebarsKnotVerticle [41875d6a-699a-4099-969f-115292152801]
-      Deployed serviceAdapter=java:io.knotx.adapter.service.http.HttpServiceAdapterVerticle [ba9429fb-ef52-4241-8c11-94977b0a30c9]
       Deployed server=java:io.knotx.server.KnotxServerVerticle [1d044822-8c95-4ae4-b2f8-6886412400eb]
 ```
 
@@ -82,40 +82,41 @@ described directly in the configuration files of those modules in `conf`.
 
 
 ### Templates repository configuration
-By default `fileSystemRepo` is not enabled in Knot.x Stack, because it purposes are purely academical.
-It is not designed to be used as production ready solution (you should use `httpRepo` there).
+By default `fileSystemRepo` is not enabled in Knot.x Stack, because its purposes are purely academical.
+It is not designed to be used as a production ready solution (you should use `httpRepo` there).
 
 
-Edit the `conf/application.conf` file and 
-- add the following entry to `modules` 
+Edit the `conf/application.conf` file and
+- add the following entry to `modules`
 ```hocon
 "fileSystemRepo=io.knotx.repository.fs.FilesystemRepositoryConnectorVerticle"
 ```
-By doing that you say Knot.x instance to start `FilesystemRepositoryConnector` with name `fileSystemRepo`. It will be later referenced by this name in configurations.
+By doing that you let Knot.x instance to start `FilesystemRepositoryConnector` with the name `fileSystemRepo`. 
+It will be later referenced by this name in configurations.
 
-- uncomment `fileSystemRepo` in `global.address` section to define the Event Bus address of the Filesystem Repository.
+- uncomment `fileSystemRepo` in the `global.address` section to define the Event Bus address of Filesystem Repository.
 ```hocon
 fileSystemRepo = knotx.core.repository.filesystem
 ```
 
 
-- Save the changes in `conf/application.conf`. 
-You may see that Knot.x instance reloaded modules and `fileSystemRepo` is now one of available modules. No restart required!
+- Save the changes in `conf/application.conf`.
+You may see that Knot.x instance reloaded modules and `fileSystemRepo` is now one of available modules. **No restart required!**
 
 ```
       Deployed httpRepo=java:io.knotx.repository.http.HttpRepositoryConnectorVerticle [c81f07ae-9345-482a-bd7f-af3e261876e0]
       Deployed assembler=java:io.knotx.assembler.FragmentAssemblerVerticle [d8010ea9-6b65-482b-a37c-2139bf154413]
-      Deployed serviceKnot=java:io.knotx.knot.service.ServiceKnotVerticle [db7b7503-71e0-40e0-adde-9012c885d581]
+      Deployed dataBridge=java:io.knotx.databridge.core.DataBridgeKnot [db7b7503-71e0-40e0-adde-9012c885d581]
       Deployed splitter=java:io.knotx.splitter.FragmentSplitterVerticle [ed249e56-92c3-486d-827a-ad506a7e0ac3]
       Deployed hbsKnot=java:io.knotx.knot.templating.HandlebarsKnotVerticle [b19ea9d2-59ed-4926-9365-3579af42895b]
       Deployed fileSystemRepo=java:io.knotx.repository.fs.FilesystemRepositoryConnectorVerticle [0879f874-1276-44b9-b746-585ab19f7d25]
-      Deployed serviceAdapter=java:io.knotx.adapter.service.http.HttpServiceAdapterVerticle [9caebb6a-18ed-474f-9182-56efdd180771]
+      Deployed dataSourceHttp=java:io.knotx.databridge.http.HttpDataSourceAdapter [9caebb6a-18ed-474f-9182-56efdd180771]
       Deployed server=java:io.knotx.server.KnotxServerVerticle [0c5f5136-c925-4f93-88b3-d24233a54988]
 ```
 
 Now, let's configure `fileSystemRepo` to read files from the local filesystem.
 
-Create `content` directory in `KNOTX_HOME` and put there following page template with Knot.x snippet (`<script data-knotx-knots="services,handlebars">...`):
+Create `content` directory in `KNOTX_HOME` and put there following page template with Knot.x snippet (`<script data-knotx-knots="databridge,handlebars">...`):
 
 *books.html*
 ```html
@@ -142,8 +143,8 @@ Create `content` directory in `KNOTX_HOME` and put there following page template
     </div>
   </div>
   <div class="row">
-    <script data-knotx-knots="services,handlebars"
-            data-knotx-service="bookslist"
+    <script data-knotx-knots="databridge,handlebars"
+            data-knotx-databridge-name="bookslist"
             type="text/knotx-snippet">
       {{#each _result.items}}
         <div class="col-sm-3">
@@ -171,7 +172,7 @@ Create `content` directory in `KNOTX_HOME` and put there following page template
 </html>
 ```
 
-Create `conf/includes/fileSystemRepo.conf` file with the following: 
+Create `conf/includes/fileSystemRepo.conf` file with the following:
 ```hocon
 # Event bus address on which the File System Repository connector listens on. Default is 'knotx.core.repository.filesystem'
 # Here below, we use a global constant defined in `conf/application.conf`
@@ -211,31 +212,32 @@ defaultFlow {
 ```
 
 ### Connecting the datasource
-As you probably noticed in the template snippet, `bookslist` datasource is defined (`data-knotx-service="bookslist"`).
+As you probably noticed in the template snippet, `bookslist` datasource is defined (`data-knotx-databridge-name="bookslist"`).
 Let's now define it in the configuration.
 
-To do so, open `conf/includes/dataBridge.conf` and add `bookslist` service:
+To do so, open `conf/includes/dataBridge.conf` and add the `bookslist` data definition:
 ```hocon
 # Event bus settings
 address = ${global.bridge.address}
-# List of mappings between service aliases and datasources.
-# You can define here as many service definitions as required for your project.
+# List of mappings between data definition aliases and datasources.
+# You can define here as many data definitions definitions as required for your project.
 dataDefinitions = [
   # Definition of the single datasource to be used in the HTML snippets.
-  # You can define an array of such services here.
+  # You can define an array of such data definitions here.
   {
-    # Name of the service that will be used in HTML snippets
+    # Name of the data definition that will be used in HTML snippets
     name = bookslist
-    # Arbitrary parameters to be send to service adapter. In this case we send the query that is part of request path to google books API
+    # Arbitrary parameters to be send to datasources adapter. In this case we send the query that is part of request path to google books API
     params {
       path= "/books/v1/volumes?q=java"
     }
-    # Event bus address of the service adapter that is responsible for handling physicall communication with a data source
+    # Event bus address of the datasources adapter that is responsible for handling physicall communication with a data source
     adapter = ${global.bridge.dataSource.http.address}
   }
 ]
 ```
-Now, as we have `bookslist` datasource, let's edit `conf/includes/dataSourceHttp.conf` file and configure Adapter available under `knotx.adapter.service.http`.
+Now, as we have the `bookslist` data definition, let's edit `conf/includes/dataSourceHttp.conf` file and configure Adapter available
+under `${global.bridge.dataSource.http.address}` which evaluates into `knotx.bridge.datasource.http` address.
 
 
 Set up service entry and enable SSL by setting ssl = true in the clientOptions configuration.
@@ -283,6 +285,6 @@ customRequestHeader {
 }
 ```
 
-Save configuration file, Knot.x will reload its modules once again.
+Save the configuration file, Knot.x will reload its modules once again.
 
 The last thing left, open [http://localhost:8092/books.html](http://localhost:8092/books.html) - Voilà!
