@@ -15,7 +15,7 @@ layout: default
           <p>
             <a class="btn btn-default btn-lg" href="/download" role="button">
               <span class="fa fa-download"></span>
-              Knot.x 1.3.0
+              Knot.x 1.4.0
             </a>
           </p>
         </span>
