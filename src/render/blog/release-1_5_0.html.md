@@ -24,7 +24,7 @@ knotxVersions:
 - [PR-12](https://github.com/Knotx/knotx-dependencies/pull/12) - Configure Knot.x Forms in BOM file
 
 ### [knotx-junit5](https://github.com/Knotx/knotx-junit5)
-No changes.
+- [PR-5](https://github.com/Knotx/knotx-junit5) - Html Markup Assertion to test html body content
 
 ### [knotx-forms](https://github.com/Knotx/knotx-forms)
 First release of the Knot.x Forms module that replaces [Knot.x Action Knot](https://github.com/Cognifide/knotx/wiki/ActionKnot)
