@@ -27,24 +27,25 @@ knotxVersions:
 - [PR-5](https://github.com/Knotx/knotx-junit5) - Html Markup Assertion to test html body content
 
 ### [knotx-forms](https://github.com/Knotx/knotx-forms)
-First release of the Knot.x Forms module that replaces [Knot.x Action Knot](https://github.com/Cognifide/knotx/wiki/ActionKnot)
+First release of the Knot.x Forms module that replaces 
+[Knot.x Action Knot](https://github.com/Cognifide/knotx/wiki/ActionKnot)
 (which is now deprecated and will be removed soon).
 Read more in the *Upgrade notes* section.
 
 ### [knotx-data-bridge](https://github.com/Knotx/knotx-data-bridge)
-First release of the [Knot.x Data Bridge](https://github.com/Knotx/knotx-data-bridge) module
-that replaces old [Knot.x Service Knot](https://github.com/Cognifide/knotx/wiki/ServiceKnot)
-(which is now deprecated and will be removed soon).
+- [PR-37](https://github.com/Knotx/knotx-data-bridge/pull/37) - implementation of [fallback handling](https://github.com/Cognifide/knotx/issues/466) in data bridge
 
 ### [knotx-template-engine](https://github.com/Knotx/knotx-template-engine)
-- [PR-37](https://github.com/Knotx/knotx-data-bridge/pull/37) - implementation of [fallback handling](https://github.com/Cognifide/knotx/issues/466) in data bridge
+First release of the Knot.x Template Engine module that replaces 
+[Knot.x Handlebars Knot](https://github.com/Cognifide/knotx/wiki/HandlebarsKnot)
+(which is now deprecated and will be removed soon).
+Read more in the *Upgrade notes* section.
 
 ### [knotx-stack](https://github.com/Knotx/knotx-stack)
 - [PR-36](https://github.com/Knotx/knotx-stack/pull/36) - Cleanup integration tests
 - [PR-32](https://github.com/Knotx/knotx-stack/pull/32) - Extract assembler and splitter EB addresses to globals.
 - [PR-33](https://github.com/Knotx/knotx-stack/pull/33) - Knot.x Template Engine introduced instead of HBS Knot
 - [PR-35](https://github.com/Knotx/knotx-stack/pull/35) - implementation of [fallback handling](https://github.com/Cognifide/knotx/issues/466) - integration tests
-
 
 ### [knotx-example-project](https://github.com/Knotx/knotx-example-project)
 - [PR-33](https://github.com/Knotx/knotx-example-project/pull/33) - Update cluster to use template engine, replace mocks with simple httpd-based images
