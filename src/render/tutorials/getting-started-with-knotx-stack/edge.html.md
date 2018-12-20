@@ -2,7 +2,7 @@
 title: Getting Started with Knot.x Stack
 author: skejven
 keywords: tutorial
-date: 2018-10-10
+date: 2018-11-30
 layout: tutorial
 knotxVersions:
   - edge
@@ -27,7 +27,8 @@ You will need following things to use Knot.x stack:
 - JDK 8
 - Linux or OSX bash console (for Windows users we recommend using e.g. Ubuntu with [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)).
 
-Download [Knot.x distribution](http://knotx.io/download) and unzip it.
+Download [Latest SNAPSHOT Knot.x distribution](https://oss.sonatype.org/content/repositories/snapshots/io/knotx/knotx-stack-manager/1.5.0-SNAPSHOT/) 
+and unzip it.
 
 For the purpose of this tutorial let's call the structure of unzipped stack `KNOTX_HOME`.
 `KNOTX_HOME` which is Knot.x instance with all configuration files and dependencies has following structure:
@@ -40,12 +41,12 @@ For the purpose of this tutorial let's call the structure of unzipped stack `KNO
 │   ├── bootstrap.json            // config retriever options, defines application configuration stores (e.g. points to `application.conf` - the main configuration)
 │   ├── default-cluster.xml       // basic configuration of Knot.x instance cluster
 │   ├── includes                  // additional modules configuration which are included in `application.conf`
-│   │   ├── actionKnot.conf
 │   │   ├── dataBridge.conf
 │   │   ├── dataSourceHttp.conf
-│   │   ├── hbsKnot.conf
+│   │   ├── forms.conf
 │   │   ├── httpRepo.conf
 │   │   ├── server.conf
+│   │   ├── templateEngine.conf
 │   └── logback.xml          // logger configuration
 ├── knotx-stack.json         // stack descriptor, defines instance libraries and dependencies
 ├── lib                      // contains instance libraries and dependencies, instance classpath
@@ -59,14 +60,14 @@ bin/knotx run-knotx
 ```
 to start the Knot.x instance. You should see that the instance is running with all deployed modules. Following entries should appear in the `logs/knotx.log` file:
 ```
-2018-04-17 09:48:39.849 [vert.x-eventloop-thread-0] INFO  i.k.launcher.KnotxStarterVerticle - Knot.x STARTED
-      Deployed httpRepo=java:io.knotx.repository.http.HttpRepositoryConnectorVerticle [233dced4-658a-422b-870f-51f12a7ced21]
-      Deployed assembler=java:io.knotx.assembler.FragmentAssemblerVerticle [9a075059-4b73-4f50-9890-d38282e2ace4]
-      Deployed dataBridge=java:io.knotx.databridge.core.DataBridgeKnot [0c5ac5ea-a196-4678-8f11-e6af84f23e7c]
-      Deployed dataSourceHttp=java:io.knotx.databridge.http.HttpDataSourceAdapter [ba9429fb-ef52-4241-8c11-94977b0a30c9]
-      Deployed splitter=java:io.knotx.splitter.FragmentSplitterVerticle [da1384fb-641a-4835-a313-03ecc1c42458]
-      Deployed hbsKnot=java:io.knotx.knot.templating.HandlebarsKnotVerticle [41875d6a-699a-4099-969f-115292152801]
-      Deployed server=java:io.knotx.server.KnotxServerVerticle [1d044822-8c95-4ae4-b2f8-6886412400eb]
+2018-11-29 14:00:34.956 [vert.x-eventloop-thread-0] INFO  i.k.launcher.KnotxStarterVerticle - Knot.x STARTED 
+    Deployed httpRepo=java:io.knotx.repository.http.HttpRepositoryConnectorVerticle [da4cfa69-04f2-4a79-9c63-39b27785c1e3]
+    Deployed assembler=java:io.knotx.assembler.FragmentAssemblerVerticle [b77754bc-b762-454a-b5bc-0a446c3db0d4]
+    Deployed dataBridge=java:io.knotx.databridge.core.DataBridgeKnot [e7aabad7-44a7-412f-ba69-dc82d6931409]
+    Deployed splitter=java:io.knotx.splitter.FragmentSplitterVerticle [fd9eee48-e6ae-407c-87e1-f3393f727ed3]
+    Deployed templateEngine=java:io.knotx.te.core.TemplateEngineKnot [606151e2-3971-4732-9eb9-60beff83ef1f]
+    Deployed dataSourceHttp=java:io.knotx.databridge.http.HttpDataSourceAdapter [17a6c160-2421-46d2-aca7-1d7f2e0ca71d]
+    Deployed server=java:io.knotx.server.KnotxServerVerticle [644ca0e5-1df6-49a7-a26f-d2f123f777f2]
 ```
 
 Congratulation! That's it. You have your own basic Knot.x instance running.
@@ -104,19 +105,19 @@ fileSystemRepo = knotx.core.repository.filesystem
 You may see that Knot.x instance reloaded modules and `fileSystemRepo` is now one of available modules. **No restart required!**
 
 ```
-      Deployed httpRepo=java:io.knotx.repository.http.HttpRepositoryConnectorVerticle [c81f07ae-9345-482a-bd7f-af3e261876e0]
-      Deployed assembler=java:io.knotx.assembler.FragmentAssemblerVerticle [d8010ea9-6b65-482b-a37c-2139bf154413]
-      Deployed dataBridge=java:io.knotx.databridge.core.DataBridgeKnot [db7b7503-71e0-40e0-adde-9012c885d581]
-      Deployed splitter=java:io.knotx.splitter.FragmentSplitterVerticle [ed249e56-92c3-486d-827a-ad506a7e0ac3]
-      Deployed hbsKnot=java:io.knotx.knot.templating.HandlebarsKnotVerticle [b19ea9d2-59ed-4926-9365-3579af42895b]
-      Deployed fileSystemRepo=java:io.knotx.repository.fs.FilesystemRepositoryConnectorVerticle [0879f874-1276-44b9-b746-585ab19f7d25]
-      Deployed dataSourceHttp=java:io.knotx.databridge.http.HttpDataSourceAdapter [9caebb6a-18ed-474f-9182-56efdd180771]
-      Deployed server=java:io.knotx.server.KnotxServerVerticle [0c5f5136-c925-4f93-88b3-d24233a54988]
+    Deployed httpRepo=java:io.knotx.repository.http.HttpRepositoryConnectorVerticle [da4cfa69-04f2-4a79-9c63-39b27785c1e3]
+    Deployed assembler=java:io.knotx.assembler.FragmentAssemblerVerticle [b77754bc-b762-454a-b5bc-0a446c3db0d4]
+    Deployed dataBridge=java:io.knotx.databridge.core.DataBridgeKnot [e7aabad7-44a7-412f-ba69-dc82d6931409]
+    Deployed splitter=java:io.knotx.splitter.FragmentSplitterVerticle [fd9eee48-e6ae-407c-87e1-f3393f727ed3]
+    Deployed templateEngine=java:io.knotx.te.core.TemplateEngineKnot [606151e2-3971-4732-9eb9-60beff83ef1f]
+    Deployed dataSourceHttp=java:io.knotx.databridge.http.HttpDataSourceAdapter [17a6c160-2421-46d2-aca7-1d7f2e0ca71d]
+    Deployed server=java:io.knotx.server.KnotxServerVerticle [644ca0e5-1df6-49a7-a26f-d2f123f777f2]
+    Deployed fileSystemRepo=java:io.knotx.repository.fs.FilesystemRepositoryConnectorVerticle [0879f874-1276-44b9-b746-585ab19f7d25]
 ```
 
 Now, let's configure `fileSystemRepo` to read files from the local filesystem.
 
-Create `content` directory in `KNOTX_HOME` and put there following page template with Knot.x snippet (`<script data-knotx-knots="databridge,handlebars">...`):
+Create `content` directory in `KNOTX_HOME` and put there following page template with Knot.x snippet (`<script data-knotx-knots="databridge,te">...`):
 
 *books.html*
 ```html
@@ -143,7 +144,7 @@ Create `content` directory in `KNOTX_HOME` and put there following page template
     </div>
   </div>
   <div class="row">
-    <script data-knotx-knots="databridge,handlebars"
+    <script data-knotx-knots="databridge,te"
             data-knotx-databridge-name="bookslist"
             type="text/knotx-snippet">
       {{#each _result.items}}
