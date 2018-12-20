@@ -50,7 +50,7 @@ docpadConfig = {
         
         getTutorialsVersions: (version) ->
           obj = @getCollection('html')
-            .findAll({relativeOutDirPath:  /tutorials(\/|\\).*/, keywords: "tutorial"},[{order: -1}])         
+            .findAll({relativeOutDirPath:  /tutorials(\/|\\).*/, keywords: "tutorial"},[{order: 1}])
             .toJSON().reduce((acc, val) => 
               versionsUrls = val.knotxVersions.map((v) -> {version: v, url: val.url})
               
@@ -61,7 +61,9 @@ docpadConfig = {
               
               return acc
             ,{})
-          return obj[version]
+          return obj[version].sort (a, b) ->
+            return -1 if (a.version == "edge")
+            return a.version > b.version
 
         isEdge: (knotxVersions) -> knotxVersions && knotxVersions.includes("edge")
 
