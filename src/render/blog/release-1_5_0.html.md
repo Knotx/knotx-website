@@ -4,7 +4,7 @@ description: We have just released a minor release Knot.x 1.5.0.
 author: skejven
 keywords: release
 order: 1
-date: 2018-12-19
+date: 2018-12-20
 knotxVersions:
     - 1.5.0
 ---

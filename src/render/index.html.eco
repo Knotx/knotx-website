@@ -15,7 +15,7 @@ layout: default
           <p>
             <a class="btn btn-default btn-lg" href="<%= @getSectionLink('download') %>" role="button">
               <span class="fa fa-download"></span>
-              Knot.x 1.4.0
+              Knot.x 1.5.0
             </a>
           </p>
         </span>
