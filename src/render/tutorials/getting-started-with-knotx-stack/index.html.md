@@ -5,5 +5,5 @@ description: "In this tutorial, we explain how to start playing with Knot.x usin
 order: 7
 date: 2018-09-10
 layout: redirect
-target: /tutorials/getting-started-with-knotx-stack/1_3/
+target: /tutorials/getting-started-with-knotx-stack/1_5/
 ---
