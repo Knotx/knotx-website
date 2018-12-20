@@ -87,14 +87,11 @@ Knot.x (<= 1.4.0) used earlier Action Knot. Please follow step below in order to
 
 #### Page templates:
 
-  - Rename data attributes accordingly
+  - Rename data attributes accordingly:
+    - `data-knotx-on-` to `data-knotx-forms-on-`
+    - `data-knotx-action` to `data-knotx-forms-adapter-name`
+    - `data-knotx-adapter-params` to `data-knotx-forms-adapter-params`
     
-  | Old                        | New                              | 
-  | -------------------------- |:--------------------------------:|
-  | data-knotx-on-             |data-knotx-forms-on-              |
-  | data-knotx-action          |data-knotx-forms-adapter-name     |
-  | data-knotx-adapter-params  |data-knotx-forms-adapter-params   |   
- 
   - In form snippet change `action` to `form`. 
 
   For example:
@@ -138,7 +135,7 @@ Refactor your custom adapter to inherit [`io.knotx.proxy.AdapterProxy`](https://
 to [`io.knotx.forms.api.FormsAdapterProxy`](https://github.com/Knotx/knotx-forms/blob/master/api/src/main/java/io/knotx/forms/api/FormsAdapterProxy.java)
 
 ### Migration form Handlebars Knot to Knot.x Template Engine
-Knot.x (<= 1.5.0) used `HandlebarsKnot`. Please follow step below in order 
+Knot.x (<= 1.4.0) used `HandlebarsKnot`. Please follow step below in order 
 to migrate your project from `HandlebarsKnot` to `Template Engine` module.
 
 Handlebars is still the default Template Engine strategy in Knot.x. Thanks to moving into Template Engine module you may now easily
