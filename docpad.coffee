@@ -50,7 +50,7 @@ docpadConfig = {
         
         getTutorialsVersions: (version) ->
           obj = @getCollection('html')
-            .findAll({relativeOutDirPath:  /tutorials(\/|\\).*/, keywords: "tutorial"},[{order: 1}])
+            .findAll({relativeOutDirPath:  /tutorials(\/|\\).*/, keywords: "tutorial"},[{order: -1}])
             .toJSON().reduce((acc, val) => 
               versionsUrls = val.knotxVersions.map((v) -> {version: v, url: val.url})
               
