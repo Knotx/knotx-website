@@ -95,9 +95,9 @@ Edit the `conf/application.conf` file and
 By doing that you let Knot.x instance to start `FilesystemRepositoryConnector` with the name `fileSystemRepo`. 
 It will be later referenced by this name in configurations.
 
-- uncomment `fileSystemRepo` in the `global.address` section to define the Event Bus address of Filesystem Repository.
+- uncomment `fileSystemRepo.address` in the `global.repositories` section to define the Event Bus address of Filesystem Repository.
 ```hocon
-fileSystemRepo = knotx.core.repository.filesystem
+fileSystemRepo.address = knotx.core.repository.filesystem
 ```
 
 
@@ -177,7 +177,7 @@ Create `conf/includes/fileSystemRepo.conf` file with the following:
 ```hocon
 # Event bus address on which the File System Repository connector listens on. Default is 'knotx.core.repository.filesystem'
 # Here below, we use a global constant defined in `conf/application.conf`
-address = ${global.address.fileSystemRepo}
+address = ${global.repositories.fileSystemRepo}
 # Path to the directory on the local filesystem which will be the root for requested templates
 catalogue = "./content/"
 ```
@@ -206,7 +206,7 @@ defaultFlow {
   repositories = [
     {
       path = ".*"
-      address = ${global.address.fileSystemRepo}
+      address = ${global.repositories.fileSystemRepo}
     }
   ]
 ...
