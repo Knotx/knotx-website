@@ -5,5 +5,5 @@ author: skejven
 order: 3
 date: 2017-03-16
 layout: redirect
-target: /tutorials/adapt-service-without-webapi/1_3/
+target: /tutorials/adapt-service-without-webapi/1_4/
 ---
