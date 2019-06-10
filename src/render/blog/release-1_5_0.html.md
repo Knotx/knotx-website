@@ -165,11 +165,11 @@ See the [example project](https://github.com/Knotx/knotx-example-project) for mo
 3. Replace all occurenes of the Handlebars Knot address in the Server routing `defaultFlow` from `${global.hbs.address}` to `${global.templateEngine.address}`.
 
 3. Instead including `hbsKnot.conf` change include to `templateEngine.conf`. You will find examples configuration files in 
-the [knotx-stack distribution](https://github.com/Knotx/knotx-stack/blob/master/knotx-stack-manager/src/main/packaging/conf/includes).
+the [knotx-stack distribution](https://github.com/Knotx/knotx-stack/blob/1.5.0/knotx-stack-manager/src/main/packaging/conf/includes).
 
 #### Page templates:
 
 1. Update `data-knotx-knots` values from `handlebars` to `te`.
 
 2. Example helpers: `string_equals` and `encode_uri` that were embedded into Handlebars Knot are no longer available in the Template Engine.
-You may introduce them by defining handlebars extension as it is presented in the [example project](https://github.com/Knotx/knotx-example-project/tree/master/acme-handlebars-ext).
+You may introduce them by defining handlebars extension as it is presented in the [example project](https://github.com/Knotx/knotx-example-project/tree/1.5.0/acme-handlebars-ext).
