@@ -243,3 +243,5 @@ Your section `actions` should have:
 Save the configuration file, Knot.x will reload its modules once again.
 
 The last thing left, open [http://localhost:8092/content/books.html](http://localhost:8092/content/books.html) - Voilà!
+
+You can find full example implementation [here](https://github.com/Knotx/knotx-example-project/tree/master/getting-started)
