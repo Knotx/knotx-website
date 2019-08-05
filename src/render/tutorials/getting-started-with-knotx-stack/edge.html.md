@@ -2,16 +2,14 @@
 title: Getting Started with Knot.x Stack
 author: skejven
 keywords: tutorial
-date: 2018-12-20
+date: 2019-08-07
 layout: tutorial
 knotxVersions:
   - edge
 ---
 ## Overview
 
-We start this tutorial with the great news! Finally [Knot.x Stack](https://github.com/Knotx/knotx-stack) is available.
-
-Let's just cut to the point. In this tutorial we will configure Knot.x instance with a simple page that
+In this tutorial we will configure Knot.x instance with a simple page that
 uses an external datasource (Google API Books) to fetch the dynamic data and display it on our page.
 
 What you’re going to learn:
@@ -27,31 +25,35 @@ You will need following things to use Knot.x stack:
 - JDK 8
 - Linux or OSX bash console (for Windows users we recommend using e.g. Ubuntu with [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)).
 
-Download [Latest SNAPSHOT Knot.x distribution](https://oss.sonatype.org/content/repositories/snapshots/io/knotx/knotx-stack-manager/1.5.0-SNAPSHOT/) 
-and unzip it.
+Download [Latest Knot.x Stack release](https://github.com/Knotx/knotx-stack/releases/) and unzip it.
+
+Simply run `gradlew build` to build. 
+Knot.x Stack artifact is a ZIP file (you can find it in build/distributions folder) with the structure described below. Please unzip.
 
 For the purpose of this tutorial let's call the structure of unzipped stack `KNOTX_HOME`.
 `KNOTX_HOME` which is Knot.x instance with all configuration files and dependencies has following structure:
 
 ```
 ├── bin
-│   └── knotx                     // shell script used to resolve and run knotx instance
+|   ├── knotx                     // shell script used to run knotx instance
+│   └── knotx.bat                 // Windows script used to run knotx instance                      
 ├── conf                          // contains application and logger configuration files
-│   ├── application.conf          // defines all modules that Knot.x instance is running, provides configuration for Knot.x Core and global variables for other config files
-│   ├── bootstrap.json            // config retriever options, defines application configuration stores (e.g. points to `application.conf` - the main configuration)
-│   ├── default-cluster.xml       // basic configuration of Knot.x instance cluster
-│   ├── includes                  // additional modules configuration which are included in `application.conf`
-│   │   ├── dataBridge.conf
-│   │   ├── dataSourceHttp.conf
-│   │   ├── forms.conf
-│   │   ├── httpRepo.conf
-│   │   ├── server.conf
-│   │   ├── templateEngine.conf
-│   └── logback.xml          // logger configuration
-├── knotx-stack.json         // stack descriptor, defines instance libraries and dependencies
+│   ├── application.conf          // defines / includes all modules that Knot.x instance is running
+│   ├── bootstrap.json            // config retriever options, defines application configuration stores (e.g. points to `application.conf` - the main configuration)
+│   ├── openapi.yaml              // Open API 3.0 configuration that is loaded via Knot.x HTTP Server
+│   ├── server.conf               // Knot.x HTTP server configuration which is included in `application.conf`
+│   ├── routes                    // server routes configurations 
+│   │   ├── operations.conf       // defines handlers per Open API operation ids
+│   │   └── handlers              // handlers configurations used in `operations.conf`
+|   │   │   ├── fragmentsHandler.conf
+|   │   │   └── httpRepoConnectorHandler.conf
+│   ├── knots                     // Knot modules configurations which are included in `application.conf`
+│   │   ├── templateEngineStack.conf
+│   │   └── templateEngineKnot.conf
+│   └── logback.xml          // logger configuration
 ├── lib                      // contains instance libraries and dependencies, instance classpath
-│   ├── list of project dependency libraries
-│   ├── ...
+│   ├── list of project dependency libraries
+│   ├── ...
 ```
 
 Now, run
@@ -60,64 +62,39 @@ bin/knotx run-knotx
 ```
 to start the Knot.x instance. You should see that the instance is running with all deployed modules. Following entries should appear in the `logs/knotx.log` file:
 ```
-2018-11-29 14:00:34.956 [vert.x-eventloop-thread-0] INFO  i.k.launcher.KnotxStarterVerticle - Knot.x STARTED 
-    Deployed httpRepo=java:io.knotx.repository.http.HttpRepositoryConnectorVerticle [da4cfa69-04f2-4a79-9c63-39b27785c1e3]
-    Deployed assembler=java:io.knotx.assembler.FragmentAssemblerVerticle [b77754bc-b762-454a-b5bc-0a446c3db0d4]
-    Deployed dataBridge=java:io.knotx.databridge.core.DataBridgeKnot [e7aabad7-44a7-412f-ba69-dc82d6931409]
-    Deployed splitter=java:io.knotx.splitter.FragmentSplitterVerticle [fd9eee48-e6ae-407c-87e1-f3393f727ed3]
-    Deployed templateEngine=java:io.knotx.te.core.TemplateEngineKnot [606151e2-3971-4732-9eb9-60beff83ef1f]
-    Deployed dataSourceHttp=java:io.knotx.databridge.http.HttpDataSourceAdapter [17a6c160-2421-46d2-aca7-1d7f2e0ca71d]
-    Deployed server=java:io.knotx.server.KnotxServerVerticle [644ca0e5-1df6-49a7-a26f-d2f123f777f2]
+2019-08-05 13:50:26.380 [vert.x-eventloop-thread-0] INFO  i.k.launcher.KnotxStarterVerticle - STARTING Knot.x
+2019-08-05 13:50:26.492 [vert.x-eventloop-thread-2] INFO  io.knotx.te.core.TemplateEngineKnot - Starting <TemplateEngineKnot>
+2019-08-05 13:50:26.497 [vert.x-eventloop-thread-2] INFO  i.k.te.core.TemplateEngineProvider - Template Engines [handlebars] registered.
+2019-08-05 13:50:26.500 [vert.x-eventloop-thread-2] INFO  i.k.t.h.HandlebarsTemplateEngine - <HandlebarsTemplateEngine> instance created
+2019-08-05 13:50:26.501 [vert.x-eventloop-thread-1] INFO  io.knotx.server.KnotxServerVerticle - Starting <KnotxServerVerticle>
+2019-08-05 13:50:26.504 [vert.x-eventloop-thread-1] INFO  io.knotx.server.KnotxServerVerticle - Open API specification location [/openapi.yaml]
+2019-08-05 13:50:26.639 [vert.x-eventloop-thread-1] INFO  i.k.server.GlobalHandlersProvider - Global handler loggerHandler registered
+2019-08-05 13:50:26.641 [vert.x-eventloop-thread-1] INFO  io.knotx.server.SecurityProvider - Auth handler factory types registered: 
+2019-08-05 13:50:26.645 [vert.x-eventloop-thread-1] INFO  io.knotx.server.RoutesProvider - Routing handler factory names [fragmentsAssemblerHandler,fragmentsHandler,fragmentsProviderHtmlSplitter,singleFragmentSupplier,fsRepoConnectorHandler,httpRepoConnectorHandler,csrfHandler,loggerHandler,bodyHandler,cookieHandler,errorHandler,requestContextHandler,headerHandler,writerHandler] registered.
+2019-08-05 13:50:27.346 [vert.x-eventloop-thread-1] INFO  io.knotx.server.RoutesProvider - Initialized all handlers for operation [operation-get]
+2019-08-05 13:50:27.362 [vert.x-eventloop-thread-1] INFO  io.knotx.server.KnotxServerVerticle - Routes [[Route[ path:null pattern:null handlers:[io.vertx.ext.web.handler.impl.BodyHandlerImpl@6ab5ad9, io.vertx.reactivex.ext.web.api.contract.openapi3.OpenAPI3RouterFactory$5@ca253d2] failureHandlers:[] order:0 methods:[]]@1683416257, Route[ path:/content/ pattern:null handlers:[io.vertx.ext.web.api.contract.openapi3.impl.OpenAPI3RequestValidationHandlerImpl@28f91299, io.vertx.reactivex.ext.web.api.contract.openapi3.OpenAPI3RouterFactory$8@7458e8cd, io.vertx.reactivex.ext.web.api.contract.openapi3.OpenAPI3RouterFactory$8@6a7a1957, io.vertx.reactivex.ext.web.api.contract.openapi3.OpenAPI3RouterFactory$8@39d98835, io.vertx.reactivex.ext.web.api.contract.openapi3.OpenAPI3RouterFactory$8@59d4284d, io.vertx.reactivex.ext.web.api.contract.openapi3.OpenAPI3RouterFactory$8@6a79ad3a, io.vertx.reactivex.ext.web.api.contract.openapi3.OpenAPI3RouterFactory$8@5073b183, io.vertx.reactivex.ext.web.api.contract.openapi3.OpenAPI3RouterFactory$8@259e1398, io.vertx.reactivex.ext.web.api.contract.openapi3.OpenAPI3RouterFactory$8@5d70d126, io.vertx.reactivex.ext.web.api.contract.openapi3.OpenAPI3RouterFactory$8@7ac7a7cf] failureHandlers:[] order:1 methods:[GET]]@930479805]]
+2019-08-05 13:50:28.012 [vert.x-eventloop-thread-1] INFO  io.knotx.server.KnotxServerVerticle - Knot.x HTTP Server started. Listening on port 8092
+2019-08-05 13:50:28.016 [vert.x-eventloop-thread-0] INFO  i.k.launcher.KnotxStarterVerticle - Instance modules: 
+Deployed 1 instance(s) of required templateEngine (java:io.knotx.te.core.TemplateEngineKnot) [313308b7-e9eb-4a32-b26b-331f79ce9e2c]
+Deployed 1 instance(s) of required server (java:io.knotx.server.KnotxServerVerticle) [56784ec6-9981-41f2-8ed6-404301cfdc5d]
+
+2019-08-05 13:50:28.017 [vert.x-eventloop-thread-0] INFO  i.k.launcher.KnotxStarterVerticle - Knot.x STARTED successfully
 ```
 
 Congratulation! That's it. You have your own basic Knot.x instance running.
 
-## Hello Service configuration
+## Configuration
 Lets now configure Knot.x to do the magic for us.
 We need to do following things:
-- provide the page template, for the tutorial purpose we will use `fileSystemRepo`,
-- provide the datasource, we will use the Google Books API.
+- provide the page template, for the tutorial purpose we will use `fsRepoConnectorHandler`,
+- provide the datasource, we will use the [Google Books API](https://developers.google.com/books/).
 
 > All configuration options and default values, such as address fields, for each Knot.x module are
 described directly in the configuration files of those modules in `conf`.
 
+### HTML Template
 
-### Templates repository configuration
-By default `fileSystemRepo` is not enabled in Knot.x Stack, because its purposes are purely academical.
-It is not designed to be used as a production ready solution (you should use `httpRepo` there).
-
-
-Edit the `conf/application.conf` file and
-- add the following entry to `modules`
-```hocon
-"fileSystemRepo=io.knotx.repository.fs.FilesystemRepositoryConnectorVerticle"
-```
-By doing that you let Knot.x instance to start `FilesystemRepositoryConnector` with the name `fileSystemRepo`. 
-It will be later referenced by this name in configurations.
-
-- uncomment `fileSystemRepo.address` in the `global.repositories` section to define the Event Bus address of Filesystem Repository.
-```hocon
-fileSystemRepo.address = knotx.core.repository.filesystem
-```
-
-
-- Save the changes in `conf/application.conf`.
-You may see that Knot.x instance reloaded modules and `fileSystemRepo` is now one of available modules. **No restart required!**
-
-```
-    Deployed httpRepo=java:io.knotx.repository.http.HttpRepositoryConnectorVerticle [da4cfa69-04f2-4a79-9c63-39b27785c1e3]
-    Deployed assembler=java:io.knotx.assembler.FragmentAssemblerVerticle [b77754bc-b762-454a-b5bc-0a446c3db0d4]
-    Deployed dataBridge=java:io.knotx.databridge.core.DataBridgeKnot [e7aabad7-44a7-412f-ba69-dc82d6931409]
-    Deployed splitter=java:io.knotx.splitter.FragmentSplitterVerticle [fd9eee48-e6ae-407c-87e1-f3393f727ed3]
-    Deployed templateEngine=java:io.knotx.te.core.TemplateEngineKnot [606151e2-3971-4732-9eb9-60beff83ef1f]
-    Deployed dataSourceHttp=java:io.knotx.databridge.http.HttpDataSourceAdapter [17a6c160-2421-46d2-aca7-1d7f2e0ca71d]
-    Deployed server=java:io.knotx.server.KnotxServerVerticle [644ca0e5-1df6-49a7-a26f-d2f123f777f2]
-    Deployed fileSystemRepo=java:io.knotx.repository.fs.FilesystemRepositoryConnectorVerticle [0879f874-1276-44b9-b746-585ab19f7d25]
-```
-
-Now, let's configure `fileSystemRepo` to read files from the local filesystem.
-
-Create `content` directory in `KNOTX_HOME` and put there following page template with Knot.x snippet (`<script data-knotx-knots="databridge,te">...`):
+Create `repository/content` directory in `KNOTX_HOME` and put there following page template with Knot.x snippet (`<knotx:snippet data-knotx-task="bookslist">...`):
 
 *books.html*
 ```html
@@ -144,9 +121,7 @@ Create `content` directory in `KNOTX_HOME` and put there following page template
     </div>
   </div>
   <div class="row">
-    <script data-knotx-knots="databridge,te"
-            data-knotx-databridge-name="bookslist"
-            type="text/knotx-snippet">
+   <knotx:snippet data-knotx-task="bookslist">
       {{#each _result.items}}
         <div class="col-sm-3">
         <div class="card">
@@ -163,9 +138,9 @@ Create `content` directory in `KNOTX_HOME` and put there following page template
             </p>
           </div>
          </div>
-         </div>
+      </div>
       {{/each}}
-    </script>
+    </knotx:snippet>
 
     </div>
 </div>
@@ -173,119 +148,98 @@ Create `content` directory in `KNOTX_HOME` and put there following page template
 </html>
 ```
 
-Create `conf/includes/fileSystemRepo.conf` file with the following:
+### Templates repository configuration
+We will use [fsRepoConnectorHandler](https://github.com/Knotx/knotx-repository-connector/tree/master/fs), its purposes are purely academical.
+It is not designed to be used as a production ready solution (you should use [httpRepoConnectorHandler](https://github.com/Knotx/knotx-repository-connector/tree/master/http) there).
+
+Create `conf\routes\handlers\fsRepoConnectorHandler.conf` file with the following:
 ```hocon
-# Event bus address on which the File System Repository connector listens on. Default is 'knotx.core.repository.filesystem'
-# Here below, we use a global constant defined in `conf/application.conf`
-address = ${global.repositories.fileSystemRepo}
 # Path to the directory on the local filesystem which will be the root for requested templates
-catalogue = "./content/"
+catalogue = "./repository/"
 ```
-This way we define the `content` directory that will to be our file repository.
+This way we define the `repository` directory that will be our files content repository.
 
+Edit the `conf/routes/operations.conf` file and:
+- replace `httpRepoConnectorHandler` to `fsRepoConnectorHandler` in `operation-get` definition
+- change included configuration file into one you have just created `routes/handlers/fsRepoConnectorHandler.conf`
 
-Next we need to reference it at the end of `conf/application.conf` file by adding the following:
+Your `conf/routes/operations.conf` should look exactly:
 
 ```hocon
-config.fileSystemRepo {
-  options.config {
-    include required("includes/fileSystemRepo.conf")
-  }
-}
-```
-
-
-
-Replace `httpRepo` with  `fileSystemRepo` in `conf/server.conf` in  `defaultFlow` section.
-
-```hocon
-...
-# Configuration of a default flow - aka Templating mode
-defaultFlow {
-  # List of the Knot.x templates repositories supported by the Server
-  repositories = [
-    {
-      path = ".*"
-      address = ${global.repositories.fileSystemRepo}
-    }
-  ]
-...
-```
-
-### Connecting the datasource
-As you probably noticed in the template snippet, `bookslist` datasource is defined (`data-knotx-databridge-name="bookslist"`).
-Let's now define it in the configuration.
-
-To do so, open `conf/includes/dataBridge.conf` and add the `bookslist` data definition:
-```hocon
-# Event bus settings
-address = ${global.bridge.address}
-# List of mappings between data definition aliases and datasources.
-# You can define here as many data definitions definitions as required for your project.
-dataDefinitions = [
-  # Definition of the single datasource to be used in the HTML snippets.
-  # You can define an array of such data definitions here.
+routingOperations = ${routingOperations} [
   {
-    # Name of the data definition that will be used in HTML snippets
-    name = bookslist
-    # Arbitrary parameters to be send to datasources adapter. In this case we send the query that is part of request path to google books API
-    params {
-      path= "/books/v1/volumes?q=java"
-    }
-    # Event bus address of the datasources adapter that is responsible for handling physicall communication with a data source
-    adapter = ${global.bridge.dataSource.http.address}
-  }
-]
-```
-Now, as we have the `bookslist` data definition, let's edit `conf/includes/dataSourceHttp.conf` file and configure Adapter available
-under `${global.bridge.dataSource.http.address}` which evaluates into `knotx.bridge.datasource.http` address.
-
-
-Set up service entry and enable SSL by setting ssl = true in the clientOptions configuration.
-
-```hocon
-# Event bus address of the Basic HTTP Datasource
-address = ${global.bridge.dataSource.http.address}
-
-clientOptions {
-  maxPoolSize = 1000
-  idleTimeout = 120 # seconds
-  # If your datasources are using SSL you'd need to configure here low level details on how the
-  # SSL connection is to be maintaned. Currently, if configured all defined in 'datasources' section
-  # will use SSL
-  ssl = true
-}
-
-# List of datasource services that are supported by this datasource adapter.
-# You can define here as many service definitions as required for your project.
-services = [
-  {
-    # A regexp.
-    # Any request to the service made by the adapter, is being made to the service with a given
-    # physical conenction details, only if the given path matching this path regexp
-    path = "/books.*"
-    # A domain or IP of actual HTTP service the adapter will talk to
-    domain =  "www.googleapis.com"
-    # HTTP port of the service, since this is SSL connection, port wourld be 443
-    port = 443
-    # List of request headers that will be send to the given service endpoint.
-    # Each header can be use wildcards '*' to generalize list, we pass all headers here.
-    # For the purpose of this tutorial, we deny all request headers.
-    allowedRequestHeaders = [ ]
-    # Additional request query parameters to be send in each request. We don't need here any.
-    queryParams {}
-    # Additional headers to be send in each request to the service. We don't need here any.
-    additionalHeaders {}
+    operationId = operation-get
+    handlers = ${config.server.handlers.common.request} [
+      {
+        name = fsRepoConnectorHandler
+        config = {include required(classpath("routes/handlers/fsRepoConnectorHandler.conf"))}
+      },
+      {
+        name = htmlFragmentsSupplier
+      },
+      {
+        name = fragmentsHandler
+        config = {include required(classpath("routes/handlers/fragmentsHandler.conf"))}
+      },
+      {
+        name = fragmentsAssembler
+      }
+    ] ${config.server.handlers.common.response}
   }
 ]
 
-# Statically defined HTTP request header sent in every request to any datasource
-customRequestHeader {
-  name = X-User-Agent
-  value = Knot.x
-}
+```
+  - Save the changes
+You may see that Knot.x instance reloaded configuration
+
+
+### Task configuration
+As you have propably noticed `Knot.x` snippet you defined in `books.html` template file pointed to `bookslist` task. Lets define it.
+
+Edit `conf/routes/handlers/fragmentsHandler.conf`
+
+ - Add following in `tasks` section:
+ 
+```hocon
+  bookslist {
+    action = books
+    onTransitions {
+      _success {
+        action = te-hbs   
+      }
+    }
+  }
+```
+
+Your task definition requires two actions: `books` and `te-hbs`, lets define them. 
+Your section `actions` should have:
+
+```hocon
+  books {
+    factory = http
+    config {
+      webClientOptions {
+    	  ssl = true
+      }
+      endpointOptions {
+        path = "/books/v1/volumes?q=java"
+        domain = www.googleapis.com
+        port = 443
+        allowedRequestHeaders = ["Content-Type"]
+      }
+    }
+  }
+  te-hbs {
+    factory = knot
+    config {
+      address = knotx.knot.te.handlebars
+      deliveryOptions {
+        sendTimeout = 1000
+      }
+    }
+  }  
 ```
 
 Save the configuration file, Knot.x will reload its modules once again.
 
-The last thing left, open [http://localhost:8092/books.html](http://localhost:8092/books.html) - Voilà!
+The last thing left, open [http://localhost:8092/content/books.html](http://localhost:8092/content/books.html) - Voilà!
