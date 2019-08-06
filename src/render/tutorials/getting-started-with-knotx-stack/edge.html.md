@@ -21,7 +21,7 @@ What you’re going to learn:
 ## Setup basic Knot.x instance
 
 **Prerequisites**
-You will need following things to use Knot.x stack:
+You will need the following things to use Knot.x stack:
 - JDK 8
 - Linux or OSX bash console (for Windows users we recommend using e.g. Ubuntu with [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)).
 
@@ -31,12 +31,12 @@ Simply run `gradlew build` to build.
 Knot.x Stack artifact is a ZIP file (you can find it in build/distributions folder) with the structure described below. Please unzip.
 
 For the purpose of this tutorial let's call the structure of unzipped stack `KNOTX_HOME`.
-`KNOTX_HOME` which is Knot.x instance with all configuration files and dependencies has following structure:
+`KNOTX_HOME` which is Knot.x instance with all configuration files and dependencies has the following structure:
 
 ```
 ├── bin
-|   ├── knotx                     // shell script used to run knotx instance
-│   └── knotx.bat                 // Windows script used to run knotx instance                      
+|   ├── knotx                     // shell script used to run Knot.x instance
+│   └── knotx.bat                 // Windows script used to run Knot.x instance                      
 ├── conf                          // contains application and logger configuration files
 │   ├── application.conf          // defines / includes all modules that Knot.x instance is running
 │   ├── bootstrap.json            // config retriever options, defines application configuration stores (e.g. points to `application.conf` - the main configuration)
@@ -52,7 +52,7 @@ For the purpose of this tutorial let's call the structure of unzipped stack `KNO
 │   │   └── templateEngineKnot.conf
 │   └── logback.xml          // logger configuration
 ├── lib                      // contains instance libraries and dependencies, instance classpath
-│   ├── list of project dependency libraries
+│   ├── the list of project dependency libraries
 │   ├── ...
 ```
 
@@ -85,11 +85,11 @@ Congratulation! That's it. You have your own basic Knot.x instance running.
 
 ## Configuration
 Lets now configure Knot.x to do the magic for us.
-We need to do following things:
-- provide the page template, for the tutorial purpose we will use `fsRepoConnectorHandler`,
+We need to do two things:
+- provide the page template, for the tutorial purpose, we will use `fsRepoConnectorHandler`,
 - provide the datasource, we will use the [Google Books API](https://developers.google.com/books/).
 
-> All configuration options and default values, such as address fields, for each Knot.x module are
+> All configuration options and default values, such as address fields, for each Knot.x module, are
 described directly in the configuration files of those modules in `conf`.
 
 ### HTML Template
@@ -194,7 +194,7 @@ You may see that Knot.x instance reloaded configuration
 
 
 ### Task configuration
-As you have propably noticed `Knot.x` snippet you defined in `books.html` template file pointed to `bookslist` task. Lets define it.
+As you probably noticed `Knot.x` snippet you defined in `books.html` template file pointed to `bookslist` task. Let's define it.
 
 Edit `conf/routes/handlers/fragmentsHandler.conf`
 
