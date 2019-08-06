@@ -25,10 +25,7 @@ You will need the following things to use Knot.x stack:
 - JDK 8
 - Linux or OSX bash console (for Windows users we recommend using e.g. Ubuntu with [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)).
 
-Download [Latest Knot.x Stack release](https://github.com/Knotx/knotx-stack/releases/) and unzip it.
-
-Simply run `gradlew build` to build. 
-Knot.x Stack artifact is a ZIP file (you can find it in build/distributions folder) with the structure described below. Please unzip it.
+Download [Latest Knot.x Stack release](https://repo1.maven.org/maven2/io/knotx/knotx-stack/) and unzip it.
 
 For the purpose of this tutorial let's call the structure of unzipped stack `KNOTX_HOME`.
 `KNOTX_HOME` which is Knot.x instance with all configuration files and dependencies has the following structure:
