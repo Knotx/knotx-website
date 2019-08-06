@@ -163,7 +163,7 @@ Edit the `conf/routes/operations.conf` file and:
 - replace `httpRepoConnectorHandler` to `fsRepoConnectorHandler` in `operation-get` definition
 - change included configuration file into one you have just created `routes/handlers/fsRepoConnectorHandler.conf`
 
-Your `conf/routes/operations.conf` should look exactly:
+Your `conf/routes/operations.conf` should contain:
 
 ```hocon
 routingOperations = ${routingOperations} [
