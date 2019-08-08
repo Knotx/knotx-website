@@ -71,14 +71,14 @@ Add in `routingOperations` array following definition
         config = {include required(classpath("routes/handlers/httpRepoConnectorHandler.conf"))}
       },
       {
-        name = fragmentsProviderHtmlSplitter
+        name = htmlFragmentsSupplier
       },
       {
         name = fragmentsHandler
         config = {include required(classpath("routes/handlers/fragmentsHandler.conf"))}
       },
       {
-        name = fragmentsAssemblerHandler
+        name = fragmentsAssembler
       }
     ] ${config.server.handlers.common.response}
   }
