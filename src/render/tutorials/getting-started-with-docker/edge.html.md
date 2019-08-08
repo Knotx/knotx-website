@@ -9,12 +9,12 @@ knotxVersions:
 ---
 ## Overview
 
-In this tutorial we will setup simple project based on [Knot.x Starter Kit](https://github.com/Knotx/knotx-starter-kit) template
+In this tutorial, we will setup a simple project based on the [Knot.x Starter Kit](https://github.com/Knotx/knotx-starter-kit) template.
 You will customize the Knot.x distribution with your own modules and configuration entries. Then you will build your custom Docker image.
 
 What you’re going to learn:
 
-- How to setup Knot.x project with customization based on [Knot.x Starter Kit](https://github.com/Knotx/knotx-starter-kit) template
+- How to setup a Knot.x project with customization based on the [Knot.x Starter Kit](https://github.com/Knotx/knotx-starter-kit) template
 - How to transform a static HTML into the dynamic content and configure Knot.x to use REST services to get data
 - How to use the data from such services to dynamically populate HTML
 - How to implement custom [Action](https://github.com/Knotx/knotx-fragments/tree/master/handler/api)
@@ -36,7 +36,7 @@ Project has the following structure:
 ├── functional                    // Keep here your functional tests. Example implementation included
 ├── gradle                        // Gradle wrapper and common gradle scripts
 ├── knotx                         // Knotx configuration which will be copied to docker image
-├── modules                       // Sub-modules of  your project
+├── modules                       // Sub-modules of your project
 │   ├── ...                       // example modules implementation
 ```
 
@@ -44,7 +44,7 @@ Project has the following structure:
 ## Configuration
 
 ### openapi.yml
-Open `knotx/conf/openapi.yml` and add following path definition
+Open `knotx/conf/openapi.yml` and add following path definition:
 
 ```
   /content/*:
@@ -60,7 +60,7 @@ By doing this you define the operation which should be executed for path `/conte
 ### operations.conf
 
 Now, you need to define operation `content-get`. Open `knotx/conf/routes/operations.con`
-Add in `routingOperations` array following definition
+Add in `routingOperations` array following definition:
 
 ```
   {
@@ -87,13 +87,13 @@ Add in `routingOperations` array following definition
 You have defined operation using [httpRepoConnectorHandler](https://github.com/Knotx/knotx-repository-connector/tree/master/http) to
 fetch documents from external repository via HTTP protocol.
 
-Then document is spitted into fragments. Fragments are processed by [fragmentsHandler](https://github.com/Knotx/knotx-fragments/tree/master/handler)
+Then the document is split into fragments. Fragments are processed by [fragmentsHandler](https://github.com/Knotx/knotx-fragments/tree/master/handler)
 
-Now you can define how fragments will be processed
+Now you can define how fragments will be processed.
 
 ### fragmentsHandler.conf
 
-Create new file `knotx/conf/routes/handlers/fragmentsHandler.conf` and edit. 
+Create a new file `knotx/conf/routes/handlers/fragmentsHandler.conf` and edit it:
 
 ```
 tasks {
@@ -190,12 +190,12 @@ actions {
 You have defined one task `payment-check`. You will refer to this task in [HTML Template](#htmlTemplate).
 
 Task perform action `user` and then in parallel `creditCard`, `paypal` and `payU`. All this actions use [`http`](https://github.com/Knotx/knotx-data-bridge/tree/master/http) implementation.
-Once all data from external services are fetched, action `payments` is executed. This action is a custom action which now we will implement.
+Once all data from external services are fetched, action `payments` is executed. This action is a custom action that now we will implement.
 
 As mentioned before we use [httpRepoConnectorHandler](https://github.com/Knotx/knotx-repository-connector/tree/master/http) to fetch documents. Modification
-is required for default handler configuration. 
+is required for the default handler configuration. 
 
-Create new file `knotx/conf/routes/handlers/httpRepoConnectorHandler.conf` and edit
+Create a new file `knotx/conf/routes/handlers/httpRepoConnectorHandler.conf` and edit it:
 
 ```hocon
 clientOptions {
@@ -238,11 +238,11 @@ We change here the `domain` name from `localhost` to `repository`. Please check 
 
 ## Implementation
 
-Now, you are ready for implementation custom [action](https://github.com/Knotx/knotx-fragments/tree/master/handler/api#action). 
-The purpose of action is to transform collected `json` data from external services into one `json` which can be used to fill [HTML Template](#htmlTemplate)  
+Now, you are ready to implement custom [Action](https://github.com/Knotx/knotx-fragments/tree/master/handler/api#action). 
+The purpose of Action is to transform collected `json` data from external services into one `json` which can be used to fill [HTML Template](#htmlTemplate)  
 
 Create the directory for new module `modules/payments`. 
-Edit `settings.gradle.kts` and add two lines:
+Edit the `settings.gradle.kts` and add two lines:
 
 ```
 include("payments")
@@ -250,7 +250,7 @@ include("payments")
 project(":payments").projectDir = file("modules/payments")
 
 ```
-Add following files
+Add the following files:
 
 *build.gradle.kts*
 ```kotlin
@@ -394,7 +394,7 @@ public final class ProvidersProvider {
 ## HTML Template
 
 Create `services/content/public_html/content` directory and put there following page template with Knot.x snippet (`<knotx:snippet data-knotx-task="payment-check">...`):
-As you see in this snippet we refer task `payment-check` we defined before.
+As you see in this snippet we refer the task `payment-check` we defined before.
 
 *payment.html*
 ```html
@@ -460,8 +460,8 @@ As you see in this snippet we refer task `payment-check` we defined before.
 
 ## External services
 
-We need to define the responses for external services. Our definition calls 4 services. Lets define them.   
-Create `services/webapi/__files` directory  and put there 4 files
+We need to define the responses for external services. Our definition calls 4 services. Let's define them.   
+Create `services/webapi/__files` directory  and put there 4 files:
 
 *creditcard.json*
 ```json
@@ -520,9 +520,9 @@ Create `services/webapi/__files` directory  and put there 4 files
 }
 ```
 
-We will use [WireMock](http://wiremock.org/) for mock services and we need to define the mappings
+We will use [WireMock](http://wiremock.org/) for mock services and we need to define the mappings.
 
-Create `services/webapi/mappings` directory  and ut there 4 files
+Create the `services/webapi/mappings` directory and put there those four files:
 
 *creditcard.json*
 ```json
@@ -596,15 +596,16 @@ Create `services/webapi/mappings` directory  and ut there 4 files
 docker.image.name=knotx-example/template-processing
 ```
 
-You will refer to image name in swarm file. 
+You will refer to image name in the swarm file.
+
 <a id="swarm"></a>
 ### Swarm
 Let's define the swarm file where we will setup following services:
- - repository - Content Repository which will serve the html templates
- - webapi - external Web APIs for: user, creditcard, payu and paypal
- - knotx - Knot.x image with our customization we build during this tutorial
+ - `repository` - Content Repository which will serve the html templates
+ - `webapi` - external Web APIs for: `user`, `creditcard`, `payu` and `paypal` (which we've just created above)
+ - `knotx` - Knot.x image with our customization we build during this tutorial
  
-Create file `template-processing.yml`
+Create the `template-processing.yml` file:
  
 ```yaml
 version: '3.7'
@@ -645,12 +646,12 @@ services:
 
 ## Run
 
-Now we are ready to run. First build your docker image
+Now we are ready to run. First, build your docker image
 ```
 $ gradlew clean build
 ```
 
-Run Knot.x instance and example data services (Web API and Content Repository) in a single node Docker Swarm:
+Run Knot.x instance and example data services (Web API and Content Repository) in a single-node Docker Swarm:
 ```
 docker stack deploy -c ./template-processing.yml template-processing
 ```
