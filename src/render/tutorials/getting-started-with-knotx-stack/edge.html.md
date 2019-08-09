@@ -91,7 +91,7 @@ described directly in the configuration files of those modules in `conf`.
 
 ### HTML Template
 
-Create `repository/content` directory in `KNOTX_HOME` and put there following page template with Knot.x snippet (`<knotx:snippet data-knotx-task="bookslist">...`):
+Create a `repository/content` directory in `KNOTX_HOME` and put there following page template with Knot.x snippet (`<knotx:snippet data-knotx-task="bookslist">...`):
 
 *books.html*
 ```html
@@ -187,11 +187,11 @@ routingOperations = ${routingOperations} [
 
 ```
   - Save the changes
-You may see that Knot.x instance reloaded configuration
+You may see that the Knot.x instance detected file changes and reloaded its configuration.
 
 
 ### Task configuration
-As you probably noticed `Knot.x` snippet you defined in `books.html` template file pointed to `bookslist` task. Let's define it.
+As you probably noticed the `Knot.x` snippet you defined in the `books.html` template file pointed to the `bookslist` task. Let's define it.
 
 Edit `conf/routes/handlers/fragmentsHandler.conf`
 
@@ -208,8 +208,8 @@ Edit `conf/routes/handlers/fragmentsHandler.conf`
   }
 ```
 
-Your task definition requires two actions: `books` and `te-hbs`, lets define them. 
-Your section `actions` should have:
+Your task definition requires two actions: `books` and `te-hbs`, let's define them. 
+The `actions` section should contain:
 
 ```hocon
   books {
