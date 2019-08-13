@@ -14,7 +14,10 @@ Hurray,
 Knot.x 2.0 - the open-source integrations framework is finally here!
 It comes with the HTTP server, distribution and platform for building backend APIs.
 The main changes and features of the second version are:
-- `Design First approach`: We get rid of custom routing definitions in favor of using standards. The [Open API v3](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md) is the way routing is defined in Knot.x server. That means you can start designing API before any
+- `Design First approach`: We get rid of custom routing definitions in favour of using standards. The [Open API v3](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md) specification is language-agnostic, and human readable way a routing is defined.
+> The Design First approach advocates for designing the API's contract first before writing any code.
+> https://swagger.io/blog/api-design/design-first-or-code-first-api-development/
+It addresses distributed systems orchestration challenges, in which fine-grained services define their API's objectives consumed by all your local and distributed teams that can be validated during design definition, before writing any code.
 line of code is written and use it as the documentation for the developers and clients.
 - `Backend API`: In the previous version, building API using Knot.x could be cumbersome in some cases. With `2.0` we bring completely new experience for building any kind of backend API
 (Gateway API, Backend for frontend or just a plain Web API).
