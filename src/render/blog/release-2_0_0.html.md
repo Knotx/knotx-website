@@ -14,18 +14,21 @@ Hurray,
 Knot.x 2.0 - the open-source integrations framework is finally here!
 It comes with the HTTP server, distribution and platform for building backend APIs.
 The main changes and features of the second version are:
+
 - `Design First approach`: We get rid of custom routing definitions in favour of using standards. The [Open API v3](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md) specification is language-agnostic, and human readable way a routing is defined.
 > The Design First approach advocates for designing the API's contract first before writing any code.
-> https://swagger.io/blog/api-design/design-first-or-code-first-api-development/
-It addresses distributed systems orchestration challenges, in which fine-grained services define their API's objectives consumed by all your local and distributed teams that can be validated during design definition, before writing any code.
-line of code is written and use it as the documentation for the developers and clients.
-- `Backend API`: In the previous version, building API using Knot.x could be cumbersome in some cases. With `2.0` we bring completely new experience for building any kind of backend API
-(Gateway API, Backend for frontend or just a plain Web API).
+>
+> -- https://swagger.io/blog/api-design/design-first-or-code-first-api-development/
+
+  It addresses distributed systems orchestration challenges, in which fine-grained services define their API's objectives consumed by all your local and distributed teams that can be validated during design definition, before writing any code.
 - `Configurable integrations`: we completely redesigned Fragments processing (a Fragment is a piece of any kind of document that can be processed independently, e.g. an HTML snippet that represents the shopping cart or a JSON containing person's bookshelf). Now, building custom
 logic for integrating the data is as easy as defining a [graph of actions](https://github.com/Knotx/knotx-fragments#how-does-it-work).
 - `Stability patterns`: We know, that when it comes to integrating multiple services over the network, not all the things go smooth. That's why Knot.x 2 brings patters such as *Circuit breaker*, *Timeouts*, *Bulkhead* and more out of the box.
-- `Pluggable HTTP extensions`: It's now much easier to extend the routing you build with Knot.x. Now, you may plug-in any [piece of custom logic](https://github.com/Knotx/knotx-server-http#knotx-http-server)
-in the HTTP request processing.
+
+With 2.0 we bring completely new experience for building any kind of backend API such as:
+- Gateway API: a logic combining data from different sources, introducing caches or fallbacks
+- Backend For Frontend: meets SPA challenges and allows to introduce RESTful or GraphQL contracts between your frontend and backend applications
+- HTTP / Web API: exposes any kind of datasource with HTTP-based API
 
 ## Release Notes
 As this is a major release version, a lot of things have changed. Instead of pointing each change,
