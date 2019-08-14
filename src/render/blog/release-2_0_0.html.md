@@ -13,6 +13,9 @@ Hurray,
 
 Knot.x 2.0 - the open-source integrations framework is finally here!
 It comes with the HTTP server, distribution and platform for building backend APIs.
+
+Before we go throught new modules and features, we would like to thank all the contributors. Your participation has been essential to this achievement!
+
 The main changes and features of the second version are:
 
 - `Design First approach`: We get rid of custom routing definitions in favour of using standards. The [Open API v3](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md) specification is language-agnostic, and human readable way a routing is defined.
