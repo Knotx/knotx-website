@@ -1,5 +1,5 @@
 ---
-title: Configurable gateway api
+title: Configurable gateway API
 author: marcinkp
 keywords: tutorial
 date: 2019-08-07
@@ -9,22 +9,22 @@ knotxVersions:
 ---
 ## Overview
 In [Getting Started with Docker](/tutorials/getting-started-with-docker) you have learnt how to use [Knot.x Starter Kit](https://github.com/Knotx/knotx-starter-kit) template.
-Now we are going to show how you can use `Knot.X` for gateway api implementation. We will implement custom [Action](https://github.com/Knotx/knotx-fragments/tree/master/handler/api) and
-use in more advanced way [`fragmentsHandler`](https://github.com/Knotx/knotx-fragments/tree/master/handler)   
+Now we are going to show how you can use `Knot.X` for gateway API implementation. We will implement custom [Action](https://github.com/Knotx/knotx-fragments/tree/master/handler/api) and
+use [`fragmentsHandler`](https://github.com/Knotx/knotx-fragments/tree/master/handler) in a more advanced way.   
 
 What you’re going to learn:
 
-- How to use Knot.x for gateway api implementation 
+- How to use Knot.x for gateway API implementation 
 - How to implement custom [Action](https://github.com/Knotx/knotx-fragments/tree/master/handler/api)
 - How to configure [Fragments engine](https://github.com/Knotx/knotx-fragments/tree/master/handler/engine) tasks and [actions](https://github.com/Knotx/knotx-fragments/tree/master/handler/api) 
 
 ## Requirements
 
-Let's assume we have the `user` service which returns information about users. There are payments providers, which returns payment detail for specific user, available.
+Let's assume we have the `user` service which returns information about users. There are payments providers, which returns payment detail for a specific user, available.
 Our goal is to implement service which will gather information from all payment providers and return one response for given `user`.
-Additional requirement is that calling payment providers APIs should be done in parallel to optimize response time our service.    
+An additional requirement is that calling payment providers APIs should be done in parallel to optimize response time for our service.    
 
-Service we are going to implement should be available on `/api/payments` endpoint
+Service we are going to implement should be available on `/api/payments` endpoint.
 
 ## Setup basic Knot.x project
 
@@ -34,13 +34,13 @@ You will need the following things to use Knot.x:
 - Linux or OSX bash console (for Windows users we recommend using e.g. Ubuntu with [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)).
 - Docker 
 
-Download [Latest Knot.x Starter Kit release](https://github.com/Knotx/knotx-starter-kit/releases) and unzip it.
+Download the [Latest Knot.x Starter Kit release](https://github.com/Knotx/knotx-starter-kit/releases) and unzip it.
 
 ## Configuration
 
 ### openapi.yml
 Regarding the requirement, let's configure endpoint.
-Open `knotx/conf/openapi.yml` and add following path definition:
+Open `knotx/conf/openapi.yml` and add the following path definition:
 
 ```
   /api/payments:
@@ -492,7 +492,7 @@ Create the `services/webapi/mappings` directory and put there those four files:
 docker.image.name=knotx-example/gateway-api
 ```
 
-You will refer to image name in the swarm file.
+You will refer to the image name in the swarm file.
 
 <a id="swarm"></a>
 ### Swarm
@@ -548,5 +548,5 @@ docker stack deploy -c gateway-api.yml gateway-api
 
 http://localhost:8092/api/payments
 
-You can find full project implementation [here](https://github.com/Knotx/knotx-example-project/tree/master/gateway-api)
+You can find full project implementation [here](https://github.com/Knotx/knotx-example-project/tree/master/gateway-api).
 Please note that this example provides 3 different approaches. One we have presented here is available under http://localhost:8092/api/v3/payments
