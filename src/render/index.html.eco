@@ -19,7 +19,6 @@ layout: default
             </a>
           </p>
         </span>
-        <h4>reactive <i>Vert.x-based</i> solution</h4>
       </div>
     </div>
   </div>
@@ -105,7 +104,7 @@ layout: default
           </p>
           <div dir="rtl">
             <ul>
-              <li>Gateway API</li>
+              <li>API Gateway</li>
               <li>Backend For Frontend</li>
               <li>Web API</li>
               <li>SPA Security Layer</li>
@@ -205,7 +204,7 @@ layout: default
             <iframe width="560" height="315" src="https://www.youtube.com/embed/dBhgsmC78Yw?rel=0" frameborder="0" allowfullscreen loading="lazy"></iframe>
           </div>
           <p>
-            <a href="<%= @getSectionLink('wiki') %>" class="btn btn-default btn-lg doc-btn">Explore the Docs</a>
+            <a href="<%= @getSectionLink('documentation') %>" class="btn btn-default btn-lg doc-btn">Explore the Docs</a>
             <a href="<%= @getSectionLink('tutorials') %>" class="btn btn-default btn-lg doc-btn">Explore the Tutorials</a>
           </p>
         </div>
