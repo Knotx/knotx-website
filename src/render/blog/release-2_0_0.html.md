@@ -30,8 +30,12 @@ With 2.0 we bring completely new experience for building any kind of backend API
 - Backend For Frontend: meets SPA challenges and allows to introduce RESTful or GraphQL contracts between your frontend and backend applications
 - HTTP / Web API: exposes any kind of datasource with HTTP-based API
 
-## Release Notes
-As this is a major release version, a lot of things have changed. Instead of pointing each change,
+## Evolution but not revolution
+Instead of developing all new features exclusively in Knot.x 2, we introduced some of these features in the 1.x versions. The Knot.x 2 development focus on more fundamental changes that cannot be done in the 1.x.
+
+![knotx-evolution](/img/blog/release-2_0_0/evolution-diagram.png)
+
+Instead of pointing each change,
 we introduce all the modules (old and new ones) with a brief description of their potential and purpose.
 You can find all the modules under https://github.com/Knotx. There is one special module (which was previously holding the `core`): https://github.com/Knotx/knotx. Currently, it keeps the overview of all official Knot.x modules and high-level vision
 (e.g. changes that require implementation at multiple modules).
