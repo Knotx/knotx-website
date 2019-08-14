@@ -185,7 +185,7 @@ layout: default
         <div class="col-sm-6 text-right">
           <h2>Scaling</h2>
           <p>
-            Scalability is the Knot.x first-class citizen, thanks to the modularity you can scale each
+            Scalability is the first-class citizen in Knot.x. Thanks to the modularity you can scale each
             module vertically (on one host) and/or horizontally (over multiple hosts) to get best
             possible performance or response to an unexpected increase in website traffic. With message-driven
             architecture, you can extend the system to handle the scale without changing a line of code.
