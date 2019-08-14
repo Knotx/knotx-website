@@ -136,7 +136,7 @@ Add in `routingOperations` array following definition:
 
 ```
   {
-    operationId = operation-get
+    operationId = content-get
     handlers = ${config.server.handlers.common.request} [
       {
         name = fsRepoConnectorHandler
