@@ -31,7 +31,7 @@ With 2.0 we bring completely new experience for building any kind of backend API
 - HTTP / Web API: exposes any kind of datasource with HTTP-based API
 
 ## Evolution but not revolution
-Instead of developing all new features exclusively in Knot.x 2, we introduced some of these features in the 1.x versions. The Knot.x 2 development focus on more fundamental changes that cannot be done in the 1.x.
+Instead of developing all new features exclusively in Knot.x 2, we introduced some of these features in the 1.x versions. The Knot.x 2 development focus on more fundamental changes that cannot be done without breaking some compatibility.
 
 ![knotx-evolution](/img/blog/release-2_0_0/evolution-diagram.png)
 
