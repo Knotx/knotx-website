@@ -102,8 +102,8 @@ docpadConfig = {
 
         getGithubReleaseTag: (version) ->
           if /^\d+\.\d+\.\d+$/.test(version)
-            "https://github.com/Cognifide/knotx/releases/tag/#{version}"
-          else "https://github.com/Cognifide/knotx"
+            "https://github.com/Knotx/knotx/releases/tag/#{version}"
+          else "https://github.com/Knotx/knotx"
 
         printKnotxVersion: (version) ->
           if version
