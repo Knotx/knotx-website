@@ -26,6 +26,7 @@
     "start": "node_modules/.bin/docpad run --env static,gh",
     "generate": "node_modules/.bin/docpad generate --debug --env static,gh",
     "deploy-gh": "node_modules/.bin/docpad deploy-ghpages --debug --env static,gh",
-    "info": "node_modules/.bin/docpad info --silent"
+    "info": "node_modules/.bin/docpad info --silent",
+    "clean": "rm -rf out/"
   }
 }
