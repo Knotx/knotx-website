@@ -5,5 +5,5 @@ description: "In this tutorial, we explain how to start playing with Knot.x usin
 order: 8
 date: 2019-08-07
 layout: redirect
-target: /tutorials/getting-started-with-docker/edge/
+target: /tutorials/getting-started-with-docker/2_0/
 ---
