@@ -10,7 +10,7 @@ knotxVersions:
 ## Overview
 
 In this tutorial, we will setup a simple project based on the [Knot.x Starter Kit](https://github.com/Knotx/knotx-starter-kit) template.
-Will configure Knot.x with a simple page that uses an external datasource (Google API Books) to fetch the dynamic data and display it on our page
+Will configure Knot.x with a simple page that uses an external datasource (Google Books API) to fetch the dynamic data and display it on our page.
 
 What you’re going to learn:
 
@@ -26,7 +26,7 @@ You will need the following things to use Knot.x:
 - Linux or OSX bash console (for Windows users we recommend using e.g. Ubuntu with [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)).
 - Docker 
 
-Download [Latest Knot.x Starter Kit release](https://github.com/Knotx/knotx-starter-kit/releases) and unzip it.
+Download the [Latest Knot.x Starter Kit release](https://github.com/Knotx/knotx-starter-kit/releases) and unzip it.
 
 Project has the following structure:
 ```
@@ -40,9 +40,9 @@ Project has the following structure:
 ```
 
 ## Configuration
-Lets now configure Knot.x to do the magic for us.
+Let's now configure Knot.x to do the magic for us.
 We need to do two things:
-- provide the page template, for the tutorial purpose, we will use `fsRepoConnectorHandler`,
+- provide the page template, for the tutorial purpose, we will use [`fsRepoConnectorHandler`](https://github.com/Knotx/knotx-repository-connector/tree/master/fs),
 - provide the datasource, we will use the [Google Books API](https://developers.google.com/books/).
 
 > All configuration options and default values, for each Knot.x module, are
@@ -201,7 +201,7 @@ actions {
 }
 ```
 Above file will be processed by [`fragmentsHandler`](https://github.com/Knotx/knotx-fragments/tree/master/handler). 
-We will cover more sophisticated example in [configurable gateway api tutorial](/tutorials/configurable-gateway-api/) 
+We will cover more sophisticated example in the [configurable gateway api tutorial](/tutorials/configurable-gateway-api/) 
   
 ## Docker
 
