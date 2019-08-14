@@ -1,0 +1,552 @@
+---
+title: Configurable gateway api
+author: marcinkp
+keywords: tutorial
+date: 2019-08-07
+layout: tutorial
+knotxVersions:
+  - edge
+---
+## Overview
+In [Getting Started with Docker](/tutorials/getting-started-with-docker) you have learnt how to use [Knot.x Starter Kit](https://github.com/Knotx/knotx-starter-kit) template.
+Now we are going to show how you can use `Knot.X` for gateway api implementation. We will implement custom [Action](https://github.com/Knotx/knotx-fragments/tree/master/handler/api) and
+use in more advanced way [`fragmentsHandler`](https://github.com/Knotx/knotx-fragments/tree/master/handler)   
+
+What you’re going to learn:
+
+- How to use Knot.x for gateway api implementation 
+- How to implement custom [Action](https://github.com/Knotx/knotx-fragments/tree/master/handler/api)
+- How to configure [Fragments engine](https://github.com/Knotx/knotx-fragments/tree/master/handler/engine) tasks and [actions](https://github.com/Knotx/knotx-fragments/tree/master/handler/api) 
+
+## Requirements
+
+Let's assume we have the `user` service which returns information about users. There are payments providers, which returns payment detail for specific user, available.
+Our goal is to implement service which will gather information from all payment providers and return one response for given `user`.
+Additional requirement is that calling payment providers APIs should be done in parallel to optimize response time our service.    
+
+Service we are going to implement should be available on `/api/payments` endpoint
+
+## Setup basic Knot.x project
+
+**Prerequisites**
+You will need the following things to use Knot.x:
+- JDK 8
+- Linux or OSX bash console (for Windows users we recommend using e.g. Ubuntu with [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)).
+- Docker 
+
+Download [Latest Knot.x Starter Kit release](https://github.com/Knotx/knotx-starter-kit/releases) and unzip it.
+
+## Configuration
+
+### openapi.yml
+Regarding the requirement, let's configure endpoint.
+Open `knotx/conf/openapi.yml` and add following path definition:
+
+```
+  /api/payments:
+    get:
+      operationId: payment-configurable-operation
+      responses:
+        default:
+          description: Payments API with configurable task
+``` 
+
+
+### operations.conf
+
+Now, you need to define operation `payment-configurable-operation`. Open `knotx/conf/routes/operations.con`
+Add in `routingOperations` array following definition:
+
+```
+  {
+    operationId = payment-configurable-operation
+    handlers = ${config.server.handlers.common.request} [
+      {
+        name = singleFragmentSupplier
+        config = {
+          type = "stub"
+          configuration.data-knotx-task = "payment-check"
+        }
+      }
+      {
+        name = fragmentsHandler
+        config = {include required(classpath("routes/handlers/fragmentsHandler.conf"))}
+      }
+      {
+        name = fragmentsAssembler
+      }
+    ] ${config.server.handlers.common.response}
+  }
+```
+
+You have defined operation using [singleFragmentSupplier](https://github.com/Knotx/knotx-fragments/tree/master/supplier/single-fragment) to 
+produce fragments and then [fragmentsHandler](https://github.com/Knotx/knotx-fragments/tree/master/handler) take action. 
+
+Now you can define how fragment will be processed.
+
+### fragmentsHandler.conf
+
+Create a new file `knotx/conf/routes/handlers/fragmentsHandler.conf` and edit it:
+
+```
+tasks {
+  payment-check {
+    action = user
+    onTransitions {
+      _success {
+        actions = [
+          {
+            action = creditCard
+          }
+          {
+            action = paypal
+          }
+          {
+            action = payU
+          }
+        ]
+        onTransitions {
+          _success {
+            action = payments
+            onTransitions {
+              _success {
+                action = copyToBody
+                onTransitions {
+                  _error {
+                    action = errorBody
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+actions {
+
+  errorBody {
+    factory = inline-body
+    config {
+      body = """
+      {
+        timestamp = null
+        providers = []
+      }
+      """
+    }
+  }
+
+  copyToBody {
+    factory = payload-to-body
+    config {
+      key = "payments"
+    }
+  }
+  payments {
+    factory = payments
+  }
+  user {
+    factory = http
+    config {
+      endpointOptions {
+        path = /user
+        domain = webapi
+        port = 8080
+        allowedRequestHeaders = ["Content-Type"]
+      }
+    }
+  }
+  creditCard {
+    factory = http
+    config {
+      endpointOptions {
+        path = /creditcard/allowed
+        domain = webapi
+        port = 8080
+        allowedRequestHeaders = ["Content-Type"]
+      }
+    }
+  }
+  paypal {
+    factory = http
+    config {
+      endpointOptions {
+        path = /paypal/verify
+        domain = webapi
+        port = 8080
+        allowedRequestHeaders = ["Content-Type"]
+      }
+    }
+  }
+  payU {
+    factory = http
+    config {
+      endpointOptions {
+        path = /payu/active
+        domain = webapi
+        port = 8080
+        allowedRequestHeaders = ["Content-Type"]
+      }
+    }
+  }
+}
+
+```
+You have defined one task `payment-check`, the same you pointed in `configuration.data-knotx-task` property of `singleFragmentSupplier`
+
+Task perform action `user` and then in parallel `creditCard`, `paypal` and `payU`. All this actions use [`http`](https://github.com/Knotx/knotx-data-bridge/tree/master/http) implementation.
+Once all data from external services are fetched, action `payments` is executed. This action is a custom action that now we will implement.
+
+## Implementation
+
+Now, you are ready to implement custom [Action](https://github.com/Knotx/knotx-fragments/tree/master/handler/api#action). 
+The purpose of Action is to transform collected `json` data from external services into one `json` which will be returned by ours API.  
+
+Create the directory for new module `modules/payments`. 
+Edit the `settings.gradle.kts` and add two lines:
+
+```
+include("payments")
+
+project(":payments").projectDir = file("modules/payments")
+
+```
+Add the following files:
+
+*build.gradle.kts*
+```kotlin
+plugins {
+    `java-library`
+}
+
+dependencies {
+    implementation(group = "org.apache.commons", name = "commons-lang3")
+
+    "io.knotx:knotx".let { v ->
+        implementation(platform("$v-dependencies:${project.property("knotx.version")}"))
+        implementation("$v-server-http-api:${project.property("knotx.version")}")
+        implementation("$v-fragments-handler-api:${project.property("knotx.version")}")
+    }
+    "io.vertx:vertx".let { v ->
+        implementation("$v-web")
+        implementation("$v-web-client")
+        implementation("$v-rx-java2")
+        implementation("$v-circuit-breaker")
+    }
+}
+```
+
+*src/main/resources/META-INF/services/io.knotx.fragments.handler.api.ActionFactory*
+```
+io.knotx.example.payment.action.PaymentsActionFactory
+```
+
+*src/main/java/io/knotx/example/payment/action/PaymentsActionFactory.java*
+```java
+package io.knotx.example.payment.action;
+
+import static io.knotx.example.payment.utils.ProvidersProvider.calculateProviders;
+
+import org.apache.commons.lang3.StringUtils;
+
+import io.knotx.fragments.handler.api.Action;
+import io.knotx.fragments.handler.api.ActionFactory;
+import io.knotx.fragments.handler.api.domain.FragmentResult;
+import io.reactivex.Single;
+import io.vertx.core.Future;
+import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
+
+public class PaymentsActionFactory implements ActionFactory {
+
+  @Override
+  public String getName() {
+    return "payments";
+  }
+
+  @Override
+  public Action create(String alias, JsonObject config, Vertx vertx, Action doAction) {
+    return (fragmentContext, resultHandler) ->
+        Single.just(fragmentContext.getFragment())
+            .map(fragment -> {
+              JsonObject payload = fragment.getPayload();
+              JsonObject user = payload.getJsonObject("user");
+              JsonObject payments = processProviders(payload);
+              fragment.clearPayload();
+              fragment.mergeInPayload(new JsonObject().put(getAlias(alias), payments)
+                  .put("user", user));
+              return new FragmentResult(fragment, FragmentResult.SUCCESS_TRANSITION);
+            })
+            .subscribe(onSuccess -> {
+              Future<FragmentResult> resultFuture = Future.succeededFuture(onSuccess);
+              resultFuture.setHandler(resultHandler);
+            }, onError -> {
+              Future<FragmentResult> resultFuture = Future.failedFuture(onError);
+              resultFuture.setHandler(resultHandler);
+            });
+  }
+
+  private JsonObject processProviders(JsonObject payload) {
+    return new JsonObject()
+        .put("timestamp", System.currentTimeMillis())
+        .put("providers", calculateProviders(payload));
+  }
+
+  private String getAlias(String alias) {
+    return StringUtils.defaultString(alias, "payments");
+  }
+}
+```
+
+*src/main/java/io/knotx/example/payment/utils/ProvidersProvider.java*
+```java
+package io.knotx.example.payment.utils;
+
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+
+public final class ProvidersProvider {
+
+  private ProvidersProvider() {
+    //util
+  }
+
+  public static JsonArray calculateProviders(JsonObject creditCard,
+      JsonObject paypal, JsonObject payU) {
+    JsonArray providers = new JsonArray();
+    if (creditCard != null && creditCard.containsKey("allowed") && creditCard
+        .getBoolean("allowed")) {
+      providers.add(getProviderData(creditCard, "label", "url"));
+    }
+    if (paypal != null && paypal.containsKey("verified") && paypal.getBoolean("verified")) {
+      providers.add(getProviderData(paypal, "label", "paymentUrl"));
+    }
+    if (payU != null && "OK".equals(payU.getString("status"))) {
+      providers.add(getProviderData(payU, "name", "link"));
+    }
+    return providers;
+  }
+
+  public static JsonArray calculateProviders(JsonObject payload) {
+    return calculateProviders(getResult(payload, "creditCard"), getResult(payload, "paypal"),
+        getResult(payload, "payU"));
+  }
+
+
+  private static JsonObject getProviderData(JsonObject data, String label, String paymentUrl) {
+    return new JsonObject()
+        .put("label", data.getString(label))
+        .put("paymentUrl", data.getString(paymentUrl));
+  }
+
+  private static JsonObject getResult(JsonObject payload, String provider) {
+    if (payload.containsKey(provider)) {
+      return payload.getJsonObject(provider)
+          .getJsonObject("_result");
+    } else {
+      return null;
+    }
+  }
+
+}
+```
+
+## External services
+
+We need to define the responses for external services. Our definition calls 4 services. Let's define them.   
+Create `services/webapi/__files` directory  and put there 4 files:
+
+*creditcard.json*
+```json
+{
+  "allowed": true,
+  "url": "https://cc-example.com/pay/19g8esry9se8rgyse90r8ug4",
+  "label": "Credit Card"
+}
+```
+
+*paypal.json*
+```json
+{
+  "verified": true,
+  "paymentUrl": "https://paypal-example.com/payment?id=1983247919hv9sa398f",
+  "label": "PayPal premium"
+}
+```
+
+*payu.json*
+```json
+{
+  "status": "OK",
+  "link": "https://payu-example.com/tr?id=afj08aw398gha0we9ge",
+  "name": "PayU"
+}
+```
+
+*user.json*
+```json
+{
+  "_id": "5cee7d620a281607d18cf8d5",
+  "score": 123.321,
+  "age": 22,
+  "eyeColor": "blue",
+  "name": {
+    "first": "Claudine",
+    "last": "Sellers"
+  },
+  "company": "GAZAK",
+  "email": "claudine.sellers@gazak.co.uk",
+  "phone": "+1 (844) 442-3950",
+  "address": "670 Rutland Road, Brethren, Montana, 9555",
+  "about": "Fugiat qui in eiusmod nostrud cupidatat do sit dolor. Duis in minim nulla exercitation ea commodo cillum excepteur amet. Esse non in labore enim eu excepteur do in eiusmod ipsum mollit commodo mollit adipisicing.",
+  "registered": "Sunday, February 2, 2014 2:48 AM",
+  "latitude": "-33.507469",
+  "longitude": "-115.52703",
+  "tags": [
+    "velit",
+    "aliquip",
+    "ullamco",
+    "sunt",
+    "non"
+  ],
+  "favoriteFruit": "apple"
+}
+```
+
+We will use [WireMock](http://wiremock.org/) for mock services and we need to define the mappings.
+
+Create the `services/webapi/mappings` directory and put there those four files:
+
+*creditcard.json*
+```json
+{
+  "request": {
+    "method": "GET",
+    "url": "/creditcard/allowed"
+  },
+  "response": {
+    "status": 200,
+    "fixedDelayMilliseconds": 100,
+    "bodyFileName": "creditcard.json"
+  }
+}
+
+```
+
+*paypal.json*
+```json
+{
+  "request": {
+    "method": "GET",
+    "url": "/paypal/verify"
+  },
+  "response": {
+    "status": 200,
+    "fixedDelayMilliseconds": 3000,
+    "bodyFileName": "paypal.json"
+  }
+}
+
+```
+
+*payu.json*
+```json
+{
+  "request": {
+    "method": "GET",
+    "url": "/payu/active"
+  },
+  "response": {
+    "status": 200,
+    "fixedDelayMilliseconds": 200,
+    "bodyFileName": "payu.json"
+  }
+}
+
+```
+
+*user.json*
+```json
+{
+  "request": {
+    "method": "GET",
+    "url": "/user"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "user.json"
+  }
+}
+```
+ 
+ 
+## Docker
+
+### Configuration
+[Knot.x Starter Kit](https://github.com/Knotx/knotx-starter-kit) project builds docker image. Edit `gradle.properties` and change property `docker.image.name`:
+
+```
+docker.image.name=knotx-example/gateway-api
+```
+
+You will refer to image name in the swarm file.
+
+<a id="swarm"></a>
+### Swarm
+Let's define the swarm file where we will setup following services:
+ - `webapi` - external Web APIs for: `user`, `creditcard`, `payu` and `paypal` (which we've just created above)
+ - `knotx` - Knot.x image with our customization we build during this tutorial
+ 
+Create the `gateway-api.yml` file:
+ 
+```yaml
+version: '3.7'
+
+networks:
+  knotnet:
+
+services:
+
+  webapi:
+    image: rodolpheche/wiremock
+    volumes:
+      - "../common-services/webapi:/home/wiremock"
+    ports:
+      - "3000:8080"
+    networks:
+      - knotnet
+
+  knotx:
+    image: knotx-example/gateway-api:latest
+    command: ["knotx", "run-knotx"]
+    ports:
+      - "8092:8092"
+      - "18092:18092"
+    networks:
+      - knotnet
+
+
+```
+
+
+## Run
+
+Now we are ready to run. First, build your docker image
+```
+$ gradlew clean build
+```
+
+Run Knot.x instance and example data services (Web API and Content Repository) in a single-node Docker Swarm:
+```
+docker stack deploy -c gateway-api.yml gateway-api
+```
+
+### Final page
+
+http://localhost:8092/api/payments
+
+You can find full project implementation [here](https://github.com/Knotx/knotx-example-project/tree/master/gateway-api)
+Please note that this example provides 3 different approaches. One we have presented here is available under http://localhost:8092/api/v3/payments
