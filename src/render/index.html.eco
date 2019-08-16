@@ -125,7 +125,7 @@ layout: default
             Experience Manager) while your site is undergoing a migration. Moreover it connects the
             authoring experience that CMS gives with the dynamic data from external systems (such as
             CRM, stock exchange service). So the integration can be gradually introduced, first by
-            integrating AEM-driven components, then dynamic components from various systems like CRM.
+            integrating CMS-driven components, then dynamic components from various systems like e-commerce.
             Knot.x integrates with all kinds of systems from CMS, through web services, to low-level
             storages like databases or caches and it's not limited to HTTP.
           </p>
