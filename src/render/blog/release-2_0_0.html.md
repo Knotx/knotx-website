@@ -13,6 +13,9 @@ Hurray,
 
 Knot.x 2.0 - the open-source integrations framework is finally here!
 It comes with the HTTP server, distribution and platform for building backend APIs.
+
+Before we go throught new modules and features, we would like to thank all the contributors. Your participation has been essential to this achievement!
+
 The main changes and features of the second version are:
 
 - `Design First approach`: We get rid of custom routing definitions in favour of using standards. The [Open API v3](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md) specification is language-agnostic, and human readable way a routing is defined.
@@ -30,8 +33,12 @@ With 2.0 we bring completely new experience for building any kind of backend API
 - Backend For Frontend: meets SPA challenges and allows to introduce RESTful or GraphQL contracts between your frontend and backend applications
 - HTTP / Web API: exposes any kind of datasource with HTTP-based API
 
-## Release Notes
-As this is a major release version, a lot of things have changed. Instead of pointing each change,
+## Evolution but not revolution
+Instead of developing all new features exclusively in Knot.x 2, we introduced some of these features in the 1.x versions. The Knot.x 2 development focus on more fundamental changes that cannot be done without breaking some compatibility.
+
+![knotx-evolution](/img/blog/release-2_0_0/evolution-diagram.png)
+
+Instead of pointing each change,
 we introduce all the modules (old and new ones) with a brief description of their potential and purpose.
 You can find all the modules under https://github.com/Knotx. There is one special module (which was previously holding the `core`): https://github.com/Knotx/knotx. Currently, it keeps the overview of all official Knot.x modules and high-level vision
 (e.g. changes that require implementation at multiple modules).
