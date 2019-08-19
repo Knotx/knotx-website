@@ -7,6 +7,8 @@ order: 1
 date: 2019-08-19
 ---
 
+![Evolution](/img/blog/evolution-of-knotx/evolution.jpg)
+
 # Evolution of Knot.x
 
 Over 2 years ago, when we kicked off Knot.x officially, the major problems that we struggled with were integrations with 3rd party and customer’s APIs. Convincing CMS, CRM, search engine and e-commerce to talk with each other and integrating them into a single, coherent platform was the main challenge of our daily work. And Knot.x came with a very simple yet powerful solution: instead of hacking each of those platforms to communicate with others, move the integration logic into a dedicated architecture layer.
