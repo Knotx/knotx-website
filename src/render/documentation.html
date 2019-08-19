@@ -10,12 +10,12 @@ order: 5
   <div class="row">
     <div class="col-sm-12">
       <p>Knot.x is an <strong>open source integration framework</strong> designed to build <strong>backend
-        APIs</strong> and combining CMS experience with the dynamic data from external systems like
+        APIs</strong> combining CMS experience with the dynamic data from external systems like
         e-commerce,
         CRMs and search engines.</p>
 
-      <p>The heart of Knot.x is the HTTP Server that uses Fragment Processing to connect many data
-        sources into one customer experience (like HTML, JSON or PDF) in the configurable, reactive,
+      <p>A "heart" of Knot.x is the non-blocking asynchronous HTTP Server (powered by [Netty](http://netty.io)) that uses Fragment Processing to connect many data
+        sources into a one customer experience (like HTML, JSON or PDF) in the configurable, reactive,
         scalable and fault-tolerant way.</p>
 
       <p>A fragment is a piece of any kind of document that can be processed independently (e.g. an
@@ -26,7 +26,7 @@ order: 5
         <a href="https://github.com/Knotx/knotx-cookbook">Cookbook</a> and
         <a href="https://hub.docker.com/u/knotx">Docker images</a>).</p>
 
-      <p>Knot.x is build on top of <a href="http://vertx.io" target="_blank">Vert.x</a>, known as
+      <p>Knot.x is built on the top of <a href="http://vertx.io" target="_blank">Vert.x</a>, known as
         one of the leading toolkits for performant,
         event-driven applications. It uses asynchronous programming principles which allows it to
         process a large number of requests using a single thread. Asynchronous programming is a
@@ -66,7 +66,7 @@ order: 5
       <p>The server is essentially a "heart" of Knot.x. It's scalable (vertically and horizontally),
         pluggable (easy to extend), fault-tolerant and highly efficient reactive HTTP server based
         on Vert.x.
-        It handles all incoming HTTP requests and routes the traffic using OpenAPI specs.
+        It handles all incoming HTTP requests and routes the traffic using the [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification).
       </p>
 
     </div>
@@ -77,7 +77,7 @@ order: 5
            href="https://github.com/Knotx/knotx-fragments#knotx-fragments"
            role="button" target="_blank"><span class="fa fa-book"></span> Explore the docs</a>
       </h3>
-      <p>While Knot.x HTTP Server is a "hearth" of Knot.x, Fragments processing is its "brain".
+      <p>While Knot.x HTTP Server is a "hearth" of Knot.x, a Fragments processing is its "brain".
         Knot.x Fragments is a Swiss Army knife for integrating with dynamic data sources. It comes
         with distributed systems stability patterns such as a circuit breaker to handle different
         kinds of network failures. Thanks to those build-in mechanisms developers can focus more on
@@ -92,9 +92,9 @@ order: 5
            href="https://github.com/Knotx/knotx-fragments#knotx-fragments"
            role="button" target="_blank"><span class="fa fa-book"></span> Explore the docs</a>
       </h3>
-      <p>Stack is a way of distributing fully functional bootstrap project for Knot.x-based
+      <p>Stack is a Knot.x distribution, a fully-featured bootstrap project for Knot.x-based
         solutions.
-        It does not require any external dependencies so it is used to build a Knot.x Docker images
+        It does not require any external dependencies, therefore it is used to build Knot.x Docker images
         and
         to setup an instance with Chef.
       </p>
@@ -106,8 +106,8 @@ order: 5
            href="https://github.com/Knotx/knotx-launcher#knotx-launcher"
            role="button" target="_blank"><span class="fa fa-book"></span> Explore the docs</a>
       </h3>
-      <p>Launcher provides a way to configure and run bare Knot.x instance. It can be used
-        as a microservice platform build on top of Vert.x using HOCON syntax for configuration
+      <p>Launcher provides a way to configure and run a bare Knot.x instance. It can be used
+        as a microservice platform built on Vert.x using the HOCON syntax for configuration
         and modules management.</p>
     </div>
 
@@ -117,8 +117,8 @@ order: 5
            href="https://github.com/Knotx/knotx-repository-connector#repository-connector"
            role="button" target="_blank"><span class="fa fa-book"></span> Explore the docs</a>
       </h3>
-      <p>Repository connector delivers template from external repositories like CMS or file
-        system</p>
+      <p>The repository connector provides a template from external repositories, such as CMS or file
+        system.</p>
     </div>
 
     <div class="col-sm-12">
@@ -140,7 +140,7 @@ order: 5
            href="https://github.com/Knotx/knotx-template-engine#template-engine"
            role="button" target="_blank"><span class="fa fa-book"></span> Explore the docs</a>
       </h3>
-      <p>Template Engine processes Fragment's data and template into the final markup. Knot.x
+      <p>Template Engine converts a template and Fragment's data into the final markup. Knot.x
         comes with implemented <a href="http://handlebarsjs.com" target="_blank">Handlebars</a>
         engine out of the box, but creating any custom template engine is very easy.
       </p>
@@ -152,7 +152,7 @@ order: 5
            href="https://github.com/Knotx/knotx-junit5#knotx-junit5"
            role="button" target="_blank"><span class="fa fa-book"></span> Explore the docs</a>
       </h3>
-      <p>JUnit 5 support and extensions for Vert.x projects.</p>
+      <p>JUnit 5 extension for Knot.x-based projects.</p>
     </div>
 
     <div class="col-sm-12">
