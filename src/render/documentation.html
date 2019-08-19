@@ -1,0 +1,172 @@
+---
+title: Documentation
+description: Knot.x documentation
+layout: content-layout
+menu: true
+order: 5
+---
+
+<div class="container flex blog">
+  <div class="row">
+    <div class="col-sm-12">
+      <p>Knot.x is an <strong>open-source integration framework</strong> designed to build <strong>backend
+        APIs</strong> combining CMS experience with the dynamic data from external systems like
+        e-commerce, CRMs, and search engines.</p>
+
+      <p>A "heart" of Knot.x is the non-blocking asynchronous HTTP Server (powered by
+        [Netty](http://netty.io)) that uses Fragment Processing to connect many data
+        sources into a one customer experience (like HTML, JSON or PDF) in the configurable,
+        reactive, scalable and fault-tolerant way.</p>
+
+      <p>A fragment is a piece of any kind of document that can be processed independently (e.g. an
+        HTML snippet that represents the shopping cart or a JSON containing person's bookshelf).</p>
+
+      <p>Knot.x comes also with a distribution that enables quick start with the framework, is a
+        project structure and supports deployment automation (see the
+        <a href="https://github.com/Knotx/knotx-cookbook">Cookbook</a> and
+        <a href="https://hub.docker.com/u/knotx">Docker images</a>).</p>
+
+      <p>Knot.x is built on the top of <a href="http://vertx.io" target="_blank">Vert.x</a>, known
+        as
+        one of the leading toolkits for performant,
+        event-driven applications. It uses asynchronous programming principles which allows it to
+        process a large number of requests using a single thread. Asynchronous programming is a
+        style promoting the ability to write non-blocking code (no thread pools). The platform stays
+        responsive under heavy and varying load and is designed to follow
+        <a href="https://www.reactivemanifesto.org/" target="_blank">Reactive Manifesto</a>
+        principles.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Getting started</h1>
+      <p>Start with the <a href="/tutorials" target="_blank">Tutorials</a> section to understand the
+        basics of
+        Knot.x and play with it.<br/>
+        Explore the <a href="https://github.com/Knotx/knotx-example-project" target="_blank">Knot.x
+          Example Project</a> for use
+        case examples.
+      </p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Documentation</h1>
+      <p>Below you can explore user documentation for the most important Knot.x modules.
+        Each module documentation can be found in module's repository. You may explore all the
+        modules in the
+        <a href="https://github.com/Knotx">Knot.x GitHub project</a>.</p>
+    </div>
+    <div class="col-sm-12">
+      <h3>knotx-server-http
+        <a class="btn btn-lg"
+           href="https://github.com/Knotx/knotx-server-http#knotx-http-server"
+           role="button" target="_blank"><span class="fa fa-book"></span> Explore the docs</a>
+      </h3>
+      <p>The server is essentially a "heart" of Knot.x. It's scalable (vertically and horizontally),
+        pluggable (easy to extend), fault-tolerant and highly efficient reactive HTTP server based
+        on Vert.x.
+        It handles all incoming HTTP requests and routes the traffic using the [OpenAPI
+        specification](https://github.com/OAI/OpenAPI-Specification).
+      </p>
+
+    </div>
+
+    <div class="col-sm-12">
+      <h3>knotx-fragments
+        <a class="btn btn-lg"
+           href="https://github.com/Knotx/knotx-fragments#knotx-fragments"
+           role="button" target="_blank"><span class="fa fa-book"></span> Explore the docs</a>
+      </h3>
+      <p>While Knot.x HTTP Server is a "hearth" of Knot.x, a Fragments processing is its "brain".
+        Knot.x Fragments is a Swiss Army knife for integrating with dynamic data sources. It comes
+        with distributed systems stability patterns such as a circuit breaker to handle different
+        kinds of network failures. Thanks to those build-in mechanisms developers can focus more on
+        delivering business logic and make the solution ready to handle any unexpected integration
+        problems.
+      </p>
+    </div>
+
+    <div class="col-sm-12">
+      <h3>knotx-stack
+        <a class="btn btn-lg"
+           href="https://github.com/Knotx/knotx-fragments#knotx-fragments"
+           role="button" target="_blank"><span class="fa fa-book"></span> Explore the docs</a>
+      </h3>
+      <p>Stack is a Knot.x distribution, a fully-featured bootstrap project for Knot.x-based
+        solutions.
+        It does not require any external dependencies, therefore it is used to build Knot.x Docker
+        images
+        and
+        to setup an instance with Chef.
+      </p>
+    </div>
+
+    <div class="col-sm-12">
+      <h3>knotx-launcher
+        <a class="btn btn-lg"
+           href="https://github.com/Knotx/knotx-launcher#knotx-launcher"
+           role="button" target="_blank"><span class="fa fa-book"></span> Explore the docs</a>
+      </h3>
+      <p>Launcher provides a way to configure and run a bare Knot.x instance. It can be used
+        as a microservice platform built on Vert.x using the HOCON syntax for configuration
+        and modules management.</p>
+    </div>
+
+    <div class="col-sm-12">
+      <h3>knotx-repository-connector
+        <a class="btn btn-lg"
+           href="https://github.com/Knotx/knotx-repository-connector#repository-connector"
+           role="button" target="_blank"><span class="fa fa-book"></span> Explore the docs</a>
+      </h3>
+      <p>The repository connector provides a template from external repositories, such as CMS or
+        file
+        system.</p>
+    </div>
+
+    <div class="col-sm-12">
+      <h3>knotx-data-bridge
+        <a class="btn btn-lg"
+           href="https://github.com/Knotx/knotx-data-bridge#knotx-data-bridge"
+           role="button" target="_blank"><span class="fa fa-book"></span> Explore the docs</a>
+      </h3>
+      <p>Data Bridge is an integration module that enriches Fragments with the data from external
+        sources.
+        It comes with HTTP Action that connects to the external WEB endpoint that responds with
+        JSON.
+      </p>
+    </div>
+
+    <div class="col-sm-12">
+      <h3>knotx-template-engine
+        <a class="btn btn-lg"
+           href="https://github.com/Knotx/knotx-template-engine#template-engine"
+           role="button" target="_blank"><span class="fa fa-book"></span> Explore the docs</a>
+      </h3>
+      <p>Template Engine converts a template and Fragment's data into the final markup. Knot.x
+        comes with implemented <a href="http://handlebarsjs.com" target="_blank">Handlebars</a>
+        engine out of the box, but creating any custom template engine is very easy.
+      </p>
+    </div>
+
+    <div class="col-sm-12">
+      <h3>knotx-junit5
+        <a class="btn btn-lg"
+           href="https://github.com/Knotx/knotx-junit5#knotx-junit5"
+           role="button" target="_blank"><span class="fa fa-book"></span> Explore the docs</a>
+      </h3>
+      <p>JUnit 5 extension for Knot.x-based projects.</p>
+    </div>
+
+    <div class="col-sm-12">
+      <h3>knotx-gradle-plugins
+        <a class="btn btn-lg"
+           href="https://github.com/Knotx/knotx-gradle-plugins#knotx-gradle-plugins"
+           role="button" target="_blank"><span class="fa fa-book"></span> Explore the docs</a>
+      </h3>
+      <p>Gradle plugins that help manage Knot.x modules build. Most of the Knot.x 2 modules
+        are built and deployed with Gradle 5 using Kotlin DSL.</p>
+    </div>
+  </div>
+</div>

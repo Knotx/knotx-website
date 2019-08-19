@@ -53,56 +53,56 @@ to replace the `core` concept with smaller, well-defined responsibilities.
 The server is essentially a "heart" of Knot.x. It's scalable (vertically and horizontally), pluggable (easy to extend), fault-tolerant and highly efficient reactive HTTP server based on Vert.x.
 It handles all incoming HTTP requests and routes the traffic using OpenAPI specs.
 
-### [knotx-fragments](https://github.com/Knotxknotx-fragments)
+### [knotx-fragments](https://github.com/Knotx/knotx-fragments)
 While Knot.x HTTP Server is a "hearth" of Knot.x, Fragments processing is its "brain".
 Knot.x Fragments is a Swiss Army knife for integrating with dynamic data sources. It comes with distributed systems stability patterns such as a circuit breaker to handle different kinds of network failures. Thanks to those build-in mechanisms developers can focus more on delivering business logic and make the solution ready to handle any unexpected integration problems.
 
-### [knotx-stack](https://github.com/Knotxknotx-stack)
+### [knotx-stack](https://github.com/Knotx/knotx-stack)
 Stack is a way of distributing fully functional bootstrap project for Knot.x-based solutions.
 It does not require any external dependencies so it is used to build a Knot.x Docker images and
 to setup an instance with Chef. Read more about how to start building Knot.x solution with [Getting Started with Knot.x Stack](http://knotx.io/tutorials/getting-started-with-knotx-stack/) tutorial.
 
-### [knotx-commons](https://github.com/Knotxknotx-commons)
+### [knotx-commons](https://github.com/Knotx/knotx-commons)
 Simple util classes that do not depend on other Knot.x modules.
 
-### [knotx-cookbook](https://github.com/Knotxknotx-cookbook)
+### [knotx-cookbook](https://github.com/Knotx/knotx-cookbook)
 Cookbook for automated Knot.x deployment.
 
-### [knotx-dashboard](https://github.com/Knotxknotx-dashboard)
+### [knotx-dashboard](https://github.com/Knotx/knotx-dashboard)
 The dashboard provides an online Knot.x instance monitoring. You may use it to monitor Knot.x
 instance performance in real-time.
 
-### [knotx-data-bridge](https://github.com/Knotxknotx-data-bridge)
+### [knotx-data-bridge](https://github.com/Knotx/knotx-data-bridge)
 Data Bridge is an integration module that enriches Fragments with the data from external sources.
 It comes with HTTP Action that connects to the external WEB endpoint that responds with JSON.
 
-### [knotx-dependencies](https://github.com/Knotxknotx-dependencies)
+### [knotx-dependencies](https://github.com/Knotx/knotx-dependencies)
 Dependencies define the versions of Knot.x components and required dependencies (in BOM fashion).
 
-### [knotx-docker](https://github.com/Knotxknotx-docker)
+### [knotx-docker](https://github.com/Knotx/knotx-docker)
 Knot.x Docker base image. The image is intended to be used by extension using the Docker `FROM` directive. Knot.x comes with standard and *alpine* (~`84 MB`) distributions.
 
-### [knotx-gradle-plugins](https://github.com/Knotxknotx-gradle-plugins)
+### [knotx-gradle-plugins](https://github.com/Knotx/knotx-gradle-plugins)
 Gradle plugins that help manage Knot.x modules build. Most of the Knot.x 2 modules
 are built and deployed with Gradle 5 using Kotlin DSL.
 
-### [knotx-junit5](https://github.com/Knotxknotx-junit5)
+### [knotx-junit5](https://github.com/Knotx/knotx-junit5)
 JUnit 5 support and extensions for Vert.x projects.
 
-### [knotx-launcher](https://github.com/Knotxknotx-launcher)
+### [knotx-launcher](https://github.com/Knotx/knotx-launcher)
 Launcher provides a way to configure and run bare Knot.x instance. It can be used
 as a microservice platform build on top of Vert.x using HOCON syntax for configuration
 and [modules management](https://github.com/Knotx/knotx-launcher#modules-configuration).
 
-### [knotx-repository-connector](https://github.com/Knotxknotx-repository-connector)
+### [knotx-repository-connector](https://github.com/Knotx/knotx-repository-connector)
 Repository connector delivers template from external repositories like CMS or file system
 
-### [knotx-starter-kit](https://github.com/Knotxknotx-starter-kit)
+### [knotx-starter-kit](https://github.com/Knotx/knotx-starter-kit)
 Knot.x Starter Kit is a template project that you can use when creating some Knot.x extensions.
 It enables easy and fast start for the Knot.x-based solutions.
 Read more about how to start with Knot.x and Docker in the [Getting Started with Docker](http://knotx.io/tutorials/getting-started-with-docker/) tutorial.
 
-### [knotx-template-engine](https://github.com/Knotxknotx-template-engine)
+### [knotx-template-engine](https://github.com/Knotx/knotx-template-engine)
 Template Engine processes Fragment's data and template into the final markup. Knot.x
 comes with implemented [Handlebars](http://handlebarsjs.com/) engine out of the box,
 but creating any custom template engine is [very easy](https://github.com/Knotx/knotx-template-engine#how-to-create-a-custom-template-engine-strategy).

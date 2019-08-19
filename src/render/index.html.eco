@@ -1,6 +1,6 @@
 ---
 title: Knot.x Homepage
-description: Knot.x connects CMS, CRM or other web platforms to create a unified customer experience.
+description: Knot.x is a highly-efficient and scalable integration framework designed to build backend APIs.
 home: true
 layout: default
 ---
@@ -9,17 +9,16 @@ layout: default
   <div class="index-header" id="content">
     <div class="container">
       <div class="banner text-center">
-        <h1><strong>Knot.x</strong></h1><h2> connects <strong>CMS, CRM</strong> or other web platforms<br/>
-          to create a <strong>unified customer experience.</strong></h2>
+        <h1><strong>Knot.x</strong></h1><h2> an open-source <strong>integration framework</strong> designed to build <strong>backend APIs</strong><br>
+        and combining CMS experience with the dynamic data from external systems</h2>
         <span class="github-btn">
           <p>
             <a class="btn btn-default btn-lg" href="<%= @getSectionLink('download') %>" role="button">
               <span class="fa fa-download"></span>
-              Knot.x 1.5.0
+              Knot.x 2.0
             </a>
           </p>
         </span>
-        <h4>reactive <i>Vert.x-based</i>  integration platform</h4>
       </div>
     </div>
   </div>
@@ -89,8 +88,34 @@ layout: default
     </div>
   </div>
 
-  <!-- Manageable Integrations -->
+  <!-- Backend API -->
   <div class="feature white-background">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-5">
+          <img src="img/backend-api.png" class="img-responsive img-centered" alt=""/>
+        </div>
+        <div class="col-sm-6 col-sm-offset-1 text-right">
+          <h2>Backend API</h2>
+          <p>
+            With the Design First principles (for REST or GraphQL endpoints) at the root,
+            Configurable Integrations and Stability Patterns build-in,
+            Knot.x is the robust framework for building backend APIs like:
+          </p>
+          <div dir="rtl">
+            <ul>
+              <li>API Gateway</li>
+              <li>Backend For Frontend</li>
+              <li>Web API</li>
+              <li>SPA Security Layer</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Manageable Integrations -->
+  <div class="feature gray-background">
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
@@ -100,7 +125,7 @@ layout: default
             Experience Manager) while your site is undergoing a migration. Moreover it connects the
             authoring experience that CMS gives with the dynamic data from external systems (such as
             CRM, stock exchange service). So the integration can be gradually introduced, first by
-            integrating AEM-driven components, then dynamic components from various systems like CRM.
+            integrating CMS-driven components, then dynamic components from various systems like e-commerce.
             Knot.x integrates with all kinds of systems from CMS, through web services, to low-level
             storages like databases or caches and it's not limited to HTTP.
           </p>
@@ -112,7 +137,7 @@ layout: default
     </div>
   </div>
   <!-- Resilience -->
-  <div class="feature gray-background">
+  <div class="feature white-background">
     <div class="container">
       <div class="row">
         <div class="col-sm-5">
@@ -129,7 +154,7 @@ layout: default
     </div>
   </div>
   <!-- Microservices 2.0 -->
-  <div class="feature white-background">
+  <div class="feature gray-background">
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
@@ -151,7 +176,7 @@ layout: default
     </div>
   </div>
   <!-- Scaling -->
-  <div class="feature gray-background">
+  <div class="feature white-background">
     <div class="container">
       <div class="row">
         <div class="col-sm-5 col-sm-offset-1">
@@ -160,7 +185,7 @@ layout: default
         <div class="col-sm-6 text-right">
           <h2>Scaling</h2>
           <p>
-            Scalability is the Knot.x first-class citizen, thanks to the modularity you can scale each
+            Scalability is the first-class citizen in Knot.x. Thanks to the modularity you can scale each
             module vertically (on one host) and/or horizontally (over multiple hosts) to get best
             possible performance or response to an unexpected increase in website traffic. With message-driven
             architecture, you can extend the system to handle the scale without changing a line of code.
@@ -175,8 +200,11 @@ layout: default
       <div class="row">
         <div class="col-sm-12 text-center">
           <h2>Ready to learn more?</h2>
+          <div class="knotx-movie">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/dBhgsmC78Yw?rel=0" frameborder="0" allowfullscreen loading="lazy"></iframe>
+          </div>
           <p>
-            <a href="<%= @getSectionLink('wiki') %>" class="btn btn-default btn-lg doc-btn">Explore the Docs</a>
+            <a href="<%= @getSectionLink('documentation') %>" class="btn btn-default btn-lg doc-btn">Explore the Docs</a>
             <a href="<%= @getSectionLink('tutorials') %>" class="btn btn-default btn-lg doc-btn">Explore the Tutorials</a>
           </p>
         </div>
