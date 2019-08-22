@@ -4,7 +4,7 @@ description: We have just released a major release Knot.x 2.0.
 author: skejven
 keywords: release
 order: 1
-date: 2019-08-23
+date: 2019-08-22
 knotxVersions:
     - 2.0.0
 ---
@@ -25,7 +25,7 @@ The main changes and features of the second version are:
 
   It addresses distributed systems orchestration challenges, in which fine-grained services define their API's objectives consumed by all your local and distributed teams that can be validated during design definition, before writing any code.
 - `Configurable integrations`: we completely redesigned Fragments processing (a Fragment is a piece of any kind of document that can be processed independently, e.g. an HTML snippet that represents the shopping cart or a JSON containing person's bookshelf). Now, building custom
-logic for integrating the data is as easy as defining a [graph of actions](https://github.com/Knotx/knotx-fragments#how-does-it-work).
+logic for integrating the data is as easy as defining a [graph of actions](https://github.com/Knotx/knotx-fragments#how-does-it-work). Read more [here](/blog/configurable-integrations/).
 - `Stability patterns`: We know, that when it comes to integrating multiple services over the network, not all the things go smooth. That's why Knot.x 2 brings patters such as *Circuit breaker*, *Timeouts*, *Bulkhead* and more out of the box.
 
 With 2.0 we bring completely new experience for building any kind of backend API such as:
@@ -34,7 +34,7 @@ With 2.0 we bring completely new experience for building any kind of backend API
 - HTTP / Web API: exposes any kind of datasource with HTTP-based API
 
 ## Evolution but not revolution
-Instead of developing all new features exclusively in Knot.x 2, we introduced some of these features in the 1.x versions. The Knot.x 2 development focus on more fundamental changes that cannot be done without breaking some compatibility.
+Instead of developing all new features exclusively in Knot.x 2, we introduced some of these features in the 1.x versions. The Knot.x 2 development focus on more fundamental changes that cannot be done without breaking some compatibility. Read more [here](/blog/evolution-of-knotx/).
 
 ![knotx-evolution](/img/blog/release-2_0_0/evolution-diagram.png)
 
