@@ -26,6 +26,8 @@ docpadConfig = {
         highlightjs:
           aliases:
             hocon: 'ruby'
+            json5: 'json'
+            graphql: 'ruby'
 
     environments:
       gh:
