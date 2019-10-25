@@ -60,7 +60,7 @@ Knot.x Fragments is a Swiss Army knife for integrating with dynamic data sources
 ### [knotx-stack](https://github.com/Knotx/knotx-stack)
 Stack is a way of distributing fully functional bootstrap project for Knot.x-based solutions.
 It does not require any external dependencies so it is used to build a Knot.x Docker images and
-to setup an instance with Chef. Read more about how to start building Knot.x solution with [Getting Started with Knot.x Stack](http://knotx.io/tutorials/getting-started-with-knotx-stack/) tutorial.
+to setup an instance with Chef. Read more about how to start building Knot.x solution with [Getting Started with Knot.x Stack](https://knotx.io/tutorials/getting-started-with-knotx-stack/) tutorial.
 
 ### [knotx-commons](https://github.com/Knotx/knotx-commons)
 Simple util classes that do not depend on other Knot.x modules.
@@ -100,7 +100,7 @@ Repository connector delivers template from external repositories like CMS or fi
 ### [knotx-starter-kit](https://github.com/Knotx/knotx-starter-kit)
 Knot.x Starter Kit is a template project that you can use when creating some Knot.x extensions.
 It enables easy and fast start for the Knot.x-based solutions.
-Read more about how to start with Knot.x and Docker in the [Getting Started with Docker](http://knotx.io/tutorials/getting-started-with-docker/) tutorial.
+Read more about how to start with Knot.x and Docker in the [Getting Started with Docker](https://knotx.io/tutorials/getting-started-with-docker/) tutorial.
 
 ### [knotx-template-engine](https://github.com/Knotx/knotx-template-engine)
 Template Engine processes Fragment's data and template into the final markup. Knot.x
