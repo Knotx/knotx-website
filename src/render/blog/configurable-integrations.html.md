@@ -10,7 +10,7 @@ date: 2019-08-22
 ![alt_text](/img/blog/configurable-integrations/hero-image.jpg)
 
 > In the API-driven world, where failures are NOT unexpected, handling errors and adapting to new business requirements
-    have become a challenging and continuous work". Is the new Knot.x feature going to make this process more manageable
+    have become a challenging and continuous work. Is the new Knot.x feature going to make this process more manageable
     and ready for further evolution? Check out this post to explore some basic concepts of Configurable Integrations.
 
 In the past, web platforms were quite simple: there was a web server hosting our application and a database storing the
@@ -62,10 +62,12 @@ decouples business operations from the communication activities. The action can 
 
 - an API request,
 - non-web API requests such as NoSQL queries,
-- custom business logic. The action definition is general, it accepts one input and replies with one or more responses
-  (like business logic can make different decisions based on the input). Action responses are text values that specify
-  the action contract. So action is simple function with well-defined responses (text values) representing business
-  decisions. It makes the business logic decomposition granularity easy to tailor to customer needs.
+- custom business logic. 
+
+The action definition is general, it accepts one input and replies with one or more responses
+(like business logic can make different decisions based on the input). Action responses are text values that specify
+the action contract. So action is simple function with well-defined responses (text values) representing business
+decisions. It makes the business logic decomposition granularity easy to tailor to customer needs.
 
 _Sounds abstract? Let's define a simple case scenario. We get a user profile data as an input. Then we calculate a user
 score, assign him/her to standard or premium group and invoke a dedicated RESTful API to fetch recommended products.
