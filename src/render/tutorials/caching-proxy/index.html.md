@@ -5,5 +5,5 @@ author: oskarjerzyk
 order: 7
 date: 2019-10-30
 layout: redirect
-target: /tutorials/caching-api-response/2_0/
+target: /tutorials/caching-proxy/2_0/
 ---
