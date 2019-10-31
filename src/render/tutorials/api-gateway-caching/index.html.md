@@ -1,5 +1,5 @@
 ---
-title: API Gateway: caching
+title: API Gateway: Caching
 description: "API gateway should provide some caching capabilities. In this tutorial, we explain how to provide caching for target API."
 author: oskarjerzyk
 order: 60
