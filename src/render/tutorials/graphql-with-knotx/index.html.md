@@ -5,5 +5,5 @@ description: "In this tutorial we implement a sample GraphQL endpoint that makes
 order: 40
 date: 2019-10-16
 layout: redirect
-target: /tutorials/graphql-usage/2_0/
+target: /tutorials/graphql-with-knotx/2_0/
 ---
