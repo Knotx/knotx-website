@@ -118,6 +118,16 @@ tasks {
 }
 ```
 
+### HTTP response body validation for content-type (HTTP Action)
+If you wish to leave the previous behaviour (when non-json response is returned, exception is thrown), 
+just configure responseOptions in your action config like this:
+```hocon
+     responseOptions {
+        predicates = [JSON]
+        forceJson = false
+      }
+```  
+
 ### Remove `cookieHandler` from server common handlers list:
 #### In 2.0
 ```hocon
