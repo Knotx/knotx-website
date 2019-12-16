@@ -46,11 +46,6 @@ knotxVersions:
 - [PR-18](https://github.com/Knotx/knotx-starter-kit/pull/18) - Apply task & node factories changes.
 - [PR-17](https://github.com/Knotx/knotx-starter-kit/pull/17) - Build ZIP distribution.
 
-First release of the Knot.x Forms module that replaces 
-[Knot.x Action Knot](https://github.com/Cognifide/knotx/wiki/ActionKnot)
-(which is now deprecated and will be removed soon).
-Read more in the *Upgrade notes* section.
-
 ## Upgrade notes
 
 ### Task & node factories configuration changes
