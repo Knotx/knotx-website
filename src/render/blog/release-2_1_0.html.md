@@ -148,3 +148,31 @@ config.server {
   }
 }
 ```
+
+### Build ZIP distribution with Knot.x Starter Kit
+Remove:
+```
+tasks.named("build") {
+    dependsOn("runTest")
+}
+```
+
+and add:
+```
+tasks.named("build") {
+    dependsOn("build-stack")
+}
+
+tasks.register("build-docker") {
+    group = "docker"
+    dependsOn("runTest")
+}
+
+tasks.register("build-stack") {
+    group = "stack"
+    // https://github.com/Knotx/knotx-gradle-plugins/blob/master/src/main/kotlin/io/knotx/distribution.gradle.kts
+    dependsOn("assembleCustomDistribution")
+    mustRunAfter("build-docker")
+}
+```
+in `build.gradle.kts` when [Knot.x Starter Kit](https://github.com/Knotx/knotx-starter-kit) used.
