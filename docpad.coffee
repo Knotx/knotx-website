@@ -28,6 +28,7 @@ docpadConfig = {
             hocon: 'ruby'
             json5: 'json'
             graphql: 'ruby'
+            pebble: 'html'
 
     environments:
       gh:
