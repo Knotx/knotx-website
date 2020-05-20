@@ -1,7 +1,7 @@
 ---
 title: Knot.x 2.2 released!
 description: We have just released a minor release Knot.x 2.2.0.
-author: admin
+author: tomaszmichalak
 keywords: release
 order: 1
 date: 2020-05-20
@@ -10,7 +10,6 @@ knotxVersions:
 ---
 
 # Knot.x 2.2
-
 
 ## Release Notes
 
@@ -89,7 +88,3 @@ No important changes in this version.
 - [PR-31](https://github.com/Knotx/knotx-starter-kit/pull/31) - Knotx/knotx-fragments#135 Extract actions Core & API.
 - [PR-27](https://github.com/Knotx/knotx-starter-kit/pull/27) - Knotx/knotx-fragments#118 Update imports.
 - [PR-24](https://github.com/Knotx/knotx-starter-kit/pull/24) - #15 Update Knot.x version and apply API changes.
-
-
-
-## Upgrade notes
