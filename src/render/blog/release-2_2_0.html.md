@@ -10,6 +10,53 @@ knotxVersions:
 ---
 
 # Knot.x 2.2
+We are extremely pleased to announce that the Knot.x version 2.2.0 has been released.
+
+## New Features
+
+### Debuggable Fragments
+With Knot.x, you can easily transform your business logic into a configurable graph structure.
+The graph ([task](https://github.com/Knotx/knotx-fragments/tree/2.2.0/task/api#task)) defines
+business operations (such as integration with an API) and decisions (if API
+responds with `A` then...). Task belongs to a [fragment](https://github.com/Knotx/knotx-fragments/tree/2.2.0/api#fragment),
+an abstraction that represents a client request (in some cases it can be an HTTP request, in other, a part of the page). Read more about configurable
+integrations [here](https://knotx.io/blog/configurable-integrations/).
+
+From now, you can easily debug your business logic directly in your browser. See the
+[Fragments Execution Log](https://github.com/Knotx/knotx-fragments/tree/master/task/handler/log)
+modules for more details.
+
+### Chrome Extension
+It is an awesome tool that extends the Chrome Developer Tools, providing intuitive business logic
+debugging opportunities for developers, QAs and business analysts. It reads fragment(s) debug data
+(provided by Fragments Execution Log modules) and visualizes it.
+
+<p align="center">
+  <img src="https://github.com/Knotx/knotx-fragments-chrome-extension/raw/master/assets/images/preview.gif" alt="Knot.x Fragments Chrome Extension"/>
+</p>
+
+You can read more about this new feature [here](https://github.com/Knotx/knotx-fragments-chrome-extension).
+
+### Pebble Template Engine
+Next to Handlebars, we add [Pebble templates](https://pebbletemplates.io/) support! From now, you can
+use various templates within the single page. What is more, the same as Handlebars, the Pebble processing
+is thoroughly scalable with the [Vert.x Event Bus](https://vertx.io/docs/vertx-core/java/#event_bus).
+
+You can read more about this new feature [here](https://github.com/Knotx/knotx-template-engine/tree/2.2.0/pebble).
+
+### RestfulAPI support
+API Communication logic is provided by configurable HTTP Action (note: you can easily provide your
+custom implementation). HTTP Action configures endpoint details, HTTP request params and expected
+response data. With Knot.x 2.2 you can fully configure your `POST`/`PUT`/`PATCH`/`DELETE`/`HEAD` API
+requests in the same way as you did it for `GET` requests.
+
+You can read more about this new feature [here](https://github.com/Knotx/knotx-fragments/tree/master/action/library#http-action).
+
+### HOCON configs testing
+HoconLoader loads the HOCON configuration files and converts them to JSON. With it, writing contract
+tests is even simpler.
+
+You can read more about this new feature [here](https://github.com/Knotx/knotx-junit5/tree/2.2.0#hoconloader).
 
 ## Release Notes
 
