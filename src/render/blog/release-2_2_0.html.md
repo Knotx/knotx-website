@@ -35,7 +35,8 @@ debugging opportunities for developers, QAs and business analysts. It reads frag
   <img src="https://github.com/Knotx/knotx-fragments-chrome-extension/raw/master/assets/images/preview.gif" alt="Knot.x Fragments Chrome Extension"/>
 </p>
 
-You can read more about this new feature [here](https://github.com/Knotx/knotx-fragments-chrome-extension).
+You can read more about this new feature [here](https://github.com/Knotx/knotx-fragments-chrome-extension)
+or watch the [live coding](https://www.youtube.com/watch?v=EWoHqzYGv0w) session.
 
 ### Pebble Template Engine
 Next to Handlebars, we add [Pebble templates](https://pebbletemplates.io/) support! From now, you can
