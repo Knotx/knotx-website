@@ -42,6 +42,22 @@ Next to Handlebars, we add [Pebble templates](https://pebbletemplates.io/) suppo
 use various templates within the single page. What is more, the same as Handlebars, the Pebble processing
 is thoroughly scalable with the [Vert.x Event Bus](https://vertx.io/docs/vertx-core/java/#event_bus).
 
+```pebble
+<knotx:snippet data-knotx-task="payments-task">
+  <div>
+    <h2>Payment providers</h2>
+    <ul>
+      {% for this in root['fetchPayments']['_result'] %}
+      <li>
+        <p>Payment provider: {{this.name}}</p>
+        <p>Payment URL: {{this.paymentUrl}}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</knotx:snippet>
+```
+
 You can read more about this new feature [here](https://github.com/Knotx/knotx-template-engine/tree/2.2.0/pebble).
 
 ### RestfulAPI support
