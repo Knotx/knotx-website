@@ -68,7 +68,6 @@ You can read more about this new feature [here](https://github.com/Knotx/knotx-j
 
 ### Knot.x Commons
 - [PR-14](https://github.com/Knotx/knotx-commons/pull/14) - KnotxServer response configuration - wildcards [41](https://github.com/Knotx/knotx-server-http/issues/41)
-- [PR-8](https://github.com/Knotx/knotx-commons/pull/8) - Unit Test for HTTP request commons
 
 ### Knot.x Launcher
 No important changes in this version.
@@ -111,14 +110,9 @@ No important changes in this version.
 - [PR-100](https://github.com/Knotx/knotx-stack/pull/100) - Knotx/knotx-fragments#135 Extract actions Core & API.
 - [PR-97](https://github.com/Knotx/knotx-stack/pull/97) - Knotx/knotx-fragments#92 Extract HTML Fragment Event Consumer.
 - [PR-96](https://github.com/Knotx/knotx-stack/pull/96) - Knotx/knotx-fragements#73 Functional test for various HTTP methods.
-- [PR-94](https://github.com/Knotx/knotx-stack/pull/94) - Gradle 6.2.2
 - [PR-92](https://github.com/Knotx/knotx-stack/pull/92) - Knotx/knotx-fragments#92 Functional tests for exposing task metadata.
-- [PR-89](https://github.com/Knotx/knotx-stack/pull/89) - #71 Remove deprecated tests: ResponseHeadersTest.
-- [PR-88](https://github.com/Knotx/knotx-stack/pull/88) - #71 Remove deprecated tests: TemplatingIntegrationTest.
 - [PR-87](https://github.com/Knotx/knotx-stack/pull/87) - Knotx/knotx-fragments#92 Update scenario with more validations.
 - [PR-86](https://github.com/Knotx/knotx-stack/pull/86) - #85 Different TE (handlebars and pebble) in fragments integration test.
-- [PR-83](https://github.com/Knotx/knotx-stack/pull/84) - Upgrade to Gradle 6.2
-- [PR-83](https://github.com/Knotx/knotx-stack/pull/83) - Upgrade to Gradle 6.1.1
 - [PR-78](https://github.com/Knotx/knotx-stack/pull/78) - Knotx/knotx-fragments#95 Move HTTP Action from Knotx/knotx-data-bridge to Knotx/knotx-fragments.
 - [PR-77](https://github.com/Knotx/knotx-stack/pull/77) - Knotx/knotx-fragments#92 Demo scenario for exposing data from task.
 - [PR-76](https://github.com/Knotx/knotx-stack/pull/76) - Knotx/knotx-template-engine#20 Pebble Template Engine Integration Test
