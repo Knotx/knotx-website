@@ -101,6 +101,9 @@ is required only if you implemented custom actions in your project.**
 
 ### Starter Kit project
 
+#### Upgrade Gradle
+Upgrade the Gradle version defined in  `./gradle/wrapper/gradle-wrapper.properties` to `6.2.1`.
+
 #### Upgrade Gradle plugins
 - Upgrade Docker Gradle plugin defined in `./buildSrc/build.gradle.kts` from `com.bmuschko:gradle-docker-plugin:5.3.0`
 to `com.bmuschko:gradle-docker-plugin:6.4.0`.
