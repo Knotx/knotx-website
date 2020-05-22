@@ -92,7 +92,7 @@ model. **This upgrade is required only if you implemented custom actions in your
 [Action API](https://github.com/Knotx/knotx-fragments/tree/2.2.0/action/api) is extracted from
 [Fragments Handler](https://github.com/Knotx/knotx-fragments/tree/2.2.0/task/handler). **This upgrade
 is required only if you implemented custom actions in your project.**
-  - replace dependency: `knotx-fragments-handler-api:2.1.0` -> `knotx-fragments-action-api:2.2.0`
+  - replace dependency: `knotx-fragments-handler-api` -> `knotx-fragments-action-api`
   - update packages:
     - `io.knotx.fragments.handler.api.Action` -> `io.knotx.fragments.action.api.Action`
     - `io.knotx.fragments.handler.api.ActionFactory` -> `io.knotx.fragments.action.api.ActionFactory`
