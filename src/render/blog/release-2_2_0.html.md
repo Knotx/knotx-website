@@ -77,7 +77,7 @@ tests is even simpler.
 You can read more about this new feature [here](https://github.com/Knotx/knotx-junit5/tree/2.2.0#hoconloader).
 
 ## Upgrade notes
-Please note that we upgraded the Knot.x Examples to Knot.x `2.2`. See this [PR](https://github.com/Knotx/knotx-example-project/pull/74/files)
+Please note that we upgraded the Knot.x Examples to Knot.x `2.2`. See this [PR](https://github.com/Knotx/knotx-example-project/pull/76)
 for more details.
 
 ### API updates
