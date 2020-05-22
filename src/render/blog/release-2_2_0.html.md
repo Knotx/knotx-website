@@ -79,12 +79,15 @@ You can read more about this new feature [here](https://github.com/Knotx/knotx-j
 ## Upgrade notes
 
 ### API updates
-- [Fragment API](https://github.com/Knotx/knotx-fragments/tree/master/api) introduces the [Fragment Operation](https://github.com/Knotx/knotx-fragments/tree/2.2.0/api#fragment-operation)
+
+#### Fragment API
+[Fragment API](https://github.com/Knotx/knotx-fragments/tree/master/api) introduces the [Fragment Operation](https://github.com/Knotx/knotx-fragments/tree/2.2.0/api#fragment-operation)
 and contains the [FragmentResult](https://github.com/Knotx/knotx-fragments/blob/master/api/docs/asciidoc/dataobjects.adoc#fragmentresult)
 model. **This upgrade is required only if you implemented custom actions in your project.**
   - update package from `io.knotx.fragments.handler.api.domain.FragmentResult` to `io.knotx.fragments.api.FragmentResult`
 
-- [Action API](https://github.com/Knotx/knotx-fragments/tree/2.2.0/action/api) is extracted from
+#### Action API
+[Action API](https://github.com/Knotx/knotx-fragments/tree/2.2.0/action/api) is extracted from
 [Fragments Handler](https://github.com/Knotx/knotx-fragments/tree/2.2.0/task/handler). **This upgrade
 is required only if you implemented custom actions in your project.**
   - replace dependency: `knotx-fragments-handler-api:2.1.0` -> `knotx-fragments-action-api:2.2.0`
@@ -118,6 +121,21 @@ The `io.knotx.distribution` plugin uses `knotx.version` and `knotx.conf` propert
 - `knotx.version` -> `knotxVersion`
 - `knotx.conf` -> `knotxConf`
 and update all references in `./build.gradle.kts`
+
+#### Update Docker script
+Replace the `./gradle/docker.gradle.kts` with the new [version](https://github.com/Knotx/knotx-starter-kit/blob/2.2.0/gradle/docker.gradle.kts).
+
+#### Update references to Gradle scripts
+When applying scripts from GitHub, please update references
+```kotlin
+apply(from = "https://raw.githubusercontent.com/Knotx/knotx-starter-kit/master/gradle/docker.gradle.kts")
+apply(from = "https://raw.githubusercontent.com/Knotx/knotx-starter-kit/master/gradle/javaAndUnitTests.gradle.kts")
+```
+to tag versions:
+```kotlin
+apply(from = "https://raw.githubusercontent.com/Knotx/knotx-starter-kit/${project.property("knotxVersion")}/gradle/docker.gradle.kts")
+apply(from = "https://raw.githubusercontent.com/Knotx/knotx-starter-kit/${project.property("knotxVersion")}/gradle/javaAndUnitTests.gradle.kts")
+```
 
 ## Release Notes
 
