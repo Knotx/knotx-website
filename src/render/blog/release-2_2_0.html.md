@@ -91,6 +91,8 @@ is required only if you implemented custom actions in your project.**
   - update packages:
     - `io.knotx.fragments.handler.api.Action` -> `io.knotx.fragments.action.api.Action`
     - `io.knotx.fragments.handler.api.ActionFactory` -> `io.knotx.fragments.action.api.ActionFactory`
+  - rename `io.knotx.fragments.handler.api.ActionFactory` file in `./src/main/resources/META-INF/services` to
+  `io.knotx.fragments.action.api.ActionFactory`
 
 ### Starter Kit project
 
