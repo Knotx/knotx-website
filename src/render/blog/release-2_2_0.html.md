@@ -76,6 +76,48 @@ tests is even simpler.
 
 You can read more about this new feature [here](https://github.com/Knotx/knotx-junit5/tree/2.2.0#hoconloader).
 
+## Upgrade notes
+
+### API updates
+- [Fragment API](https://github.com/Knotx/knotx-fragments/tree/master/api) introduces the [Fragment Operation](https://github.com/Knotx/knotx-fragments/tree/2.2.0/api#fragment-operation)
+and contains the [FragmentResult](https://github.com/Knotx/knotx-fragments/blob/master/api/docs/asciidoc/dataobjects.adoc#fragmentresult)
+model. **This upgrade is required only if you implemented custom actions in your project.**
+  - update package from `io.knotx.fragments.handler.api.domain.FragmentResult` to `io.knotx.fragments.api.FragmentResult`
+
+- [Action API](https://github.com/Knotx/knotx-fragments/tree/2.2.0/action/api) is extracted from
+[Fragments Handler](https://github.com/Knotx/knotx-fragments/tree/2.2.0/task/handler). **This upgrade
+is required only if you implemented custom actions in your project.**
+  - replace dependency: `knotx-fragments-handler-api:2.1.0` -> `knotx-fragments-action-api:2.2.0`
+  - update packages:
+    - `io.knotx.fragments.handler.api.Action` -> `io.knotx.fragments.action.api.Action`
+    - `io.knotx.fragments.handler.api.ActionFactory` -> `io.knotx.fragments.action.api.ActionFactory`
+    - `io.knotx.fragments.handler.api.domain.FragmentResul`
+
+### Starter Kit project
+
+#### Upgrade Gradle plugins
+- Upgrade Docker Gradle plugin defined in `./buildSrc/build.gradle.kts` from `com.bmuschko:gradle-docker-plugin:5.3.0`
+to `com.bmuschko:gradle-docker-plugin:6.4.0`.
+- In the new Knot.x, all Knot.x Gradle plugins are released with each new version of Knot.x. We
+recommend to configure them in `./settings.gradle.kts`:
+```kotlin
+pluginManagement {
+    val knotxVersion: String by settings
+    plugins {
+        id("io.knotx.distribution") version knotxVersion
+        id("io.knotx.release-base") version knotxVersion
+    }
+}
+```
+See [knotx-starter-kit/settings.gradle.kts](https://github.com/Knotx/knotx-starter-kit/blob/2.2.0/settings.gradle.kts) for more details.
+
+#### Rename Gradle properties
+The `io.knotx.distribution` plugin uses `knotx.version` and `knotx.conf` properties defined in
+`./gradle.properties`. In Knot.x 2.2 we renamed those properties:
+- `knotx.version` -> `knotxVersion`
+- `knotx.conf` -> `knotxConf`
+and update all references in `./build.gradle.kts`
+
 ## Release Notes
 
 ### Knot.x Gradle Plugins
