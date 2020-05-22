@@ -125,8 +125,8 @@ and update all references in `./build.gradle.kts`
 #### Update Docker script
 Replace the `./gradle/docker.gradle.kts` with the new [version](https://github.com/Knotx/knotx-starter-kit/blob/2.2.0/gradle/docker.gradle.kts).
 
-#### Update references to Gradle scripts
-When applying scripts from GitHub, please update references
+#### Fix references to GitHub resources
+When applying scripts from GitHub, please update references from:
 ```kotlin
 apply(from = "https://raw.githubusercontent.com/Knotx/knotx-starter-kit/master/gradle/docker.gradle.kts")
 apply(from = "https://raw.githubusercontent.com/Knotx/knotx-starter-kit/master/gradle/javaAndUnitTests.gradle.kts")
