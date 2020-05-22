@@ -35,7 +35,7 @@ debugging opportunities for developers, QAs and business analysts. It reads frag
   <img src="https://github.com/Knotx/knotx-fragments-chrome-extension/raw/master/assets/images/preview.gif" alt="Knot.x Fragments Chrome Extension"/>
 </p>
 
-You can read more about this new feature [here](https://github.com/Knotx/knotx-fragments-chrome-extension)
+You can read more about this new feature [here](https://knotx.io/tutorials/chrome-extension/2_2/)
 or watch the [live coding](https://www.youtube.com/watch?v=EWoHqzYGv0w) session.
 
 ### Pebble Template Engine
@@ -59,7 +59,8 @@ is thoroughly scalable with the [Vert.x Event Bus](https://vertx.io/docs/vertx-c
 </knotx:snippet>
 ```
 
-You can read more about this new feature [here](https://github.com/Knotx/knotx-template-engine/tree/2.2.0/pebble).
+You can read more about this new feature [here](https://github.com/Knotx/knotx-template-engine/tree/2.2.0/pebble)
+and see the [example](https://github.com/Knotx/knotx-example-project/tree/master/chrome-extension).
 
 ### RestfulAPI support
 API Communication logic is provided by configurable HTTP Action (note: you can easily provide your
