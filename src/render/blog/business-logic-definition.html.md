@@ -4,8 +4,15 @@ description: In this post, we will tell you what does business logic mean for us
 author: tomaszmichalak
 keywords: business-logic,domain-driven-design,user-stories
 order: 1
-date: 2020-06-04
+date: 2020-06-05
 ---
+![written equations on brown wooden board](/img/blog/how-to-understand-business-logic/business-logic-hero-banner.jpg)
+
+Wikipedia definition of business logic tells:
+> In computer software, business logic or domain logic is the part of the program that encodes the real-world business rules that determine how data can be created, stored, and changed.
+
+But how that definition is connected with the code?
+In this post, we will tell you what does business logic mean for us, software engineers, and transform user stories to domain objects and then model the solution.
 
 ## Story
 We begin with a brief story, the user story.
@@ -34,7 +41,7 @@ be in defined form and returns the output - also in the expected format. In simp
 that input and output legislate a function's contract. And the contract for the function that represents
 our example user story would be:
 
-```shell script
+```
 Domain objects: User, Product
 Input: User
 Output: Products(User)
@@ -58,7 +65,7 @@ Let's make our example user story more specific:
 
 Adjectives define domain object properties, the attributes. Now our functions look like:
 
-```shell script
+```
 Product<Standard> (User<Standard>)
 Product<Premium> (User<Premium>)
 ```
@@ -94,3 +101,7 @@ domain, specifying domain objects and relations between them. Business logic def
 the gap between domain objects. It is a part of the solution, managed by software engineers.
 
 ![alt_text](/img/blog/business-logic-definition/problem-solution-space.png)
+
+---
+
+<small>Hero image by [Roman Mager](https://unsplash.com/@roman_lazygeek?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on Unsplash.</small>
