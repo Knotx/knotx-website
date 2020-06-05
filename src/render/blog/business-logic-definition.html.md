@@ -7,20 +7,18 @@ order: 1
 date: 2020-06-04
 ---
 
-This is the first article in the series dedicated to the subject of business logic.
-
 ## Story
 We begin with a brief story, the user story.
 
-Once upon a time... 
+Once upon a time...
 > a user gets products.
 
 This sentence captures a requirement of a software feature from an end-user perspective. It describes
 what the user wants. The subject (“user”) is a model (class) that has no behaviour (methods) defined,
 and contains data (properties). In the Domain-Driven Design (DDD) it is called a domain object. Our
 story specifies two domain objects: a user and a product.
-The verb (“gets”) defines an action/state/relation between our domain objects. What is interesting even
-though it's a single word hiding most of the complexity in the solution we are building. One more fact,
+The verb (“gets”) defines an action/state/relation between our domain objects. What is interesting
+it’s a single word hiding most of the complexity in the solution we are building. One more fact,
 user stories focus on results, leaving out the technical details like “how” to get products.
 
 ## Business logic
