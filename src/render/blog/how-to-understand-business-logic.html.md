@@ -1,5 +1,5 @@
 ---
-title: What does business logic mean for us
+title: How to understand business logic
 description: In this post, we will tell you what does business logic mean for us and transform user stories to domain objects and then model the solution. It starts the series discussing "Business Logic Evolution".
 author: tomaszmichalak
 keywords: business-logic,domain-driven-design,user-stories
