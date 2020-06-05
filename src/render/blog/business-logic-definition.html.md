@@ -12,7 +12,8 @@ This is the first article in the series dedicated to the subject of business log
 ## Story
 We begin with a brief story, the user story.
 
-> Once upon a time... a user gets products.
+Once upon a time... 
+> a user gets products.
 
 This sentence captures a requirement of a software feature from an end-user perspective. It describes
 what the user wants. The subject (“user”) is a model (class) that has no behaviour (methods) defined,
@@ -43,7 +44,7 @@ Output: Products(User)
 
 The output is a list of products that are in the User’s context.
 
-So we can proceed now to fulfil our business logic. Having the output, we can divide our into two steps:
+Having said that, we can divide business logic of our example into two steps:
 - the first step gets details about the user
 - the second step uses user details and gets products
 
@@ -63,23 +64,21 @@ Adjectives define domain object properties, the attributes. Now our functions lo
 Product<Standard> (User<Standard>)
 Product<Premium> (User<Premium>)
 ```
-
-
-Attributes define business decisions. Those decisions define a context for the next steps. So each
+Attributes define business decisions, which in fact shape context for the next steps. Each
 subsequent step is in the context of previous decisions.
 
 So our “steps” diagram looks like:
 
 ![alt_text](/img/blog/business-logic-definition/business-logic-variants.png)
 
-The “get user” steps for both scenarios accept the same input (`Context`) and define two different
+The “get user” steps for both scenarios accept the same input (`Context`) but define two different
 outputs (`User<Standard>` and `User<Premium>`). Those outputs are business decisions. Steps with the
 same input can be easily merged.
 
 ![alt_text](/img/blog/business-logic-definition/business-logic-decisions.png)
 
-As you can see, steps can have a single input and multiple outputs. Input specifies previous business
-decisions, and outputs new.
+As you can see, steps can have a single input and multiple outputs. The input specifies previous business
+decisions and outputs new.
 
 ## Big picture
 The presented user stories were trivial. Very often, they are the result of breaking down more complex
@@ -88,7 +87,7 @@ them together we get a graph of steps.
 
 ![alt_text](/img/blog/business-logic-definition/business-logic-big-picture.png)
 
-So business decisions produce branches to new steps/logics. Finally, we get an acyclic directed graph
+We can say business decisions produce paths to new steps/logics. Finally, we get an acyclic directed graph
 of steps (it's actually a tree), where leaves are the final outputs.
 
 ## Summary
