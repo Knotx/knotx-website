@@ -99,6 +99,8 @@ the gap between domain objects. It is a part of the solution, managed by softwar
 
 ![alt_text](/img/blog/how-to-understand-business-logic/problem-solution-space.png)
 
+Continue reading to the second post in this series: [What is the business logic evolution](/blog/what-is-the-business-logic-evolution/).
+
 ---
 
 <small>Hero image by [Roman Mager](https://unsplash.com/@roman_lazygeek?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on Unsplash.</small>
