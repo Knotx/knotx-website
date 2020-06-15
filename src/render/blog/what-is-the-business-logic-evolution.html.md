@@ -82,15 +82,22 @@ Let's see the simple example:
 > Standard user gets standard products.</br>
 > Premium user gets premium products.
 
-On the diagram we can see, that this change implicits change of the input for the first step:
+The new user story appeared. At first glance, we seem to be introducing another user type, an unlogged user. It is similar to the first example, where we added a new decision (output). However, in this case, this change involves further modifications - we need to redesign the user model (our domain object). Changing the model, we have to rethink many aspects such as the user name, age etc.
+
+But is this the right way to handle that change?
+
+This new requirement does not tell that there is a new user type. A much better and flexible solution would be to include the change to our business logic. Since the unlogged users should follow the standard user requirements, we should adapt our input to interpret unlogged users correctly.
 
 ![Detailing the input](/img/blog/what-is-the-business-logic-evolution/detailing-input.png "Detailing the input")
 
-### Handling errors
+Checking the steps diagram, we can easily say that the change impacts the input. However, this change does not break any of the implemented steps. We can apply changes to the context to simulate a standard user. As you can see, accidental changes in business logic inputs can be expensive, so we need to be careful when applying them.
 
-And now time for a little reflection. What’s your opinion on error handling? Could that change the business logic? Try to remember a situation, when something unexpected happened in a well designed algorithm (or at least you thought it was well designed until that happened). And that moment when you think “why it wasn’t like that from the beginning”.
+## Handling errors
 
-In our opinion, error handling is one of the most significant evolutions of the well designed business logic. That’s because when the requirement is defined by the business, there are no details on how it will be implemented by developers. That makes figuring out any corner case behaviours, especially those technical, almost impossible. On the other hand, when developers start the implementation, some technical details are discovered (e.g. data will be fetched from web service). Depending on those details, some changes in requirements can be suggested by the development team. And here is the example:
+And now time for a little reflection. What if a requirement comes from the engineering team? How does error handling impact user stories and the solution? Try to remember a situation, when something unexpected happened in a well-designed algorithm (or at least you thought it was well-designed until that happened). And that moment when you think “why it wasn’t like that from the beginning”.
+
+Actually, that's a really common scenario. That’s because when business defines requirements, there are no details on how it will be implemented by developers. That makes figuring out any corner case behaviours, especially those technical, almost impossible. On the other hand, when developers start the implementation, some technical details are discovered (e.g. data will be fetched from web service). Depending on those details, some changes in requirements should be suggested by the architects/engineering team. And here is the example:
+
 
 > Standard user gets standard products.</br>
 > Premium user gets premium products.</br>
