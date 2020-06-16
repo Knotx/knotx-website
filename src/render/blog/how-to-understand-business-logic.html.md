@@ -66,12 +66,14 @@ Adjectives define domain object properties, the attributes. Now our functions lo
 > **Output 1:** `Product<Standard>(User<Standard>)`</br>
 > **Output 2:** `Product<Premium>(User<Premium>)`
 
-Attributes define business decisions, which in fact shape context for the next steps. Each
-subsequent step is in the context of previous decisions.
+Attributes define business decisions, which in fact shape conditions for the next steps. 
+Each step is influenced by decisions from previous steps.
 
 So our “steps” diagram looks like:
 
 ![alt_text](/img/blog/how-to-understand-business-logic/business-logic-variants.png)
+
+> Note: For simplicity we start the diagram with “Context”. That can be an HTTP request, but also any other trigger. We will not focus on details of it in this article.
 
 The “get user” steps for both scenarios accept the same input (`Context`) but define two different
 outputs (`User<Standard>` and `User<Premium>`). Those outputs are business decisions. Steps with the
@@ -91,6 +93,8 @@ them together we get a graph of steps.
 
 We can say business decisions produce paths to new steps/logics. Finally, we get an acyclic directed graph
 of steps (it's actually a tree), where leaves are the final outputs.
+We actually implemented this idea in the [Knot.x Fragments](https://github.com/Knotx/knotx-fragments)
+processing. You can read more about graph processing there.
 
 ## Summary
 A user story, written by business, is a bridge between problem and solution spaces. It focuses on a
@@ -98,6 +102,8 @@ domain, specifying domain objects and relations between them. Business logic def
 the gap between domain objects. It is a part of the solution, managed by software engineers.
 
 ![alt_text](/img/blog/how-to-understand-business-logic/problem-solution-space.png)
+
+Continue reading to the second post in this series: [What is the business logic evolution](/blog/what-is-the-business-logic-evolution/).
 
 ---
 
