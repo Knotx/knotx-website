@@ -118,7 +118,7 @@ pluginManagement {
     }
 }
 ```
-See [knotx-starter-kit/settings.gradle.kts](https://github.com/Knotx/knotx-starter-kit/blob/2.2.0/settings.gradle.kts) for more details.
+Read [Knot.x version and depencendies in starter kit](https://github.com/Knotx/knotx-starter-kit#knotx-version-and-depencendies) for more details.
 
 #### Rename Gradle properties
 The `io.knotx.distribution` plugin uses `knotx.version` and `knotx.conf` properties defined in
