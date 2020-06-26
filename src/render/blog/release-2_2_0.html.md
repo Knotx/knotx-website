@@ -1,14 +1,14 @@
 ---
-title: Knot.x 2.2 released!
+title: Knot.x 2.2.0 released!
 description: We have just released a minor release Knot.x 2.2.0.
 keywords: release
 order: 1
 date: 2020-05-20
 knotxVersions:
-  - 2.2
+  - 2.2.0
 ---
 
-# Knot.x 2.2
+# Knot.x 2.2.0
 We are extremely pleased to announce that the Knot.x version 2.2.0 has been released.
 
 ## New Features
