@@ -1,7 +1,6 @@
 ---
 title: Knot.x 1.4.0 released!
 description: We have just released a minor release Knot.x 1.4.0.
-author: skejven
 keywords: release
 order: 1
 date: 2018-10-10

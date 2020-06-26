@@ -1,7 +1,6 @@
 ---
 title: Knot.x 2.1.0 released!
 description: We have just released a minor release Knot.x 2.1.0.
-author: tomaszmichalak
 keywords: release
 order: 1
 date: 2019-12-16

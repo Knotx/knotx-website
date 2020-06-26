@@ -1,7 +1,6 @@
 ---
 title: Knot.x 2.0 released!
 description: We have just released a major release Knot.x 2.0.
-author: skejven
 keywords: release
 order: 1
 date: 2019-08-22
