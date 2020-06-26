@@ -1,5 +1,7 @@
 <header class="meta">
-  <a class="meta-item" href="<%= @getMemberGithub(@getMember(@author)) %>"><%= @getMember(@author).name %></a>
+  <% if @author: %>
+    <a class="meta-item" href="<%= @getMemberGithub(@getMember(@author)) %>"><%= @getMember(@author).name %></a>
+  <% end %>
   <time class="meta-item date"
         datetime="<%= @formatDt(@date) %>"><%= @formatDate(@date) %>
   </time>
