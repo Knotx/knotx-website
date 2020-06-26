@@ -1,13 +1,13 @@
 ---
-title: Knot.x 2.0 released!
-description: We have just released a major release Knot.x 2.0.
+title: Knot.x 2.0.0 released!
+description: We have just released a major release Knot.x 2.0.0.
 keywords: release
 order: 1
 date: 2019-08-22
 knotxVersions:
     - 2.0.0
 ---
-# Knot.x 2.0
+# Knot.x 2.0.0
 Hurray,
 
 Knot.x 2.0 - the open-source integrations framework is finally here!
