@@ -8,46 +8,47 @@ date: 2020-06-05
 ---
 ![written equations on brown wooden board](/img/blog/how-to-understand-business-logic/business-logic-hero-banner.jpg)
 
-Wikipedia definition of business logic tells:
-> In computer software, business logic or domain logic is the part of the program that encodes the real-world business rules that determine how data can be created, stored, and changed.
+Wikipedia defines business logic as follows:
 
-But how that definition is connected with the code?
-In this post, we will tell you what does business logic mean for us, software engineers, and transform user stories to domain objects and then model the solution.
+> In computer software, business logic or domain logic is the part of the program that encodes the real-world business
+> rules that determine how data can be created, stored, and changed.
+
+But how is that definition connected with the code? Today, we will tell you what business logic means to us, software
+engineers, and transform user stories to domain objects and then model the solution.
 
 ## Story
-We begin with a brief story, the user story.
 
-Once upon a time...
-> *a user gets products*.
+We begin with a brief story, the user story. Once upon a time...
 
-This sentence captures a requirement of a software feature from an end-user perspective. It describes
-what the user wants. The subject (“user”) is a model (class) that has no behaviour (methods) defined,
-and contains data (properties). In the Domain-Driven Design (DDD) it is called a domain object. Our
-story specifies two domain objects: a user and a product.
-The verb (“gets”) defines an action/state/relation between our domain objects. What is interesting
-it's a single word hiding most of the complexity in the solution we are building. One more fact,
-user stories focus on results, leaving out the technical details like “how” to get products.
+> _a user gets products_.
+
+This sentence captures a requirement of a software feature from an end-user perspective. It describes what the user
+wants. The subject (“user”) is a model (class) that has no behaviour (methods) defined, and contains data (properties).
+In the Domain-Driven Design (DDD) it is called a domain object. Our story specifies two domain objects: a user and a
+product. The verb (“gets”) defines an action/state/relation between our domain objects. What's interesting is that this
+single word hides most of the complexity of to the solution we are building. One more fact, user stories focus on
+results, leaving out the technical details like “how” to get products.
 
 ## Business logic
-Detailing “how” we actually call the business logic. Domain objects define “who” and “what”. So business
-logic is a part of the solution (application) that executes user stories, using domain objects as its
-inputs and outputs.
+
+Business logic is a part of the solution (application) that executes user stories, using domain objects as its inputs
+and outputs. While domain objects define the “who” and the “what”, business logic addresses the "how". This simple
+diagram summarizes our understanding of business logic:
 
 ![Business logic input and output](/img/blog/how-to-understand-business-logic/business-logic-input-output.png)
 
-Looking at the diagram above, we quickly notice the similarity between business logic and a computer
-program - let’s call it a function for simplicity. Every function takes an input that is expected to
-be in defined form and returns the output - also in the expected format. In simple words, we can assume
-that input and output legislate a function's contract. And the contract for the function that represents
-our example user story would be:
+Looking at the diagram above, we quickly notice the similarity between business logic and a computer program - let’s
+call it a function for simplicity. Every function has an input and an output, which constitute a function's contract.
+And the contract for the function that represents our example user story would be:
 
-> **Domain objects:** `User`, `Product`</br>
-> **Input:** `User`</br>
-> **Output:** `Products(User)`
+- **Domain objects: `User`, `Product`**
+- **Input:** `User`
+- **Output:** `Products(User)`
 
 The output is a list of products that are in the User’s context.
 
 Having said that, we can divide business logic of our example into two steps:
+
 - the first step gets details about the user
 - the second step uses user details and gets products
 
@@ -56,52 +57,57 @@ Having said that, we can divide business logic of our example into two steps:
 It is easy to see that the result of the previous step becomes the input of the next.
 
 ## Decisions
+
 Let's make our example user story more specific:
 
-> *Standard user gets standard products.*</br>
-> *Premium user gets premium products.*
+> _Standard user gets standard products._</br> _Premium user gets premium products._
 
-Adjectives define domain object properties, the attributes. Now our functions look like:
+Adjectives define domain object properties, the attributes. Now our functions look like this:
 
-> **Output 1:** `Product<Standard>(User<Standard>)`</br>
-> **Output 2:** `Product<Premium>(User<Premium>)`
+- **Output 1:** `Product<Standard>(User<Standard>)`
+- **Output 2:** `Product<Premium>(User<Premium>)`
 
-Attributes define business decisions, which in fact shape conditions for the next steps. 
-Each step is influenced by decisions from previous steps.
+Attributes define business decisions, which shape conditions for the next steps. Each step is influenced by decisions
+from previous steps.
 
 So our “steps” diagram looks like:
 
-![alt_text](/img/blog/how-to-understand-business-logic/business-logic-variants.png)
+![Business logic variants](/img/blog/how-to-understand-business-logic/business-logic-variants.png)
 
-> Note: For simplicity we start the diagram with “Context”. That can be an HTTP request, but also any other trigger. We will not focus on details of it in this article.
+Note: For simplicity we start the diagram with “Context”. That can be an HTTP request, but also any other trigger. We
+will not focus on details of it in this article.
 
-The “get user” steps for both scenarios accept the same input (`Context`) but define two different
-outputs (`User<Standard>` and `User<Premium>`). Those outputs are business decisions. Steps with the
-same input can be easily merged.
+The “get user” steps for both scenarios accept the same input (`Context`) but define two different outputs
+(`User<Standard>` and `User<Premium>`). Those outputs are business decisions. Steps with the same input can be easily
+merged, as shown on the diagram below:
 
-![alt_text](/img/blog/how-to-understand-business-logic/business-logic-decisions.png)
+![Business logic decisions](/img/blog/how-to-understand-business-logic/business-logic-decisions.png)
 
-As you can see, steps can have a single input and multiple outputs. The input specifies previous business
-decisions and outputs new.
+As you can see, steps can have a single input and multiple outputs. The input specifies previous business decisions and
+the outputs new ones.
 
 ## Big picture
-The presented user stories were trivial. Very often, they are the result of breaking down more complex
-domain problems into small manageable items. So one story defines input for another, etc. Combining
-them together we get a graph of steps.
 
-![alt_text](/img/blog/how-to-understand-business-logic/business-logic-big-picture.png)
+The presented user stories were trivial. Very often, they are the result of breaking down more complex domain problems
+into small manageable items. So one story defines input for another, etc. Combining them together we get a graph of
+steps.
 
-We can say business decisions produce paths to new steps/logics. Finally, we get an acyclic directed graph
-of steps (it's actually a tree), where leaves are the final outputs.
-We actually implemented this idea in the [Knot.x Fragments](https://github.com/Knotx/knotx-fragments)
-processing. You can read more about graph processing there.
+![Big picture: business logic](/img/blog/how-to-understand-business-logic/business-logic-big-picture.png)
+
+We can say business decisions produce paths to new steps encapsulating new business logic. Finally, we get an acyclic
+directed graph of steps (it's actually a tree), where leaves are the final outputs. Such representation can help to
+understand the complexity and the impact of the changing circumstances faster so it's desired when building larger
+systems. As an example of how the graph representation of business logic can be done in practice, you can take a look at
+our open source project called [Knot.x](https://knotx.io/) (the actual implementation is done in the
+[Knot.x Fragments](https://github.com/Knotx/knotx-fragments) module).
 
 ## Summary
-A user story, written by business, is a bridge between problem and solution spaces. It focuses on a
-domain, specifying domain objects and relations between them. Business logic defines steps that fill
-the gap between domain objects. It is a part of the solution, managed by software engineers.
 
-![alt_text](/img/blog/how-to-understand-business-logic/problem-solution-space.png)
+A user story is a bridge between problem and solution spaces. It focuses on a domain, specifying domain objects and
+relations between them. Business logic defines steps that fill the gap between domain objects. It is a part of the
+solution, managed by software engineers.
+
+![Problem space vs solution space](/img/blog/how-to-understand-business-logic/problem-solution-space.png)
 
 Continue reading to the second post in this series: [What is the business logic evolution](/blog/what-is-the-business-logic-evolution/).
 
