@@ -69,7 +69,7 @@ No important changes in this version.
 
 ### Knot.x Dependencies
 - [PR-55](https://github.com/Knotx/knotx-dependencies/pull/55) - Upgrade to Vert.x `3.9.4`.
-  - It looks that that validation libs were updated in https://github.com/vert-x3/vertx-web/pull/1708 and after upgrade to Vert.x 3.9.4 the issue was validated so the tests with invalid specs failed. See [knotx-server/#68](https://github.com/Knotx/knotx-server-http/pull/68) for more details.
+  - An Open API improvement (see https://github.com/vert-x3/vertx-web/pull/1708) in Vert.x 3.9.4 adds more restrictive validation rules:  See [knotx-server/#68](https://github.com/Knotx/knotx-server-http/pull/68) for more details.
 
 ### Knot.x commons (affecting Knot.x fragments)
 - [PR-37](https://github.com/Knotx/knotx-commons/pull/37) Updates in `JsonObjectUtil`.
