@@ -73,7 +73,7 @@ No important changes in this version.
 
 ### Knot.x commons (affecting Knot.x fragments)
 - [PR-37](https://github.com/Knotx/knotx-commons/pull/37) Updates in `JsonObjectUtil`.
-  - Contract for getString changes: the function no longer returns null if some intermediate key is not present, but returns an empty JsonObject instead. Validated it does not change PlaceholdersResolver behaviour (the only usage in stack).
+  - The contract for `JsonObjectUtil.getString()` changes: the function no longer returns null if some intermediate key is not present, but returns an empty JsonObject instead. It does not break backward compatibility.
 
 ### Knot.x Fragments
 - [PR-203](https://github.com/Knotx/knotx-fragments/pull/203) - Fixing [#197](https://github.com/Knotx/knotx-fragments/issues/197): Invoke actions via ActionInvoker.
