@@ -11,6 +11,44 @@ knotxVersions:
 # Knot.x 2.3.0
 We are extremely pleased to announce that the Knot.x version 2.3.0 has been released.
 
+## New Features
+
+### Action: Copy Payload Key
+Copy Payload Key Action copies data inside Fragment's payload. Its configuration looks like:
+
+```hocon
+factory = copy-payload-key
+config {
+  from = "some.possibly.nested.origin._result"
+  to = "destination.possibly.nested"
+}
+```
+
+If no data is present in payload under `from` key, the action has no effect on `Fragment`.
+
+### Improving Debuggable Fragments
+There are couple of new things:
+- Nested actions are exposed in operation metadata.
+- Task processing log is extended with error details as well as fragrment results errors provides detailed error information. Example:
+
+```json
+  {
+    "fragment": { },
+    "transition": "_error",
+    "log": null,
+    "error": {
+      "code": "_GENERAL_EXCEPTION",
+      "exceptions": [
+        {
+          "className": "java.lang.IllegalArgumentException",
+          "stacktrace": [
+            "io.knotx.fragments.api.FragmentResultTest.expectExceptionDetails(FragmentResultTest.java:78)",
+          ]
+        }
+      ]
+    }
+  }
+```
 
 ## Release Notes
 
