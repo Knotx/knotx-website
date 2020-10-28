@@ -42,7 +42,7 @@ There are couple of new things:
         {
           "className": "java.lang.IllegalArgumentException",
           "stacktrace": [
-            "io.knotx.fragments.api.FragmentResultTest.expectExceptionDetails(FragmentResultTest.java:78)",
+            "io.knotx.fragments.api.FragmentResultTest.expectExceptionDetails(FragmentResultTest.java:78)"
           ]
         }
       ]
@@ -50,30 +50,90 @@ There are couple of new things:
   }
 ```
 
+### Custom caches pluggable via SPI
+It is now possible to provide a custom cache implementation to be used by Cache action.
+Create `CustomCache` and `CustomCacheFactory`:
+```java
+public class CustomCache implements Cache {
+
+  private final CustomCacheImpl cache;
+
+  public CustomCache(JsonObject config) {
+    cache = new CustomCacheImpl(options);
+  }
+
+  @Override
+  public Maybe<Object> get(String key) {
+    return Maybe.fromCallable(() -> cache.get(key));
+  }
+
+  @Override
+  public void put(String key, Object value) {
+    cache.put(key, value);
+  }
+
+}
+```
+
+```java
+public class CustomCacheFactory implements CacheFactory {
+
+  @Override
+  public String getType() {
+    return "custom";
+  }
+
+  @Override
+  public Cache create(JsonObject config, Vertx vertx) {
+    return new CustomCache(config);
+  }
+
+}
+```
+
+Register it via SPI in `META-INF/services/io.knotx.commons.cache.CacheFactory`:
+```txt
+com.company.knotx.cache.custom.CustomCacheFactory
+```
+Then configure cache action to use it:
+```hocon
+factory = "cache"
+config {
+  cache {
+    # custom config
+  }
+  type = "custom"
+  cacheKey = "product-{param.id}"
+  payloadKey = product
+  logLevel = error
+}
+doAction = product-cb
+```
+
 ## Release Notes
 
 ### Knot.x Gradle Plugins
 No important changes in this version.
-                
+
 ### Knot.x Dependencies
 - [PR-55](https://github.com/Knotx/knotx-dependencies/pull/55) - Upgrade to Vert.x `3.9.4`.
 
 ### Knot.x Commons
 - [PR-37](https://github.com/Knotx/knotx-commons/pull/37) Updates in `JsonObjectUtil`.
 - [PR-35](https://github.com/Knotx/knotx-commons/pull/35) Introduce Cache and CacheFactory interfaces and in-memory implementation - moved from `knotx-fragments` [192](https://github.com/Knotx/knotx-fragments/issues/192)
-                
+
 ### Knot.x Launcher
 No important changes in this version.
-                
+
 ### Knot.x Junit5
 - [PR-62](https://github.com/Knotx/knotx-junit5/pull/62) - Fixes `RequestUtil` failure verification: assertion error not propagated.
-                
+
 ### Knot.x Server Http
 No important changes in this version.
-                
+
 ### Knot.x Repository Connector
 No important changes in this version.
-                
+
 ### Knot.x Fragments
 - [PR-203](https://github.com/Knotx/knotx-fragments/pull/203) - Fixing [#197](https://github.com/Knotx/knotx-fragments/issues/197): Invoke actions via ActionInvoker.
 - [PR-201](https://github.com/Knotx/knotx-fragments/pull/201) - Prevent StackOverflowException when evaluating fragment as HTML attributes.
@@ -88,16 +148,16 @@ No important changes in this version.
 - [PR-174](https://github.com/Knotx/knotx-fragments/pull/172) - Add node processing errors to the [graph node response log](https://github.com/Knotx/knotx-fragments/blob/master/task/handler/log/api/docs/asciidoc/dataobjects.adoc#graphnoderesponselog).
 - [PR-172](https://github.com/Knotx/knotx-fragments/pull/172) - Add a task node processing exception to event log. Remove unused 'TIMEOUT' node status. Update node unit tests.
 - [PR-170](https://github.com/Knotx/knotx-fragments/pull/170) - Upgrade to Vert.x `3.9.1`, replace deprecated `setHandler` with `onComplete`.
-                
+
 ### Knot.x Template Engine
 - [PR-47](https://github.com/Knotx/knotx-template-engine/pull/47) - Upgrade to Vert.x `3.9.1`, replace deprecated `setHandler` with `onComplete`.
-     
+
 ### Knot.x Stack
 - [PR-118](https://github.com/Knotx/knotx-stack/pull/118) - Upgrade to Vert.x `3.9.1` - removed `netty-tcnative` as TLS ALPN support has been back-ported to JDK 8.
 
 ### Knot.x Docker
 No important changes in this version.
-                
+
 ### Knot.x Starter Kit
 No important changes in this version.
 
