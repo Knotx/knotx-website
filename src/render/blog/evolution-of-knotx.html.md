@@ -1,7 +1,7 @@
 ---
 title: Evolution of Knot.x: from tool to framework
 description: While Knot.x philosophy has not changed from the beginning, we definitely witness the journey from being a reactive template engine processor to being an API integration framework. Read about the evolution of Knot.x in this short article.
-author: skejven
+author: malaskowski
 keywords: blog
 order: 1
 date: 2019-08-19

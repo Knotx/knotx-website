@@ -1,7 +1,7 @@
 ---
 title: What is the business logic evolution
 description: In the second post of the "Business Logic Evolution" series we will focus on explainig what is the business logic evolution and give you examples of changes that may occur during the project development.
-author: skejven
+author: malaskowski
 keywords: business-logic,domain-driven-design,user-stories
 order: 1
 date: 2020-06-15

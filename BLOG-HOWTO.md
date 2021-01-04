@@ -29,7 +29,7 @@ Each line between the `---` lines are metadata. The **required** metadata fields
 * **title**: the post title
 * **description**: the excerpt of the post, visible on the post list
 * **date**: the publication date. The date must be provided using the `YYYY-MM-DD` format
-* **author**: the Github account of the author, such as `marcinczeczko` or `skejven`
+* **author**: the Github account of the author, such as `marcinczeczko` or `malaskowski`
 
 After the metadata section, you can start the post. 
 
