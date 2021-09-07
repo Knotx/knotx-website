@@ -5,7 +5,7 @@ This repository contains Knot.x website source. The target website is generated 
 ## Building
 ### Prerequisites
 
-- Node.js 6.x or higher installed
+- Node.js v10.24.1
 - Npm
 
 ### Bulding a dev version
@@ -49,7 +49,7 @@ Read [BLOG-HOWTO.md](BLOG-HOWTO.md) for instructions how to write a blog post.
 
 ## Tutorials
 
-Read [TUTORIAL-HOWTO.md](TUTORIAL-HOWTO.md) for instructions how to write a tutorial. 
+Read [TUTORIAL-HOWTO.md](TUTORIAL-HOWTO.md) for instructions how to write a tutorial.
 
 1. Add additional `remote` to this repository
 ```
