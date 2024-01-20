@@ -39,10 +39,6 @@ The site is started on port `3010` under you machine name:
 http://YOUR_MACHINE_NAME:3010
 ```
 
-## Contributors section
-
-Read [CONTRIBUTORS-HOWTO.md](CONTRIBUTORS-HOWTO.md) for instructions how to add information about Contributors to the site.
-
 ## Blogs
 
 Read [BLOG-HOWTO.md](BLOG-HOWTO.md) for instructions how to write a blog post.
