@@ -6,10 +6,9 @@ layout: content-layout
   <div class="community">
     <%- @content %>
     <hr>
-    <!-- Core Team -->
     <div class="row">
       <div class="col-sm-3">
-        <h2><span id="core-team"></span>Core Team</h2>
+        <h2><span id="core-team"></span>Core developers</h2>
       </div>
       <div class="col-sm-9">
         <div class="row">
