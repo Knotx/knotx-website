@@ -11,6 +11,21 @@ knotxVersions:
 # Knot.x 2.4.0
 We are extremely pleased to announce that the Knot.x version 2.4.0 has been released.
 
+## Changes
+
+### JDK 11 support
+All modules within Knot.x were updated from JDK `8` (`AdoptOpenJDK`) to JDK 11 (`Temurin`).
+
+### Fixing vulnerabilities
+This release addresses security concerns by resolving the following vulnerabilities:
+
+- [io.vertx:vertx-dependencies:3.9.8](https://mvnrepository.com/artifact/io.vertx/vertx-dependencies/3.9.8) -> [io.vertx:vertx-dependencies:3.9.16](https://mvnrepository.com/artifact/io.vertx/vertx-dependencies/3.9.16)
+- [commons-io:commons-io:2.5](https://mvnrepository.com/artifact/commons-io/commons-io/2.5) -> [commons-io:commons-io:2.15.1](https://mvnrepository.com/artifact/commons-io/commons-io/2.15.1)
+- [org.apache.commons:commons-collections4:4.2](https://mvnrepository.com/artifact/org.apache.commons/commons-collections4/4.2) -> [org.apache.commons:commons-collections4:4.4](https://mvnrepository.com/artifact/org.apache.commons/commons-collections4/4.4)
+- [com.google.guava:guava:30.1.1-jre](https://mvnrepository.com/artifact/com.google.guava/guava/30.1.1-jre) -> [com.google.guava:guava:33.0.0-jre](https://mvnrepository.com/artifact/com.google.guava/guava/33.0.0-jre)
+- [ch.qos.logback:logback-classic:1.2.3](https://mvnrepository.com/artifact/ch.qos.logback/logback-classic/1.2.3) -> [ch.qos.logback:logback-classic:1.4.14](https://mvnrepository.com/artifact/ch.qos.logback/logback-classic/1.4.14)
+- [com.github.tomakehurst:wiremock-jre8:2.30.1](https://mvnrepository.com/artifact/com.github.tomakehurst/wiremock-jre8/2.30.1) -> [org.wiremock:wiremock:3.3.1](https://mvnrepository.com/artifact/org.wiremock/wiremock/3.3.1)
+- [io.pebbletemplates:pebble:3.1.2](https://mvnrepository.com/artifact/io.pebbletemplates/pebble/3.1.2) -> [io.pebbletemplates:pebble:3.2.2](https://mvnrepository.com/artifact/io.pebbletemplates/pebble/3.2.2)
 
 ## Release Notes
 
@@ -50,6 +65,14 @@ No important changes in this version.
 ### Knot.x Starter Kit
 - [PR-53](https://github.com/Knotx/knotx-starter-kit/pull/53) Upgrade to JDK 11, upgrade Gradle to 7.6.3
 
-
-
 ## Upgrade notes
+Configure JDK 11 in your Gradle project:
+
+```
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+        vendor.set(JvmVendorSpec.ADOPTIUM)
+    }
+}
+```
