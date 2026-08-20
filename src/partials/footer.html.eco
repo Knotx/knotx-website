@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12 text-center">
-         <p>Knot.x is <a href="https://github.com/Knotx/knotx">open source</a> licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0 License</a> and maintained by <a href="https://handsonarchitects.com/">handsonarchitects.com</a>.</p>
+         <p>Knot.x is <a href="https://github.com/Knotx/knotx">open source</a> licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0 License</a>. It was founded in 2016 by Tomasz Michalak and Maciej Laskowski of <a href="https://handsonarchitects.com/">handsonarchitects.com</a> and built with a team of contributors. It is no longer actively developed &mdash; the last release was 2.4.0, March 2024.</p>
       </div>
     </div>
   </div>
