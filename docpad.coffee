@@ -38,7 +38,7 @@ docpadConfig = {
     templateData:
         deployAnalytics: false
         site:
-            url: "https://knotx.io"
+            url: "https://knotx.github.io"
             name: "Knot.x Website"
             title: "Knot.x Website"
             description: """

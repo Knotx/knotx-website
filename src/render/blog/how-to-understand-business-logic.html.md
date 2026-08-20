@@ -98,7 +98,7 @@ We can say business decisions produce paths to new steps encapsulating new busin
 directed graph of steps (it's actually a tree), where leaves are the final outputs. Such representation can help to
 understand the complexity and the impact of the changing circumstances faster so it's desired when building larger
 systems. As an example of how the graph representation of business logic can be done in practice, you can take a look at
-our open source project called [Knot.x](https://knotx.io/) (the actual implementation is done in the
+our open source project called [Knot.x](https://knotx.github.io/) (the actual implementation is done in the
 [Knot.x Fragments](https://github.com/Knotx/knotx-fragments) module).
 
 ## Summary

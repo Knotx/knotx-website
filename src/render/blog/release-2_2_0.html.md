@@ -19,7 +19,7 @@ The graph ([task](https://github.com/Knotx/knotx-fragments/tree/2.2.0/task/api#t
 business operations (such as integration with an API) and decisions (if API
 responds with `A` then...). Task belongs to a [fragment](https://github.com/Knotx/knotx-fragments/tree/2.2.0/api#fragment),
 an abstraction that represents a client request (in some cases it can be an HTTP request, in other, a part of the page). Read more about configurable
-integrations [here](https://knotx.io/blog/configurable-integrations/).
+integrations [here](https://knotx.github.io/blog/configurable-integrations/).
 
 From now, you can easily debug your business logic directly in your browser. See the
 [Fragments Execution Log](https://github.com/Knotx/knotx-fragments/tree/master/task/handler/log)
@@ -34,7 +34,7 @@ debugging opportunities for developers, QAs and business analysts. It reads frag
   <img src="https://github.com/Knotx/knotx-fragments-chrome-extension/raw/master/assets/images/preview.gif" alt="Knot.x Fragments Chrome Extension"/>
 </p>
 
-You can read more about this new feature [here](https://knotx.io/tutorials/chrome-extension/2_2/)
+You can read more about this new feature [here](https://knotx.github.io/tutorials/chrome-extension/2_2/)
 or watch the [live coding](https://www.youtube.com/watch?v=EWoHqzYGv0w) session.
 
 ### Pebble Template Engine
